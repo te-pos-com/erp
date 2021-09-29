@@ -149,19 +149,26 @@
                     </div>
                 </div>
                 <div class="form-group row">
-
-
                     <div class="col-sm-4">
-                        <input type="text" placeholder="<?php echo $this->lang->line('Stock Units') ?>*"
-                               class="form-control margin-bottom required" name="product_qty"
-                               onkeypress="return isNumber(event)"></div>
+                        <div class="input-group">
+                            <input type="text" placeholder="<?php echo $this->lang->line('Stock Units') ?>*"
+                                class="form-control margin-bottom required" name="product_qty"
+                                onkeypress="return isNumber(event)">
+                            <span class="input-group-addon">
+                                <input type="checkbox" name="chk_nonstok">
+                                <label for="chk_nonstok" style="font-size:12px">Non Stok**</label>
+                            </span>
+                        </div>
+                    </div>
 
                     <div class="col-sm-4">
                         <input type="text" placeholder="<?php echo $this->lang->line('Alert Quantity') ?>"
                                class="form-control margin-bottom" name="product_qty_alert"
                                onkeypress="return isNumber(event)">
                     </div>
-
+                    <div class="col-sm-4">
+                        <small><?php echo $this->lang->line('Non Stok') ?></small>
+                    </div>
                 </div>
                 <hr>
 
@@ -314,6 +321,7 @@
                                         <td><input value="" class="form-control" name="v_stock[]"
                                                    placeholder="<?php echo $this->lang->line('Stock Units') ?>*">
                                         </td>
+                                        <td><input type="checkbox" class="form-control" name="chk_NonStock[]"></td>
                                         <td><input value="" class="form-control" name="v_alert[]"
                                                    placeholder="<?php echo $this->lang->line('Alert Quantity') ?>*">
                                         </td>
