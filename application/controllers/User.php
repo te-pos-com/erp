@@ -53,7 +53,22 @@ class User extends CI_Controller
 
 
     }
-
+    public function register()
+    {
+        if ($this->aauth->is_loggedin()) {
+            redirect('/dashboard/', 'refresh');
+        }
+        $data['response'] = '';
+        $data['captcha_on'] = $this->captcha;
+        $data['captcha'] = $this->captcha_u->public_key()->recaptcha_p;
+        if ($this->input->get('e')) {
+            $data['response'] = 'Invalid username or password!';
+        }
+        //$this->load->view('user/header');
+        $this->load->view('user/register', $data);
+        //$this->load->view('user/footer');
+ 
+    }
     public function checklogin()
     {
         $user = $this->input->post('username');

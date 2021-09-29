@@ -40,63 +40,51 @@
     <link rel="stylesheet" href="<?= base_url()?>assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url()?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url()?>assets/css/style2.css">
-<title>Login</title>
+<title>Register</title>
 </head>
 <body>
 <div class="d-lg-flex half">
     <div class="bg order-1 order-md-2" style="background-image: url('<?= base_url();?>assets/images/bg_1.jpg');"></div>
         <div class="contents order-2 order-md-1">
             <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-7">
-                    <h3>Login to<img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></h3>
-                    <p class="mb-4">Aplikasi Kasir, Mudah digunakan.</p>
-                    <?php if ($response) {
-                                echo '<div id="notify" class="alert alert-danger" >
-                    <a href="#" class="close" data-dismiss="alert">&times;</a> <div class="message">' . $response . '</div>
-                </div>';
-                            } ?>
-                    <?php
-                        $attributes = array('class' => 'form-horizontal form-simple', 'id' => 'login_form');
-                        echo form_open('user/checklogin', $attributes);
-                                ?>
-
-                        <div class="form-group first">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $this->lang->line('Your Email') ?>" name="username" id="username">
-                        </div>
-                        <div class="form-group last mb-3">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" placeholder="<?php echo $this->lang->line('Your Password') ?>" name="password" id="password">
-                            
-                        </div>
-
-                        <?php if ($this->aauth->get_login_attempts() > 1 && $captcha_on) {
-                            echo '<script src="https://www.google.com/recaptcha/api.js"></script>
-                        <fieldset class="form-group position-relative has-icon-left">
-                            <div class="g-recaptcha" data-sitekey="' . $captcha . '"></div>
-                        </fieldset>';
-                        } ?>
-                        <div class="form-group row">
-                            <div class="col-md-6 col-12 text-center text-sm-left">
-                                <fieldset>
-                                    <input type="checkbox" id="remember-me" class="chk-remember"
-                                            name="remember_me">
-                                    <label for="remember-me">  <?php echo $this->lang->line('remember_me') ?></label>
-                                </fieldset>
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-7">
+                                <h3>Register to<img src="https://www.te-pos.my.id/public/images/logo.png" width="150px" height="50px"></h3>
+                                <div id="hasil"></div>
+                                <form action="#" id="frmlogin" name="frmlogin" method="post">
+                                    <div class="form-group first">
+                                    <label for="username">Username *</label>
+                                    <input type="text" class="form-control" placeholder="Your username" name="username" id="username">
+                                    </div>
+                                    <div class="form-group last mb-2">
+                                    <label for="password">Password *</label>
+                                    <input type="password" class="form-control" placeholder="Your Password" name="password" id="password">
+                                    </div>
+                                    <div class="form-group last mb-2">
+                                    <label for="email">Email *</label>
+                                    <input type="email" class="form-control" placeholder="youremail@mail.com" name="email" id="email">
+                                    </div>
+                                    <div class="form-group last mb-2">
+                                    <label for="perusahaan">Perusahaan *</label>
+                                    <input type="perusahaan" class="form-control" placeholder=" Nama Perusahaan" name="perusahaan" id="perusahaan">
+                                    </div>
+                                    <div class="form-group last mb-2">
+                                    <label for="password">Alamat</label>
+                                    <textarea class="form-control" placeholder="Alamat" name="alamat" id="alamat"> </textarea>
+                                    </div>
+                                    <div class="form-group last mb-2">
+                                    <button class="btn btn-block btn-success" id="tombollogin">
+                                        Register
+                                    </button>
+                                    </div>
+                                    <p class="cl-grey text-center">
+                                        <br/>
+                                        <br/>
+                                        Sudah Punya Akun? Silahkan <a href="<?= base_url()?>user">Login</a>
+                                    </p>
+                                </form>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-block btn-success" id="tombollogin">
-                            <?php echo $this->lang->line('login') ?>
-                        </button>
-                        <p class="cl-grey text-center">
-                            <br/>
-                            <br/>
-                            Lupa akun te-pos ? <a href="<?php echo base_url('user/forgot'); ?>">Klik Disini</a>
-                            <br/>
-                            Belum Punya Akun te-pos ? <a href="<?php echo base_url('user/register'); ?>">Daftar Disini</a>
-                        </p>
                     </form>
                 </div>
             </div>
