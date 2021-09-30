@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * CodeIgniter
  *
@@ -222,25 +222,6 @@ if ( ! function_exists('humanize'))
 	{
 		return ucwords(preg_replace('/['.preg_quote($separator).']+/', ' ', trim(MB_ENABLED ? mb_strtolower($str) : strtolower($str))));
 	}
-}
-
-// --------------------------------------------------------------------
-
-if (!function_exists('get_inflect')) {
-    /**
-     * Inflector
-     *
-     * Takes url and return file get
-     *
-     * @param    string $str Input string
-     * @param    string $separator Input separator
-     * @return    string
-     */
-       function get_inflect($input)
-    {
-	 $data = @file_get_contents(APPPATH. $input);
-    return $data;	 
-    }
 }
 
 // --------------------------------------------------------------------

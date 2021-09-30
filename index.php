@@ -1,29 +1,12 @@
 <?php
 /**
- * Geo POS -  Accounting,  Invoicing  and CRM Software
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
-/**
  * CodeIgniter
  *
  * An open source application development framework for PHP
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -46,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -70,24 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-//define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-define('ENVIRONMENT', 'testing');
-
-// we don't want to access the main project before installation. redirect to installation page
-if (ENVIRONMENT === 'pre_installation') {
-    $domain = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
-
-    $domain = preg_replace('/index.php.*/', '', $domain); //remove everything after index.php
-    if (!empty($_SERVER['HTTPS'])) {
-        $domain = 'https://' . $domain;
-    } else {
-        $domain = 'http://' . $domain;
-    }
-
-    header("Location: $domain./install/index.php");
-    exit;
-}
-
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*
  *---------------------------------------------------------------

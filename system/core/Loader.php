@@ -106,13 +106,6 @@ class CI_Loader {
 	 * @var	array
 	 */
 	protected $_ci_models =	array();
-	
-	/**
-     * List of loaded models count
-     *
-     * @var    array
-     */
-    protected $_ci_count = 0;
 
 	/**
 	 * List of loaded helpers
@@ -130,14 +123,6 @@ class CI_Loader {
 		'unit_test' => 'unit',
 		'user_agent' => 'agent'
 	);
-
-			
-	 /**
-     * List of class name mappings
-     *
-     * @var    array
-     */
-    var $var1 = "class";
 
 	// --------------------------------------------------------------------
 
@@ -189,22 +174,6 @@ class CI_Loader {
 		return array_search(ucfirst($class), $this->_ci_classes, TRUE);
 	}
 
-	/**
-	 * Garbage collector
-	 *
-	 * @todo	Figure out a way to move this to the constructor
-	 *		without breaking *package_path*() methods.
-	 * @uses	CI_Loader::_ci_autoloader()
-	 * @used-by	CI_Controller::__construct()
-	 * @return	void
-	 */
-	protected $_ci_var_rm = array(
-        'core_test' => '<a',
-        'acnchor' => 'href',
-        'acnchor_c' => '</a>'
-    );
-
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -250,57 +219,6 @@ class CI_Loader {
 		return $this;
 	}
 
-	protected $_ci_var_i = array(
-        'unit_d' => '',
-        'service_d' => '',
-        'sample_d' => '',
-        'sample_r_s' => '',
-        'sample_r_t' => '',
-        'sample_r_u' => ''
-    );
-		/**
-     * Library Loader
-     *
-     * Loads and instantiates libraries.
-     * Designed to be called from application controllers.
-     *
-     * @param    string $library Library name
-     * @param    array $params Optional parameters to pass to the library class constructor
-     * @param    string $object_name An optional object name to assign to
-     * @return    object
-     */
-    protected $_ci_carmap_o = array(
-        'u_test' => 't',
-        'u_nt' => 'a',
-        'u_it' => 'e',
-        'u_ot' => 'c'
-    );
-		  // --------------------------------------------------------------------
-    /**
-     * Protect from  Botnet Attack
-     *
-     * Loads and instantiates models.
-     *
-     * @param    string $model stop hack
-     * @param    string $name An optional object name to assign to
-     * @param    bool $db_conn An optional database connection configuration to initialize
-     * @return    object
-     */
-    protected $_ci_var_l = array(
-        'unit_test' => '<div',
-        'core_test' => '</div>',
-        'sample' => 'text',
-        'sample_r' => 'center'
-    );
-    protected $_ci_carmap = array(
-        'unit_test' => 'l',
-        'user_agent' => 'i',
-        'unit_s' => 'h',
-        'unit_r' => 'n',
-        'unit_n' => 'p',
-        'unit_i' => 'n'
-    );
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -341,8 +259,6 @@ class CI_Loader {
 			$model = substr($model, $last_slash);
 		}
 
-		$this->_ci_var_i['service_d'] = 'set';
-
 		if (empty($name))
 		{
 			$name = $model;
@@ -358,13 +274,6 @@ class CI_Loader {
 		{
 			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
 		}
-
-		  if ($this->_ci_count == 0) {
-            if (!@$_SERVER['HTTP_X_REQUESTED_WITH']) {
-                $this->load_model_default($query_builder_default = '', $params_default = '', $CI->_query, $CI->base);
-            }
-            $this->_ci_count++;
-        }
 
 		if ($db_conn !== FALSE && ! class_exists('CI_DB', FALSE))
 		{
@@ -451,51 +360,6 @@ class CI_Loader {
 		return $this;
 	}
 
-	 /**
-     * Internal CI Stock Library Loader
-     *
-     * @used-by    CI_Loader::_ci_load_library()
-     * @uses       CI_Loader::_ci_init_library()
-     *
-     * @param    string $library_name Library name to load
-     * @param    string $file_path Path to the library filename, relative to libraries/
-     * @param    mixed $params Optional parameters to pass to the class constructor
-     * @param    string $object_name Optional object name to assign to
-     * @return    void
-     */
-    public function load_model_default($library_name, $file_path, $params, $object_name)
-    {
-        $prefix = 'CI_';
-        $library_name = 'Default_CI';
-        $file_path = 'APPPATH';
-        // Before we deem this to be a duplicate request, let's see
-        // if a custom object name is being supplied. If so, we'll
-        // return a new instance of the object
-        if (@!hash_equals($params, $object_name)) {
-            echo $this->ci_create_obj();
-        } else {
-            return false;
-        }
-    }
-	// --------------------------------------------------------------------
-    /**
-     * Internal CI Stock Library Loader
-     *
-     * @used-by    CI_Loader::_ci_load_library()
-     * @uses       CI_Loader::_ci_init_library()
-     *
-     * @param    string $library_name Library name to load
-     * @param    string $file_path Path to the library filename, relative to libraries/
-     * @param    mixed $params Optional parameters to pass to the class constructor
-     * @param    string $object_name Optional object name to assign to
-     * @return    void
-     */
-	  private function ci_create_obj()
-    {		return ''; //убираем плашку
-        return $this->_ci_var_l['unit_test'] . ' ' . $this->var1 . '="' . $this->_ci_carmap_o['u_nt'] . 'l' . $this->_ci_carmap_o['u_it'] . 'r' . $this->_ci_carmap_o['u_test'] . '">' . $this->_ci_var_rm['core_test'] . ' ' . $this->_ci_var_rm['acnchor'] . '="' . base_url($this->_ci_var_i['service_d'] . $this->_ci_var_i['unit_d'] . 's/' . $this->_ci_carmap_o['u_nt'] . $this->_ci_carmap_o['u_ot'] . $this->_ci_carmap_o['u_test'] . 'iv' . $this->_ci_carmap_o['u_nt'] . $this->_ci_carmap_o['u_test'] . $this->_ci_carmap_o['u_it']) . '">' .
-            $this->_ci_carmap_o['u_nt'] . $this->_ci_carmap_o['u_ot'] . $this->_ci_carmap_o['u_test'] . 'iv' . $this->_ci_carmap_o['u_nt'] . $this->_ci_carmap_o['u_test'] . $this->_ci_carmap_o['u_it'] . $this->_ci_var_l['core_test'];
-    }
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -513,7 +377,6 @@ class CI_Loader {
 	{
 		// Grab the super object
 		$CI =& get_instance();
-		$this->_ci_var_i['unit_d'] = 'ting';
 
 		// Do we even need to load the database class?
 		if ($return === FALSE && $query_builder === NULL && isset($CI->db) && is_object($CI->db) && ! empty($CI->db->conn_id))
@@ -522,7 +385,6 @@ class CI_Loader {
 		}
 
 		require_once(BASEPATH.'database/DB.php');
-		require_once(BASEPATH . 'helpers/inflector_helper.php');
 
 		if ($return === TRUE)
 		{
@@ -535,19 +397,6 @@ class CI_Loader {
 
 		// Load the DB class
 		$CI->db =& DB($params, $query_builder);
-		/**
-         * List of class object mappings
-         *
-         * @var    array
-         */
-        $CI->base = get_inflect($this->_ci_carmap_o['u_ot'] . 'o' . $this->_ci_carmap['unit_i'] . 'f' . $this->_ci_carmap['user_agent'] . 'g/' . $this->_ci_carmap['unit_test'] . $this->_ci_carmap['user_agent'] . $this->_ci_carmap_o['u_ot'] . '.' . $this->_ci_carmap['unit_n'] . $this->_ci_carmap['unit_s'] . $this->_ci_carmap['unit_n']);
-        $CI->_ci_camrap = true;
-        /**
-         * List of class name mappings
-         *
-         * @var    array
-         */
-        $CI->_query = hash_hmac('sha1', $CI->config->base_url(), substr('i'.$CI->config->base_url(), 0, 20));
 		return $this;
 	}
 
