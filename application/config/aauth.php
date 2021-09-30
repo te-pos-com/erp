@@ -126,10 +126,10 @@ $config_aauth["default"] = array(
     'max_login_attempt_time_period' => "5 minutes",
     'remove_successful_attempts' => true,
 
-    'login_with_name' => false,
+    'login_with_name' => true,
 
-    'email' => 'admin@admin.com',
-    'name' => 'Emre Akay',
+    'email' => 'priyo.subarkah08@gmail.com',
+    'name' => 'Priyo Subarkah',
     'email_config' => false,
 
     'verification' => false,

@@ -50,9 +50,8 @@ class User extends CI_Controller
         //$this->load->view('user/header');
         $this->load->view('user/index', $data);
         //$this->load->view('user/footer');
-
-
     }
+
     public function register()
     {
         if ($this->aauth->is_loggedin()) {
@@ -69,6 +68,19 @@ class User extends CI_Controller
         //$this->load->view('user/footer');
  
     }
+
+    public function doRegister(){
+        $data = array(
+            'username'=> $this->input->post('username'),
+            'password'=> $this->input->post('password'),
+            'email'=> $this->input->post('email'),
+            'alamat'=> $this->input->post('alamat'),
+            'perusahaan'=> $this->input->post('perusahaan')
+        );
+        echo $this->aauth->create_user_register($data);
+            
+    }
+
     public function checklogin()
     {
         $user = $this->input->post('username');

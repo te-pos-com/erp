@@ -73,7 +73,7 @@
                                     <textarea class="form-control" placeholder="Alamat" name="alamat" id="alamat"> </textarea>
                                     </div>
                                     <div class="form-group last mb-2">
-                                    <button class="btn btn-block btn-success" id="tombollogin">
+                                    <button class="btn btn-block btn-success" id="tombolregister">
                                         Register
                                     </button>
                                     </div>
@@ -100,6 +100,38 @@
 <script src="<?= assets_url(); ?>app-assets/js/core/app.js"></script>
 <script type="text/javascript" src="<?= assets_url(); ?>app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
 <script src="<?= assets_url(); ?>app-assets/js/scripts/forms/form-login-register.js"></script>
+<script>
+    $(document).ready(function() {
+	$("#tombolregister").click(function() {
+        $("#tombolregister").html("<i class='fa fa-spinner fa-spin'></i>");
+		var aksilogin = $("#frmlogin").attr('action');
+		var datalogin = {
+			username: $("#username").val(),
+			password: $("#password").val(),
+            email: $("#email").val(),
+            alamat: $("#alamat").val(),
+            perusahaan: $("#perusahaan").val(),
+		};
 
+		$.ajax({
+			type: "POST",
+			url: '<?= base_url()?>user/doRegister',
+			data: datalogin,
+			success: function(data)
+			{
+                console.log(data);
+                var json = $.parseJSON(data);
+                $("#tombolregister").html("Register");
+      			if(json.error == false)
+					$("#hasil").html("<p class='alert alert-success' align='center'>" + json.message + "</p>");
+				else
+					$("#hasil").html("<p class='alert alert-danger' align='center'>" + json.message + "</p>");					
+            }
+		});
+		return false;
+	});
+
+    });
+</script>
 </body>
 </html>

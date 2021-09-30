@@ -279,17 +279,12 @@ class Aauth
         }
 
         $query = null;
-
         $query = $this->aauth_db->where($db_identifier, $identifier);
         $query = $this->aauth_db->where('banned', 0);
-
         $query = $this->aauth_db->get($this->config_vars['users']);
-
         $row = $query->row();
-
         // if email and pass matches and not banned
         $password = ($this->config_vars['use_password_hash'] ? $pass : $this->hash_password($pass, @$row->id));
-
         if ($query->num_rows() != 0 && $this->verify_password($password, $row->pass)) {
 
             // If email and pass matches
@@ -323,11 +318,9 @@ class Aauth
             // update last login
             $this->update_last_login($row->id);
             $this->update_activity();
-
             if ($this->config_vars['remove_successful_attempts'] == TRUE) {
                 $this->reset_login_attempts();
             }
-
             return TRUE;
         } // if not matches
         else {
@@ -712,6 +705,7 @@ class Aauth
      * @param string $username User's username
      * @return int|bool False if create fails or returns user id if successful
      */
+    
     public function create_user($email, $pass, $username = FALSE)
     {
 
@@ -794,6 +788,106 @@ class Aauth
             return FALSE;
         }
     }
+
+    public function create_user_register($data)
+    {
+
+        $email      =   $data['email'];
+        $pass       =   $data['pass'];
+        $username   =   $data['username'];
+        $alamat     =   $data['alamat'];
+        $perusahaan =   $data['perusahaan'];
+
+        $valid = TRUE;
+
+        $valid_email = (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
+        if (!$valid_email) {
+            $this->error($this->CI->lang->line('aauth_error_email_invalid'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'Format email salah!'));
+        
+        }
+        if ($username != FALSE && !ctype_alnum(str_replace($this->config_vars['additional_valid_chars'], '', $username))) {
+            $this->error($this->CI->lang->line('aauth_error_username_invalid'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'Invalid Username!'));
+        }
+        
+        
+        if ($this->user_exist_by_username($username) && $username != FALSE) {
+            $this->error($this->CI->lang->line('aauth_error_username_exists'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'Userneme sudah pernah digunakan'));
+        }
+
+        if ($this->user_exist_by_email($email)) {
+            $this->error($this->CI->lang->line('aauth_error_email_exists'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'Email sudah pernah digunakan'));
+        }
+    
+        if ($this->user_exist_by_perusahaan($perusahaan)) {
+            $this->error($this->CI->lang->line('aauth_error_perusahaan_exists'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'Perusahaan sudah pernah digunakan'));
+        }
+        
+        $data_perusahaan = array(
+            'cname'=>$perusahaan,
+            'address'=>$alamat,
+            'email'=>$email
+        );
+        if ($this->aauth_db->insert('geopos_system', $data_perusahaan)) {
+            $id_perusahaan = $this->aauth_db->insert_id();
+        }
+
+        $data = array(
+            'email' => $email,
+            'pass' => $this->hash_password($pass, 0), // Password cannot be blank but user_id required for salt, setting bad password for now
+            'username' => (!$username) ? '' : $username,
+            'date_created' => date("Y-m-d H:i:s"),
+            'ip_address'=>'::1',
+            'id_perusahaan'=>$id_perusahaan,
+			'picture'=>'example.png'
+        );
+
+
+
+
+        if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
+
+            $user_id = $this->aauth_db->insert_id();
+            // if otp actived
+            if ($this->config_vars['totp_active'] == TRUE AND $this->config_vars['totp_only_on_ip_change'] == TRUE) {
+                $this->update_user_totp_secret($user_id,$this->generate_unique_totp_secret());
+            } 
+            // if verification activated
+            if ($this->config_vars['verification'] && !$this->is_admin()) {
+                $data = null;
+                $data['banned'] = 1;
+
+                $this->aauth_db->where('id', $user_id);
+                $this->aauth_db->update($this->config_vars['users'], $data);
+
+                // sends verifition ( !! e-mail settings must be set)
+                $this->send_verification($user_id);
+            }
+
+            // Update to correct salted password
+            if (!$this->config_vars['use_password_hash']) {
+                $data = null;
+                $data['pass'] = $this->hash_password($pass, $user_id);
+                $this->aauth_db->where('id', $user_id);
+                $this->aauth_db->update($this->config_vars['users'], $data);
+            }
+            $pesan = json_encode(array('error'=>false,'message'=>'Register berhasil<br>Silahkan ke Halaman <a href="'. base_url('user') .'">Login</a>'));
+            return $pesan;
+
+        } else {
+            return $pesan;
+        }
+    }
+
 
     //tested
 
@@ -1157,6 +1251,18 @@ class Aauth
         $query = $this->aauth_db->where('email', $user_email);
 
         $query = $this->aauth_db->get($this->config_vars['users']);
+
+        if ($query->num_rows() > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    public function user_exist_by_perusahaan($nama_perusahaan)
+    {
+        $query = $this->aauth_db->where('cname', $nama_perusahaan);
+
+        $query = $this->aauth_db->get('geopos_system');
 
         if ($query->num_rows() > 0)
             return TRUE;
