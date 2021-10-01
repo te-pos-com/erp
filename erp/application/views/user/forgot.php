@@ -45,7 +45,7 @@
 </head>
 <body>
 <div class="d-lg-flex half">
-    <div class="bg order-1 order-md-1" style="background-image: url('<?= base_url();?>assets/images/bg_3.JPG');"></div>
+    <div class="bg order-1 order-md-1" style="background-image: url('<?= base_url();?>assets/images/bg_3.jpg');"></div>
         <div class="contents order-2 order-md-1">
             <div class="container">
                 <div class="row align-items-center justify-content-center"  style="background-color:#fff">
