@@ -49,7 +49,7 @@
             <div class="container">
                         <div class="row align-items-center justify-content-center" style="background-color:#fff">
                             <div class="col-md-7">
-                                <h3 class="text-center">Register to<img src="<?= base_url()?>public/images/logo.png" width="150px" height="50px"></h3>
+                                <h3 class="text-center">Register to<img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></h3>
                                 <div id="hasil"></div>
                                 <form action="#" id="frmlogin" name="frmlogin" method="post">
                                     <div class="form-group first">
