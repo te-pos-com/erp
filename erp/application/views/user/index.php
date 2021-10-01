@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center" style="background-color:#fff">
                     <div class="col-md-7">
-                    <h3 class="text-center">Login to<img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></h3>
+                    <h3 class="text-center">Login to<a href="https://te-pos.com"><img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></a></h3>
                     <?php if ($response) {
                                 echo '<div id="notify" class="alert alert-danger" >
                     <a href="#" class="close" data-dismiss="alert">&times;</a> <div class="message">' . $response . '</div>
@@ -61,11 +61,11 @@
                                 ?>
 
                         <div class="form-group first">
-                            <label for="username">Username</label>
+                            <label for="username"><?php echo $this->lang->line('Your Email') ?></label>
                             <input type="text" class="form-control" style="border:1px solid #cd955c" placeholder="<?php echo $this->lang->line('Your Email') ?>" name="username" id="username">
                         </div>
                         <div class="form-group last mb-3">
-                            <label for="password">Password</label>
+                            <label for="password"><?php echo $this->lang->line('Your Password') ?></label>
                             <input type="password" class="form-control" style="border:1px solid #cd955c" placeholder="<?php echo $this->lang->line('Your Password') ?>" name="password" id="password">
                             
                         </div>

@@ -126,7 +126,7 @@ $config_aauth["default"] = array(
     'max_login_attempt_time_period' => "5 minutes",
     'remove_successful_attempts' => true,
 
-    'login_with_name' => true,
+    'login_with_name' => false,
 
     'email' => 'priyo.subarkah08@gmail.com',
     'name' => 'Priyo Subarkah',

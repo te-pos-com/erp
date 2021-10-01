@@ -14,7 +14,9 @@
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                 class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item"><a class="navbar-brand" href="<?= base_url() ?>dashboard/"><span  class="text-center" style="color:#fff;padding-top:-4px;margin-left:30px;font-size:24px"> te-pos.com</span>
+                <li class="nav-item"><a class="navbar-brand" href="<?= base_url() ?>dashboard/"><img
+                                class="brand-logo ml-1" alt="logo"
+                                src="<?php echo base_url(); ?>userfiles/theme/logo-header.png">
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
                                                   data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
@@ -64,7 +66,409 @@
                 </ul>
 
                 <ul class="nav navbar-nav float-right"><?php if ($this->aauth->get_user()->roleid == 5) { ?>
-                <?php } ?>
+                        <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link " href="#"
+                                                                       data-toggle="dropdown"><?php echo $this->lang->line('business_settings') ?></a>
+                            <ul class="mega-dropdown-menu dropdown-menu row">
+                                <li class="col-md-3">
+
+                                    <div id="accordionWrap" role="tablist" aria-multiselectable="true">
+                                        <div class="card border-0 box-shadow-0 collapse-icon accordion-icon-rotate">
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading1" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap" href="#accordion1"
+                                                   aria-controls="accordion1"><i
+                                                            class="fa fa-leaf"></i> <?php echo $this->lang->line('business_settings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion1" role="tabpanel"
+                                                 aria-labelledby="heading1" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/company"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('company_settings') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>locations"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Business Locations') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>tools/setgoals"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Set Goals') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading2" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap" href="#accordion2"
+                                                   aria-controls="accordion2"> <i
+                                                            class="fa fa-calendar"></i><?php echo $this->lang->line('Localisation') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion2" role="tabpanel"
+                                                 aria-labelledby="heading2" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/currency"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Currency') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/language"><i
+                                                                        class="ft-chevron-right"></i>Languages</a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/dtformat"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Date & Time Format') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/theme"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Theme') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading3" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap" href="#accordion3"
+                                                   aria-controls="accordion3"> <i
+                                                            class="fa fa-lightbulb-o"></i><?php echo $this->lang->line('miscellaneous_settings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion3" role="tabpanel"
+                                                 aria-labelledby="heading3" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>webupdate"><i
+                                                                        class="ft-chevron-right"></i> Software
+                                                                Update</a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/email"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Email Config') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>transactions/categories"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Transaction Categories') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/misc_automail"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('EmailAlert') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/about"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('About') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+
+                                    <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
+                                        <div class="card border-0 box-shadow-0 collapse-icon accordion-icon-rotate">
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading4" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap1" href="#accordion4"
+                                                   aria-controls="accordion4"><i
+                                                            class="fa fa-fire"></i><?php echo $this->lang->line('AdvancedSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion4" role="tabpanel"
+                                                 aria-labelledby="heading4" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>restapi"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('REST API') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>cronjob"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Automatic Corn Job') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/custom_fields"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('CustomFields') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/dual_entry"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('DualEntryAccounting') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/logdata"><i
+                                                                        class="ft-chevron-right"></i> Application
+                                                                Activity Log</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/debug"><i
+                                                                        class="ft-chevron-right"></i> Debug Mode </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading2" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap1" href="#accordion5"
+                                                   aria-controls="accordion5"> <i
+                                                            class="fa fa-shopping-cart"></i><?php echo $this->lang->line('BillingSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion5" role="tabpanel"
+                                                 aria-labelledby="heading5" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                               <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/billing_settings"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('billing_settings') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/discship"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('DiscountShipping') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/prefix"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Prefix') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/billing_terms"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Billing Terms') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/automail"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Auto Email SMS') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/warehouse"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('DefaultWarehouse') ?>
+                                                            </a></li>
+
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/pos_style"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('POSStyle') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading6" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap1" href="#accordion6"
+                                                   aria-controls="accordion6"><i
+                                                            class="fa fa-scissors"></i><?php echo $this->lang->line('TaxSettings')  ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion6" role="tabpanel"
+                                                 aria-labelledby="heading6" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/tax"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Tax') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/taxslabs"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('OtherTaxSettings') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+
+                                    <div id="accordionWrap2" role="tablist" aria-multiselectable="true">
+                                        <div class="card border-0 box-shadow-0 collapse-icon accordion-icon-rotate">
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading7" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap2" href="#accordion7"
+                                                   aria-controls="accordion7"><i
+                                                            class="fa fa-flask"></i><?php echo $this->lang->line('ProductsSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion7" role="tabpanel"
+                                                 aria-labelledby="heading7" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>units"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Measurement Unit') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>units/variations"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('ProductsVariations') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>units/variables"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('VariationsVariables') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading8" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap2" href="#accordion8"
+                                                   aria-controls="accordion8"> <i
+                                                            class="fa fa-money"></i><?php echo $this->lang->line('Payment Settings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion8" role="tabpanel"
+                                                 aria-labelledby="heading8" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways/settings"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Payment Settings') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Payment Gateways') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways/currencies"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Payment Currencies') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways/exchange"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Currency Exchange') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways/bank_accounts"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Bank Accounts') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading9" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap2" href="#accordion9"
+                                                   aria-controls="accordion9"><i
+                                                            class="fa fa-umbrella"></i><?php echo $this->lang->line('CRMHRMSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion9" role="tabpanel"
+                                                 aria-labelledby="heading9" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>employee/auto_attendance"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('SelfAttendance') ?>
+                                                            </a></li>
+
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/registration"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('CRMSettings') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>plugins/recaptcha"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Security') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/tickets"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Support Tickets') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                                <li class="col-md-3">
+
+                                    <div id="accordionWrap3" role="tablist" aria-multiselectable="true">
+                                        <div class="card border-0 box-shadow-0 collapse-icon accordion-icon-rotate">
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading10" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap3" href="#accordion10"
+                                                   aria-controls="accordion10"><i
+                                                            class="fa fa-magic"></i><?php echo $this->lang->line('PluginsSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion10" role="tabpanel"
+                                                 aria-labelledby="heading10" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>plugins/recaptcha"><i
+                                                                        class="ft-chevron-right"></i>reCaptcha Security</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>plugins/shortner"><i
+                                                                        class="ft-chevron-right"></i> URL Shortener</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>plugins/twilio"><i
+                                                                        class="ft-chevron-right"></i> SMS Configuration</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>paymentgateways/exchange"><i
+                                                                        class="ft-chevron-right"></i>Currency Exchange
+                                                                API</a></li>
+                                                        <?php plugins_checker(); ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading11" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap3" href="#accordion11"
+                                                   aria-controls="accordion11"> <i
+                                                            class="fa fa-eye"></i><?php echo $this->lang->line('TemplatesSettings') ?>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion11" role="tabpanel"
+                                                 aria-labelledby="heading8" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>templates/email"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Email') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>templates/sms"><i
+                                                                        class="ft-chevron-right"></i> SMS</a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/print_invoice"><i
+                                                                        class="ft-chevron-right"></i> <?php echo $this->lang->line('Print Invoice') ?>
+                                                            </a></li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>settings/theme"><i
+                                                                        class="ft-chevron-right"></i><?php echo $this->lang->line('Theme') ?>
+                                                            </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-header p-0 pb-1 border-0 mt-1" id="heading12" role="tab">
+                                                <a class=" text-uppercase black" data-toggle="collapse"
+                                                   data-parent="#accordionWrap3" href="#accordion12"
+                                                   aria-controls="accordion12"><i
+                                                            class="fa fa-print"></i>POS Printers</a>
+                                                </a></div>
+                                            <div class="card-collapse collapse mb-1 " id="accordion12" role="tabpanel"
+                                                 aria-labelledby="heading12" aria-expanded="true">
+                                                <div class="card-content">
+                                                    <ul>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>printer/add"><i
+                                                                        class="ft-chevron-right"></i>Add Printer</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item"
+                                                               href="<?php echo base_url(); ?>printer"><i
+                                                                        class="ft-chevron-right"></i> List Printers</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </li>       <?php } ?>
                     <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
                                                                            data-toggle="dropdown"><i
                                     class="ficon ft-bell"></i><span
@@ -195,7 +599,70 @@
 
                 </li>
             <?php
-            
+            if ($this->aauth->premission(1)) { ?>
+                <li class="nav-item has-sub <?php if ($this->li_a == "sales") {
+                    echo ' open';
+                } ?>"><a href="#"><i
+                                class="icon-basket-loaded"></i><span><?php echo $this->lang->line('sales') ?></span></a>
+                    <ul class="menu-content">
+                        <li class="menu-item"><a
+                                    href="#"><i
+                                        class="icon-paper-plane"></i><?php echo $this->lang->line('pos sales') ?></a>
+                            <ul class="menu-content">
+                                <li class="menu-item"><a href="<?= base_url(); ?>pos_invoices/create"
+                                    ><?php echo $this->lang->line('New Invoice'); ?></a>
+                                </li>
+                                <li class="menu-item"><a
+                                            href="<?php echo base_url(); ?>pos_invoices/create?v2=true"><?= $this->lang->line('New Invoice'); ?>
+                                        V2 - Mobile</a>
+                                </li>
+                                <li class="menu-item"><a
+                                            href="<?php echo base_url(); ?>pos_invoices"><?php echo $this->lang->line('Manage Invoices'); ?></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="#"><i
+                                        class="icon-basket"></i><?php echo $this->lang->line('sales') ?></a>
+                            <ul class="menu-content">
+                                <li class="menu-item"><a href="<?= base_url(); ?>invoices/create"
+                                                         data-toggle="dropdown"><?php echo $this->lang->line('New Invoice'); ?></a>
+                                </li>
+
+                                <li class="menu-item"><a
+                                            href="<?php echo base_url(); ?>invoices"><?php echo $this->lang->line('Manage Invoices'); ?></a>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="#"><i
+                                        class="icon-call-out"></i><?php echo $this->lang->line('Quotes') ?></a>
+                            <ul class="menu-content">
+                                <li class="menu-item"><a
+                                            href="<?= base_url(); ?>quote/create"><?php echo $this->lang->line('New Quote'); ?></a>
+                                </li>
+
+                                <li class="menu-item"><a class="dropdown-item" href="<?php echo base_url(); ?>quote"
+                                                         data-toggle="dropdown"><?php echo $this->lang->line('Manage Quotes'); ?></a>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item"><a href="#"><i
+                                        class="ft-radio"></i><?php echo $this->lang->line('Subscriptions') ?></a>
+                            <ul class="menu-content">
+                                <li class="menu-item"><a
+                                            href="<?= base_url(); ?>subscriptions/create"><?php echo $this->lang->line('New Subscription'); ?></a>
+                                </li>
+
+                                <li class="menu-item"><a
+                                            href="<?php echo base_url(); ?>subscriptions"><?php echo $this->lang->line('Subscriptions'); ?></a>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="<?php echo base_url(); ?>stockreturn/creditnotes"><i
+                                        class="icon-screen-tablet"></i><?php echo $this->lang->line('Credit Notes'); ?>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php }
             if ($this->aauth->premission(2)) { ?>
                 <li class="nav-item has-sub <?php if ($this->li_a == "stock") {
                     echo ' open';
@@ -276,70 +743,6 @@
                                   <li  class="menu-item"><a href="<?php echo base_url(); ?>products/standard_label"
                                                 ><?php echo $this->lang->line('standard_label'); ?></a></li>
                             </ul>
-                        </li>
-                    </ul>
-                </li>
-            <?php }
-            if ($this->aauth->premission(1)) { ?>
-                <li class="nav-item has-sub <?php if ($this->li_a == "sales") {
-                    echo ' open';
-                } ?>"><a href="#"><i
-                                class="icon-basket-loaded"></i><span><?php echo $this->lang->line('sales') ?></span></a>
-                    <ul class="menu-content">
-                        <li class="menu-item"><a
-                                    href="#"><i
-                                        class="icon-paper-plane"></i><?php echo $this->lang->line('pos sales') ?></a>
-                            <ul class="menu-content">
-                                <li class="menu-item"><a href="<?= base_url(); ?>pos_invoices/create"
-                                    ><?php echo $this->lang->line('New Invoice'); ?></a>
-                                </li>
-                                <li class="menu-item"><a
-                                            href="<?php echo base_url(); ?>pos_invoices/create?v2=true"><?= $this->lang->line('New Invoice'); ?>
-                                        V2 - Mobile</a>
-                                </li>
-                                <li class="menu-item"><a
-                                            href="<?php echo base_url(); ?>pos_invoices"><?php echo $this->lang->line('Manage Invoices'); ?></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a href="#"><i
-                                        class="icon-basket"></i><?php echo $this->lang->line('sales') ?></a>
-                            <ul class="menu-content">
-                                <li class="menu-item"><a href="<?= base_url(); ?>invoices/create"
-                                                         data-toggle="dropdown"><?php echo $this->lang->line('New Invoice'); ?></a>
-                                </li>
-
-                                <li class="menu-item"><a
-                                            href="<?php echo base_url(); ?>invoices"><?php echo $this->lang->line('Manage Invoices'); ?></a>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a href="#"><i
-                                        class="icon-call-out"></i><?php echo $this->lang->line('Quotes') ?></a>
-                            <ul class="menu-content">
-                                <li class="menu-item"><a
-                                            href="<?= base_url(); ?>quote/create"><?php echo $this->lang->line('New Quote'); ?></a>
-                                </li>
-
-                                <li class="menu-item"><a class="dropdown-item" href="<?php echo base_url(); ?>quote"
-                                                         data-toggle="dropdown"><?php echo $this->lang->line('Manage Quotes'); ?></a>
-                            </ul>
-                        </li>
-
-                        <li class="menu-item"><a href="#"><i
-                                        class="ft-radio"></i><?php echo $this->lang->line('Subscriptions') ?></a>
-                            <ul class="menu-content">
-                                <li class="menu-item"><a
-                                            href="<?= base_url(); ?>subscriptions/create"><?php echo $this->lang->line('New Subscription'); ?></a>
-                                </li>
-
-                                <li class="menu-item"><a
-                                            href="<?php echo base_url(); ?>subscriptions"><?php echo $this->lang->line('Subscriptions'); ?></a>
-                            </ul>
-                        </li>
-                        <li class="menu-item">
-                            <a href="<?php echo base_url(); ?>stockreturn/creditnotes"><i
-                                        class="icon-screen-tablet"></i><?php echo $this->lang->line('Credit Notes'); ?>
-                            </a>
                         </li>
                     </ul>
                 </li>
