@@ -77,8 +77,7 @@ class User extends CI_Controller
             'alamat'=> $this->input->post('alamat'),
             'perusahaan'=> $this->input->post('perusahaan')
         );
-        echo $this->aauth->create_user_register($data);
-            
+        echo $this->aauth->create_user_register($data);        
     }
 
     public function checklogin()

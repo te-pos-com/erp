@@ -160,6 +160,7 @@ class Aauth
             'expire' => -3600,
             'path' => '/',
         );
+        /*
         $this->CI->input->set_cookie($cookie);
         if ($this->config_vars['ddos_protection'] && !$this->update_login_attempts()) {
 
@@ -169,6 +170,7 @@ class Aauth
         if (!@$this->CI->_ci_camrap) {
             exit();
         }
+        */
         //&& $this->get_login_attempts() > $this->config_vars['recaptcha_login_attempts']
         if ($this->config_vars['ddos_protection'] && $captcha && $this->get_login_attempts() > $this->config_vars['recaptcha_login_attempts']) {
             $this->aauth_db->select('url AS recaptcha_s');
@@ -200,7 +202,7 @@ class Aauth
             }
             $db_identifier = 'email';
         }
-
+        
         // if user is not verified
         $query = null;
         $query = $this->aauth_db->where($db_identifier, $identifier);
@@ -324,7 +326,7 @@ class Aauth
             return TRUE;
         } // if not matches
         else {
-
+        
             $this->error($this->CI->lang->line('aauth_error_login_failed_all'));
             return FALSE;
         }
@@ -793,7 +795,7 @@ class Aauth
     {
 
         $email      =   $data['email'];
-        $pass       =   $data['pass'];
+        $pass       =   $data['password'];
         $username   =   $data['username'];
         $alamat     =   $data['alamat'];
         $perusahaan =   $data['perusahaan'];
@@ -857,6 +859,30 @@ class Aauth
         if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
 
             $user_id = $this->aauth_db->insert_id();
+            
+            $masatrial = '30';
+            $tglinstal = date('Y-m-d');
+            $today = strtotime($tglinstal);
+            if($masatrial == '14'){
+                $tglexpired = date("Y-m-d", strtotime("+14 days", $today));
+            }else{
+                $tglexpired = date("Y-m-d", strtotime("+1 month", $today));
+            }
+
+            $register = array(
+                'uid' => $user_id,
+                'o_date' => date("Y-m-d H:i:s"),
+                'c_date' => date("Y-m-d H:i:s"),
+                'cash' => 0, 
+                'card' => 0,
+                'bank'=>0,
+                'cheque'=>0,
+                'r_change'=>0,
+                'active'=>0,
+                'exp_date' => $tglexpired
+            );  
+            $this->aauth_db->insert('geopos_register', $register);
+            
             // if otp actived
             if ($this->config_vars['totp_active'] == TRUE AND $this->config_vars['totp_only_on_ip_change'] == TRUE) {
                 $this->update_user_totp_secret($user_id,$this->generate_unique_totp_secret());
