@@ -34,7 +34,7 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html"><img src="<?= base_url()?>assets/img/logo.png"> te-pos.com</a></h1>
+      <h1 class="logo"><a href="<?= base_url()?>"><img src="<?= base_url()?>assets/img/logo.png"> Te-Pos</a></h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -762,13 +762,13 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>te-pos.com</h3>
+            <h3>Te-Pos</h3>
             <p>
               Jl Kalimati No. 32<br>
               Sleman, 535022<br>
               Indonesia <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              <strong>Phone:</strong> +6281328675727<br>
+              <strong>Email:</strong> info@te-pos.com<br>
             </p>
           </div>
 
@@ -794,7 +794,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>te-pos.com</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Te-Pos</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           <!-- All the links in the footer should remain intact. -->
