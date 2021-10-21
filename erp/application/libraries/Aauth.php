@@ -1,47 +1,7 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Aauth is a User Authorizationsend_pm Library for CodeIgniter 2.x, which aims to make
- * easy some essential jobs such as login, permissions and access operations.
- * Despite ease of use, it has also very advanced features like private messages,
- * groupping, access management, public access etc..
- *
- * @author        Emre Akay <emreakayfb@hotmail.com>
- * @contributor Jacob Tomlinson
- * @contributor Tim Swagger (Renowne, LLC) <tim@renowne.com>
- * @contributor Raphael Jackstadt <info@rejack.de>
- *
- * @copyright 2014-2016 Emre Akay
- *
- * @version 2.5.12
- *
- * @license LGPL
- * @license http://opensource.org/licenses/LGPL-3.0 Lesser GNU Public License
- *
- * The latest version of Aauth can be obtained from:
- * https://github.com/emreakay/CodeIgniter-Aauth
- *
- * @todo separate (on some level) the unvalidated users from the "banned" users
- */
 class Aauth
 {
 
@@ -799,6 +759,7 @@ class Aauth
         $username   =   $data['username'];
         $alamat     =   $data['alamat'];
         $perusahaan =   $data['perusahaan'];
+        $phone      =   $data['phone'];
 
         $valid = TRUE;
 
@@ -827,6 +788,12 @@ class Aauth
             $valid = FALSE;
             return json_encode(array('error'=>true,'message'=>'Email sudah pernah digunakan'));
         }
+
+        if ($this->user_exist_by_phone($phone)) {
+            $this->error($this->CI->lang->line('aauth_error_email_exists'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'No. Telp sudah pernah digunakan'));
+        }
     
         if ($this->user_exist_by_perusahaan($perusahaan)) {
             $this->error($this->CI->lang->line('aauth_error_perusahaan_exists'));
@@ -848,6 +815,7 @@ class Aauth
             'pass' => $this->hash_password($pass, 0), // Password cannot be blank but user_id required for salt, setting bad password for now
             'username' => (!$username) ? '' : $username,
             'date_created' => date("Y-m-d H:i:s"),
+            'phone'=> $phone,
             'ip_address'=>'::1',
             'id_perusahaan'=>$id_perusahaan,
 			'picture'=>'example.png'
@@ -857,9 +825,7 @@ class Aauth
 
 
         if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
-
             $user_id = $this->aauth_db->insert_id();
-            
             $masatrial = '30';
             $tglinstal = date('Y-m-d');
             $today = strtotime($tglinstal);
@@ -875,10 +841,12 @@ class Aauth
                 'c_date' => date("Y-m-d H:i:s"),
                 'cash' => 0, 
                 'card' => 0,
-                'bank'=>0,
+                'bank'  =>  0,
                 'cheque'=>0,
                 'r_change'=>0,
                 'active'=>0,
+                'tgl_mulai'=>date("Y-m-d H:i:s"),
+                'id_paket'=>1,
                 'exp_date' => $tglexpired
             );  
             $this->aauth_db->insert('geopos_register', $register);
@@ -1275,6 +1243,18 @@ class Aauth
     public function user_exist_by_email($user_email)
     {
         $query = $this->aauth_db->where('email', $user_email);
+
+        $query = $this->aauth_db->get($this->config_vars['users']);
+
+        if ($query->num_rows() > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    public function user_exist_by_phone($user_phone)
+    {
+        $query = $this->aauth_db->where('phone', $user_phone);
 
         $query = $this->aauth_db->get($this->config_vars['users']);
 

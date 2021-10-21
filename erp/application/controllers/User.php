@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -75,6 +59,7 @@ class User extends CI_Controller
             'password'=> $this->input->post('password'),
             'email'=> $this->input->post('email'),
             'alamat'=> $this->input->post('alamat'),
+            'phone'=> $this->input->post('phone'),
             'perusahaan'=> $this->input->post('perusahaan')
         );
         echo $this->aauth->create_user_register($data);        

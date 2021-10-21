@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css"
       href="<?= assets_url() ?>app-assets/<?= LTR ?>/core/menu/menu-types/vertical-menu-modern.css">
+<link href="<?= base_url()?>assets/css/style3.css" rel="stylesheet">
 </head>
 <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click"
       data-menu="vertical-menu-modern" data-col="2-columns">
@@ -660,7 +661,7 @@
                 </ul>
                 </li>
             <?php }
-            if ($this->aauth->get_user()->roleid > 4) {
+            if ($this->aauth->get_user()->roleid ==0) {
                 ?>
                 <li class="menu-item   has-sub <?php if ($this->li_a == "export") {
                     echo ' open';
@@ -703,6 +704,9 @@
                 </ul>
 
 
+                </li>
+                <li class="menu-item"><a href="<?= base_url()?>langganan"><i class="ft-bar-chart-2"></i>
+                    <span>Langganan</span></a>
                 </li>
             <?php }
             ?>

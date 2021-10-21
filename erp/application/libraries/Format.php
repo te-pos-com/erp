@@ -1,42 +1,12 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * Format class
- * Help convert between various formats such as XML, JSON, CSV, etc.
- *
- * @author    Phil Sturgeon, Chris Kacerguis, @softwarespot
- * @license   http://www.dbad-license.org/
- */
 class Format
 {
 
-    /**
-     * Array output format
-     */
     const ARRAY_FORMAT = 'array';
 
-    /**
-     * Comma Separated Value (CSV) output format
-     */
     const CSV_FORMAT = 'csv';
 
     /**

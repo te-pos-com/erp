@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Selamat Datang</title>
+  <title>Selamat Datang | Te-Pos</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,8 +42,9 @@
           <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Fitur</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="#pricing">Harga</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="<?= base_url()?>erp/user/register">Coba Gratis 30 Hari</a></li>
+          <li><a class="getstarted scrollto" href="https://cloud.te-pos.com/user/register">Coba Gratis 30 Hari</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -67,8 +68,8 @@
             <li><i class="ri-check-line"></i> Laporan Yang Lengkap</li>
           </ul>
           <div class="mt-3">
-            <a href="<?= base_url()?>erp/" class="btn-get-started scrollto">Mulai</a>
-            <a href="<?= base_url()?>erp/user/register" class="btn-get-quote">Coba Gratis 30 Hari</a>
+            <a href="https://cloud.te-pos.com/" class="btn-get-started scrollto">Mulai</a>
+            <a href="https://cloud.te-pos.com/user/register" class="btn-get-quote">Coba Gratis 30 Hari</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -570,12 +571,12 @@
               <li><i class="bx bx-check"></i> Manajement Project</li>
               <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="https://cloud.te-pos.com/user/register" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box featured">
             <h3>Personal</h3>
-            <h4>Rp 50.000,00<span>per bulan</span></h4>
+            <h4>Rp 250.000,00<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -587,12 +588,12 @@
                 <li class="na"><i class="bx bx-x"></i> <span> Manajement Project</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span> Accounting</span></li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="https://cloud.te-pos.com/langanan" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box">
             <h3>Business</h3>
-            <h4>Rp 150.000,00<span>per bulan</span></h4>
+            <h4>Rp 350.000,00<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -604,7 +605,7 @@
                 <li><i class="bx bx-check"></i> Manajement Project</li>
                 <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="https://cloud.te-pos.com/langanan" class="btn-buy">Get Started</a>
           </div>
 
         </div>
@@ -797,11 +798,7 @@
           &copy; Copyright <strong><span>Te-Pos</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/resi-free-bootstrap-html-template/ -->
-          Designed by <a href="https://te-pos.com/">te-pos</a>
+          Designed by <a href="https://te-pos.com/">te-pos.com</a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">

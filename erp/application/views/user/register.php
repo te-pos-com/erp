@@ -65,8 +65,12 @@
                                     <input type="email" class="form-control"  style="border:1px solid #cd955c" placeholder="youremail@mail.com" name="email" id="email">
                                     </div>
                                     <div class="form-group last mb-2">
+                                    <label for="phone">Phone *</label>
+                                    <input type="text" class="form-control"  style="border:1px solid #cd955c" placeholder="08XXXXXXXXX" name="phone" id="phone">
+                                    </div>
+                                    <div class="form-group last mb-2">
                                     <label for="perusahaan">Perusahaan *</label>
-                                    <input type="perusahaan" class="form-control" style="border:1px solid #cd955c" placeholder=" Nama Perusahaan" name="perusahaan" id="perusahaan">
+                                    <input type="text" class="form-control" style="border:1px solid #cd955c" placeholder=" Nama Perusahaan" name="perusahaan" id="perusahaan">
                                     </div>
                                     <div class="form-group last mb-2">
                                     <label for="password">Alamat</label>
@@ -109,6 +113,7 @@
 			password: $("#password").val(),
             email: $("#email").val(),
             alamat: $("#alamat").val(),
+            phone: $("#phone").val(),
             perusahaan: $("#perusahaan").val(),
 		};
 
