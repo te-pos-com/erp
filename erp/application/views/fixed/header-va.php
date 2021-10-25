@@ -15,7 +15,7 @@
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a
                             class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                 class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item"><a class="navbar-brand" href="<?= base_url() ?>dashboard/"><span  class="text-center" style="color:#fff;padding-top:-4px;margin-left:30px;font-size:24px"> te-pos.com</span>
+                <li class="nav-item"><a class="navbar-brand" href="<?= base_url() ?>dashboard/"><span  class="text-center" style="color:#fff;padding-top:-4px;margin-left:30px;font-size:24px"> Te-Pos</span>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
                                                   data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
