@@ -24,20 +24,15 @@ class Locations_model extends CI_Model
 
     public function locations_list()
     {
-        $query = $this->db->query("SELECT * FROM geopos_locations ORDER BY id DESC");
+        $query = $this->db->query("SELECT * FROM geopos_locations WHERE loc=". $this->aauth->get_user()->id_perusahaan ." ORDER BY id DESC");
         return $query->result_array();
     }
 
     public function locations_list2()
     {
         $where = '';
-        if ($this->aauth->get_user()->loc) $where = 'WHERE loc=' . $this->aauth->get_user()->loc . '';
-        if ($this->aauth->get_user()->loc) $where2 = 'WHERE id=' . $this->aauth->get_user()->loc . '';
-        $query = $this->db->query("
-        SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo,id FROM geopos_locations $where 
-        UNION ALL 
-        SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo,id FROM geopos_system $where2
-        ");
+        if ($this->aauth->get_user()->loc) $where = 'WHERE loc=' . $this->aauth->get_user()->id_perusahaan . '';
+        $query = $this->db->query("SELECT * FROM geopos_locations $where");
         return $query->result_array();
     }
 
@@ -67,7 +62,8 @@ class Locations_model extends CI_Model
             'logo' => $image,
             'ext' => $ac_id,
             'cur' => $cur_id,
-            'ware' => $wid
+            'ware' => $wid,
+            'loc' => $this->aauth->get_user()->id_perusahaan
         );
 
         if ($this->db->insert('geopos_locations', $data)) {
@@ -95,7 +91,8 @@ class Locations_model extends CI_Model
             'logo' => $image,
             'ext' => $ac_id,
             'cur' => $cur_id,
-            'ware' => $wid
+            'ware' => $wid,
+            'loc' => $this->aauth->get_user()->id_perusahaan
         );
 
         $this->db->set($data);
@@ -138,7 +135,7 @@ class Locations_model extends CI_Model
 
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
-            $this->db->or_where('loc', 0);
+            $this->db->or_where('loc', $this->aauth->get_user()->loc);
         }
 
         $query = $this->db->get();
@@ -164,7 +161,7 @@ class Locations_model extends CI_Model
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('loc', 0);
+            $this->db->where('loc', $this->aauth->get_user()->loc);
         }
         $query = $this->db->get();
         return $query->result_array();

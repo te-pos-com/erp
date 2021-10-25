@@ -388,11 +388,14 @@ function location($number = 0)
 {
     $ci =& get_instance();
     $ci->load->database();
-    $query2 = $ci->db->query("SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM geopos_system WHERE id=$number
-    UNION ALL
-    SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM geopos_locations WHERE loc=$number
-    ");
-    return $query2->row_array();
+    if ($number>0){
+        $query2 = $ci->db->query("SELECT * FROM geopos_locations WHERE id=$number");
+        return $query2->row_array();
+    }
+    else{
+        $query2 = $ci->db->query("SELECT * FROM geopos_locations WHERE loc=". $this->aauth->get_user()->id_perusahaan);
+        return $query2->result_array();
+    }
 }
 
 function active($input1)

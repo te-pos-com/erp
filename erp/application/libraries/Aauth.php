@@ -257,6 +257,7 @@ class Aauth
                 'email' => $row->email,
                 's_role' => 'r_'.$row->roleid,
                 'loc'=>$row->loc,
+                'id_perusahaan'=>$row->id_perusahaan,
                 'loggedin' => TRUE
             );
 
@@ -808,24 +809,30 @@ class Aauth
             'email'=>$email
         );
         if ($this->aauth_db->insert('geopos_system', $data_perusahaan)) {
+            
             $id_perusahaan = $this->aauth_db->insert_id();
+            $data_location = array(
+                'cname'=>$perusahaan,
+                'address'=>$alamat,
+                'email'=>$email,
+                'loc'=>$id_perusahaan
+            );
+            $this->aauth_db->insert('geopos_locations', $data_location);
+            $id_location = $this->aauth_db->insert_id();
         }
 
         $data = array(
             'email' => $email,
-            'pass' => $this->hash_password($pass, 0), // Password cannot be blank but user_id required for salt, setting bad password for now
+            'pass' => $this->hash_password($pass, 0),
             'username' => (!$username) ? '' : $username,
             'date_created' => date("Y-m-d H:i:s"),
             'phone'=> $phone,
             'ip_address'=>'::1',
             'id_perusahaan'=>$id_perusahaan,
-            'loc'=>$id_perusahaan,
+            'loc'=>$id_location,
             'roleid'=>5,
 			'picture'=>'example.png'
         );
-
-
-
 
         if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
             $user_id = $this->aauth_db->insert_id();

@@ -99,7 +99,6 @@ class Productcategory extends CI_Controller
             }
 
             if ($cat_name) {
-
                 $this->products_cat->addwarehouse($cat_name, $cat_desc, $lid);
             }
         } else {

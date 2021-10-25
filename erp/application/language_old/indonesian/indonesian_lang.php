@@ -123,8 +123,8 @@ $lang['Flat Discount'] = "Diskon Datar";
 $lang['flat Discount'] = "Diskon Datar";
 $lang['Invoice Note'] = "Catatan faktur";
 $lang['Item Name'] = "Nama barang";
-$lang['Quantity'] = " Kuantitas";
-$lang['Rate'] = " Menilai";
+$lang['Quantity'] = " Qty";
+$lang['Rate'] = " Harga";
 $lang['Tax(%)'] = " Pajak(%)";
 $lang['Discount'] = " Diskon";
 $lang['Action'] = " Tindakan";
@@ -162,7 +162,7 @@ $lang['INVOICE'] = "FAKTUR";
 $lang['Gross Amount'] = "Jumlah bruto";
 $lang['Due Date'] = "Batas tanggal terakhir";
 $lang['Terms'] = "Ketentuan";
-$lang['Rate'] = "Menilai";
+$lang['Rate'] = "Harga";
 $lang['Qty'] = "Qty";
 $lang['Payment Status'] = "Status pembayaran";
 $lang['Payment Method'] = "Metode pembayaran";
@@ -1068,8 +1068,8 @@ $lang['disable_expired_products'] = "Nonaktifkan pencarian produk kadaluarsa
 ";
 $lang['standard_label'] = "Label standar
 ";
-$lang['billing_settings'] = "� Pengaturan Penagihan
+$lang['billing_settings'] = "� Pengaturan Penagihan
 ";
-$lang['custom_label'] = "� Label Kustom
+$lang['custom_label'] = "� Label Kustom
 ";
-$lang['Customer_approved'] = "� Pelanggan disetujui";
+$lang['Customer_approved'] = "� Pelanggan disetujui";

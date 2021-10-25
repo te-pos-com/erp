@@ -46,7 +46,7 @@ class Settings extends CI_Controller
 
             $head['usernm'] = $this->aauth->get_user()->username;
             $head['title'] = 'Company Settings';
-            $data['company'] = $this->settings->company_details(1);
+            $data['company'] = $this->settings->company_details($this->aauth->get_user()->id_perusahaan);
 
             $this->load->view('fixed/header', $head);
             $this->load->view('settings/company', $data);
