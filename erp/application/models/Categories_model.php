@@ -35,10 +35,10 @@ ORDER BY id DESC");
         $where = '';
 
 
-        if (!BDATA) $where = "WHERE  (loc=0) ";
+        if (!BDATA) $where = "";
         if ($this->aauth->get_user()->loc) {
             $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . " ) ";
-            if (BDATA) $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . " OR geopos_warehouse.loc=0) ";
+            if (BDATA) $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . ") ";
         }
 
 
@@ -52,10 +52,10 @@ ORDER BY id DESC");
     public function category_stock()
     {
         $whr = '';
-        if (!BDATA) $whr = "WHERE  (geopos_warehouse.loc=0) ";
+        if (!BDATA) $whr = " ";
         if ($this->aauth->get_user()->loc) {
             $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " ) ";
-            if (BDATA) $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " OR geopos_warehouse.loc=0) ";
+            if (BDATA) $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " ) ";
         }
 
         $query = $this->db->query("SELECT c.*,p.pc,p.salessum,p.worthsum,p.qty FROM geopos_product_cat AS c LEFT JOIN ( SELECT geopos_products.pcat,COUNT(geopos_products.pid) AS pc,SUM(geopos_products.product_price*geopos_products.qty) AS salessum, SUM(geopos_products.fproduct_price*geopos_products.qty) AS worthsum,SUM(geopos_products.qty) AS qty FROM geopos_products LEFT JOIN geopos_warehouse ON geopos_products.warehouse=geopos_warehouse.id  $whr GROUP BY geopos_products.pcat ) AS p ON c.id=p.pcat WHERE c.c_type=0");
@@ -65,10 +65,10 @@ ORDER BY id DESC");
     public function category_sub_stock($id = 0)
     {
         $whr = '';
-        if (!BDATA) $whr = "WHERE  (geopos_warehouse.loc=0) ";
+        if (!BDATA) $whr = " ";
         if ($this->aauth->get_user()->loc) {
             $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " ) ";
-            if (BDATA) $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " OR geopos_warehouse.loc=0) ";
+            if (BDATA) $whr = "WHERE  (geopos_warehouse.loc=" . $this->aauth->get_user()->loc . " ) ";
         }
 
         $whr2 = '';
@@ -83,9 +83,9 @@ ORDER BY id DESC");
         if ($this->aauth->get_user()->loc) {
             $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc;
 
-            if (BDATA) $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc . ' OR c.loc=0';
+            if (BDATA) $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc . ' ';
         } elseif (!BDATA) {
-            $where = ' WHERE  c.loc=0';
+            $where = '';
         }
         $query = $this->db->query("SELECT c.*,p.pc,p.salessum,p.worthsum,p.qty FROM geopos_warehouse AS c LEFT JOIN ( SELECT warehouse,COUNT(pid) AS pc,SUM(product_price*qty) AS salessum, SUM(fproduct_price*qty) AS worthsum,SUM(qty) AS qty FROM  geopos_products GROUP BY warehouse ) AS p ON c.id=p.warehouse  $where");
         return $query->result_array();

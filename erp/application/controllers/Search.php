@@ -42,10 +42,10 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($tid) {
@@ -75,10 +75,10 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
@@ -119,10 +119,10 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
 
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
         if ($name != NULL) {
             $query = $this->db->query("SELECT id,username FROM geopos_users WHERE $whr username  LIKE '%" . $name . "%' LIMIT 6");
@@ -152,10 +152,10 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
@@ -178,10 +178,10 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {

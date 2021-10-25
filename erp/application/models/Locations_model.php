@@ -31,8 +31,13 @@ class Locations_model extends CI_Model
     public function locations_list2()
     {
         $where = '';
-        if ($this->aauth->get_user()->loc) $where = 'WHERE id=' . $this->aauth->get_user()->loc . '';
-        $query = $this->db->query("SELECT * FROM geopos_locations $where ORDER BY id DESC");
+        if ($this->aauth->get_user()->loc) $where = 'WHERE loc=' . $this->aauth->get_user()->loc . '';
+        if ($this->aauth->get_user()->loc) $where2 = 'WHERE id=' . $this->aauth->get_user()->loc . '';
+        $query = $this->db->query("
+        SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo,id FROM geopos_locations $where 
+        UNION ALL 
+        SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo,id FROM geopos_system $where2
+        ");
         return $query->result_array();
     }
 

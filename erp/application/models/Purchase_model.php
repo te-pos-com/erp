@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -50,9 +34,9 @@ class Purchase_model extends CI_Model
         $this->db->from('geopos_warehouse');
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
-            if (BDATA) $this->db->or_where('loc', 0);
+            if (BDATA) $this->db->or_where('loc',$this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('loc', 0);
+            $this->db->where('loc', $this->aauth->get_user()->loc);
         }
         $query = $this->db->get();
         return $query->result_array();
@@ -67,9 +51,9 @@ class Purchase_model extends CI_Model
         $this->db->where('geopos_purchase.id', $id);
         if ($this->aauth->get_user()->loc) {
             $this->db->where('geopos_purchase.loc', $this->aauth->get_user()->loc);
-            if (BDATA) $this->db->or_where('geopos_purchase.loc', 0);
+            if (BDATA) $this->db->or_where('geopos_purchase.loc', $this->aauth->get_user()->loc0);
         } elseif (!BDATA) {
-            $this->db->where('geopos_purchase.loc', 0);
+            $this->db->where('geopos_purchase.loc', $this->aauth->get_user()->loc);
         }
         $this->db->join('geopos_supplier', 'geopos_purchase.csd = geopos_supplier.id', 'left');
         $this->db->join('geopos_terms', 'geopos_terms.id = geopos_purchase.term', 'left');
@@ -115,7 +99,7 @@ class Purchase_model extends CI_Model
         if ($this->aauth->get_user()->loc) {
             $whr = array('id' => $id, 'loc' => $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-               $whr = array('id' => $id, 'loc' =>0);
+               $whr = array('id' => $id, 'loc' =>$this->aauth->get_user()->loc);
         }
         $this->db->delete('geopos_purchase', $whr);
         if ($this->db->affected_rows()) $this->db->delete('geopos_purchase_items', array('tid' => $id));
@@ -135,7 +119,7 @@ class Purchase_model extends CI_Model
             if ($this->aauth->get_user()->loc) {
             $this->db->where('geopos_purchase.loc', $this->aauth->get_user()->loc);
         }
-        elseif(!BDATA) { $this->db->where('geopos_purchase.loc', 0); }
+        elseif(!BDATA) { $this->db->where('geopos_purchase.loc', $this->aauth->get_user()->loc); }
                     if ($this->input->post('start_date') && $this->input->post('end_date')) // if datatable send POST for search
         {
             $this->db->where('DATE(geopos_purchase.invoicedate) >=', datefordatabase($this->input->post('start_date')));

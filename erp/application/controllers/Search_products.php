@@ -38,10 +38,10 @@ class Search_products extends CI_Controller
         if ($this->aauth->get_user()->loc) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
             $join2 = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' OR geopos_warehouse.loc=0) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $qw .= '(geopos_warehouse.loc=0) AND ';
+            $qw .= ' AND ';
         }
         $e = '';
         if ($billing_settings['key1'] == 1) {
@@ -83,10 +83,10 @@ class Search_products extends CI_Controller
         $join = '';
         if ($this->aauth->get_user()->loc) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' OR geopos_warehouse.loc=0) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $qw .= '(geopos_warehouse.loc=0) AND ';
+            $qw .= ' AND ';
         }
         if ($name) {
             $query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_code,geopos_products.fproduct_price,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.unit FROM geopos_products $join WHERE " . $qw . "UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%' OR UPPER(geopos_products.product_code) LIKE '" . strtoupper($name) . "%' LIMIT 6");
@@ -109,10 +109,10 @@ class Search_products extends CI_Controller
         $name = $this->input->get('keyword', true);
         $whr = '';
         if ($this->aauth->get_user()->loc) {
-            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             if (!BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $whr = ' (loc=0) AND ';
+            $whr = '  AND ';
         }
         if ($name) {
             $query = $this->db->query("SELECT id,name,address,city,phone,email,discount_c FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
@@ -142,10 +142,10 @@ class Search_products extends CI_Controller
 
 
         if ($this->aauth->get_user()->loc) {
-            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
             if (!BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $whr = ' (loc=0) AND ';
+            $whr = '  AND ';
         }
 
 
@@ -171,10 +171,10 @@ class Search_products extends CI_Controller
         $name = $this->input->get('keyword', true);
         $whr = '';
         if ($this->aauth->get_user()->loc) {
-            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             if (!BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $whr = ' (loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
@@ -200,10 +200,10 @@ class Search_products extends CI_Controller
 
         $whr = '';
         if ($this->aauth->get_user()->loc) {
-            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
             if (!BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $whr = ' (loc=0) AND ';
+            $whr = ' AND ';
         }
         if ($name) {
             $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_supplier WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
@@ -239,10 +239,10 @@ class Search_products extends CI_Controller
         $join = '';
         if ($this->aauth->get_user()->loc) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' OR geopos_warehouse.loc=0) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $qw .= '(geopos_warehouse.loc=0) AND ';
+            $qw .= ' AND ';
         }
 
         $e = '';
@@ -328,10 +328,10 @@ $flag_p=false;
 
         if ($this->aauth->get_user()->loc) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' OR geopos_warehouse.loc=0) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $qw .= '(geopos_warehouse.loc=0) AND ';
+            $qw .= ' AND ';
         }
 
         $e = '';
@@ -419,10 +419,10 @@ if($flag_p) {
         if ($this->aauth->get_user()->loc) {
              $qw .= "(geopos_product_groups.loc='".$this->aauth->get_user()->loc."') AND ";
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' OR geopos_warehouse.loc=0) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
             $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $qw .= '(geopos_warehouse.loc=0) AND ';
+            $qw .= ' AND ';
         }
 
         $e = '';

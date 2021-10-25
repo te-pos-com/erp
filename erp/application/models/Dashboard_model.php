@@ -85,7 +85,7 @@ class Dashboard_model extends CI_Model
                 if ($this->aauth->get_user()->loc) {
          $whr = ' AND (geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ')';
         } elseif (!BDATA) {
-         $whr = ' AND (geopos_warehouse.loc=0)';
+         $whr = ' ';
         }
 
         $query = $this->db->query("SELECT geopos_products.*,geopos_warehouse.title FROM geopos_products LEFT JOIN geopos_warehouse ON geopos_products.warehouse=geopos_warehouse.id  WHERE (geopos_products.qty<=geopos_products.alert) $whr ORDER BY geopos_products.product_name ASC LIMIT 10");
@@ -130,7 +130,7 @@ class Dashboard_model extends CI_Model
              if ($this->aauth->get_user()->loc) {
          $whr = ' AND (loc=' . $this->aauth->get_user()->loc . ')';
         } elseif (!BDATA) {
-         $whr = ' AND (loc=0)';
+         $whr = ' ';
         }
         $query = $this->db->query("SELECT SUM(credit) AS total,date FROM geopos_transactions WHERE ((DATE(date) BETWEEN DATE('$year-$month-01') AND '$today') AND type='Income')  $whr GROUP BY date ORDER BY date DESC");
         return $query->result_array();
@@ -142,7 +142,7 @@ class Dashboard_model extends CI_Model
                    if ($this->aauth->get_user()->loc) {
          $whr = ' AND (loc=' . $this->aauth->get_user()->loc . ')';
         } elseif (!BDATA) {
-         $whr = ' AND (loc=0)';
+         $whr = ' ';
         }
         $query = $this->db->query("SELECT SUM(debit) AS total,date FROM geopos_transactions WHERE ((DATE(date) BETWEEN DATE('$year-$month-01') AND '$today') AND type='Expense')  $whr GROUP BY date ORDER BY date DESC");
         return $query->result_array();
@@ -155,7 +155,7 @@ class Dashboard_model extends CI_Model
                     if ($this->aauth->get_user()->loc) {
          $whr = ' AND (loc=' . $this->aauth->get_user()->loc . ')';
         } elseif (!BDATA) {
-         $whr = ' AND (loc=0)';
+         $whr = '';
         }
         $query = $this->db->query("SELECT COUNT(id) AS ttlid,SUM(total) AS total,DATE(invoicedate) as date FROM geopos_invoices WHERE (DATE(invoicedate) BETWEEN '$today' - INTERVAL 30 DAY AND '$today')  $whr GROUP BY DATE(invoicedate) ORDER BY date DESC");
         return $query->result_array();
@@ -203,7 +203,7 @@ class Dashboard_model extends CI_Model
                 if ($this->aauth->get_user()->loc) {
          $whr = ' WHERE (i.loc=' . $this->aauth->get_user()->loc . ') ';
         } elseif (!BDATA) {
-           $whr = ' WHERE (i.loc=0) ';
+           $whr = '';
         }
         $query = $this->db->query("SELECT i.id,i.tid,i.invoicedate,i.total,i.status,i.i_class,c.name,c.picture,i.csd
 FROM geopos_invoices AS i LEFT JOIN geopos_customers AS c ON i.csd=c.id $whr ORDER BY i.id DESC LIMIT 10");
@@ -218,7 +218,7 @@ FROM geopos_invoices AS i LEFT JOIN geopos_customers AS c ON i.csd=c.id $whr ORD
                 if ($this->aauth->get_user()->loc) {
          $whr = ' WHERE (i.loc=' . $this->aauth->get_user()->loc . ') ';
         } elseif (!BDATA) {
-           $whr = ' WHERE (i.loc=0) ';
+           $whr = '';
         }
         $query = $this->db->query("SELECT MAX(i.id) AS iid,i.csd,SUM(i.total) AS total, c.cid,MAX(c.picture) as picture ,MAX(c.name) as name,MAX(i.status) as status FROM geopos_invoices AS i LEFT JOIN (SELECT geopos_customers.id AS cid, geopos_customers.picture AS picture, geopos_customers.name AS name FROM geopos_customers) AS c ON c.cid=i.csd $whr GROUP BY i.csd ORDER BY iid DESC LIMIT 10;");
         $result= $query->result_array();

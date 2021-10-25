@@ -87,7 +87,7 @@ class Products_model extends CI_Model
                 }
             }
         }
-
+        $this->db->where('geopos_products.loc', $this->aauth->get_user()->loc);
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 
@@ -194,7 +194,8 @@ class Products_model extends CI_Model
                         'expiry' => $wdate,
                         'code_type' => $code_type,
                         'sub_id' => $sub_cat,
-                        'b_id' => $b_id
+                        'b_id' => $b_id,
+                        'loc' => $this->aauth->get_user()->loc
                     );
 
                 } else {
@@ -219,7 +220,8 @@ class Products_model extends CI_Model
                         'expiry' => $wdate,
                         'code_type' => 'EAN13',
                         'sub_id' => $sub_cat,
-                        'b_id' => $b_id
+                        'b_id' => $b_id,
+                        'loc' => $this->aauth->get_user()->loc
                     );
                 }
                 $this->db->trans_start();
@@ -254,6 +256,7 @@ class Products_model extends CI_Model
                             $data['merge'] = 1;
                             $data['sub'] = $pid;
                             $data['vb'] = $v_type[$key];
+                            $data['loc'] = $this->aauth->get_user()->loc;
                             $this->db->insert('geopos_products', $data);
                             $pidv = $this->db->insert_id();
                             $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -271,6 +274,7 @@ class Products_model extends CI_Model
                             $data['merge'] = 2;
                             $data['sub'] = $pid;
                             $data['vb'] = $w_type[$key];
+                            $data['loc'] = $this->aauth->get_user()->loc;
                             $this->db->insert('geopos_products', $data);
                             $pidv = $this->db->insert_id();
                             $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -303,7 +307,8 @@ class Products_model extends CI_Model
                     'expiry' => $wdate,
                     'code_type' => $code_type,
                     'sub_id' => $sub_cat,
-                    'b_id' => $b_id
+                    'b_id' => $b_id,
+                    'loc' => $this->aauth->get_user()->loc
                 );
             } else {
                 $barcode = rand(100, 999) . rand(0, 9) . rand(1000000, 9999999) . rand(0, 9);
@@ -325,7 +330,8 @@ class Products_model extends CI_Model
                     'expiry' => $wdate,
                     'code_type' => 'EAN13',
                     'sub_id' => $sub_cat,
-                    'b_id' => $b_id
+                    'b_id' => $b_id,
+                    'loc' => $this->aauth->get_user()->loc
                 );
             }
             $this->db->trans_start();
@@ -361,6 +367,7 @@ class Products_model extends CI_Model
                         $data['merge'] = 1;
                         $data['sub'] = $pid;
                         $data['vb'] = $v_type[$key];
+                        $data['loc'] = $this->aauth->get_user()->loc;
                         $this->db->insert('geopos_products', $data);
                         $pidv = $this->db->insert_id();
                         $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -379,6 +386,7 @@ class Products_model extends CI_Model
                         $data['merge'] = 2;
                         $data['sub'] = $pid;
                         $data['vb'] = $w_type[$key];
+                        $data['loc'] = $this->aauth->get_user()->loc;
                         $this->db->insert('geopos_products', $data);
                         $pidv = $this->db->insert_id();
                         $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -420,7 +428,8 @@ class Products_model extends CI_Model
                     'barcode' => $barcode,
                     'code_type' => $code_type,
                     'sub_id' => $sub_cat,
-                    'b_id' => $b_id
+                    'b_id' => $b_id,
+                    'loc' => $this->aauth->get_user()->loc
                 );
 
                 $this->db->set($data);
@@ -460,7 +469,8 @@ class Products_model extends CI_Model
                 'barcode' => $barcode,
                 'code_type' => $code_type,
                 'sub_id' => $sub_cat,
-                'b_id' => $b_id
+                'b_id' => $b_id,
+                'loc' => $this->aauth->get_user()->loc
             );
             $this->db->set($data);
             $this->db->where('pid', $pid);
@@ -518,6 +528,7 @@ class Products_model extends CI_Model
                     $data['merge'] = 1;
                     $data['sub'] = $pid;
                     $data['vb'] = $v_type[$key];
+                    $data['loc'] = $this->aauth->get_user()->loc;
                     $this->db->insert('geopos_products', $data);
                     $pidv = $this->db->insert_id();
                     $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -535,6 +546,7 @@ class Products_model extends CI_Model
                     $data['merge'] = 2;
                     $data['sub'] = $pid;
                     $data['vb'] = $w_type[$key];
+                    $data['loc'] = $this->aauth->get_user()->loc;
                     $this->db->insert('geopos_products', $data);
                     $pidv = $this->db->insert_id();
                     $this->movers(1, $pidv, $data['qty'], 0, 'Stock Initialized');
@@ -552,9 +564,9 @@ class Products_model extends CI_Model
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' LEFT JOIN  geopos_warehouse on geopos_warehouse.id = geopos_products.warehouse WHERE geopos_warehouse.loc=' . $this->aauth->get_user()->loc;
-            if (BDATA) $whr = ' LEFT JOIN  geopos_warehouse on geopos_warehouse.id = geopos_products.warehouse WHERE geopos_warehouse.loc=0 OR geopos_warehouse.loc=' . $this->aauth->get_user()->loc;
+            if (BDATA) $whr = ' LEFT JOIN  geopos_warehouse on geopos_warehouse.id = geopos_products.warehouse WHERE  geopos_warehouse.loc=' . $this->aauth->get_user()->loc;
         } elseif (!BDATA) {
-            $whr = ' LEFT JOIN  geopos_warehouse on geopos_warehouse.id = geopos_products.warehouse WHERE geopos_warehouse.loc=0';
+            $whr = ' LEFT JOIN  geopos_warehouse on geopos_warehouse.id = geopos_products.warehouse ';
         }
         $query = $this->db->query("SELECT
 COUNT(IF( geopos_products.qty > 0, geopos_products.qty, NULL)) AS instock,
@@ -569,6 +581,7 @@ FROM geopos_products $whr");
         $this->db->select('geopos_products.*');
         $this->db->from('geopos_products');
         $this->db->where('geopos_products.warehouse', $id);
+        $this->db->where('geopos_products.loc', $this->aauth->get_user()->loc);
         if ($this->aauth->get_user()->loc) {
             $this->db->join('geopos_warehouse', 'geopos_warehouse.id = geopos_products.warehouse');
             $this->db->where('geopos_warehouse.loc', $this->aauth->get_user()->loc);

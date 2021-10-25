@@ -256,6 +256,7 @@ class Aauth
                 'username' => $row->username,
                 'email' => $row->email,
                 's_role' => 'r_'.$row->roleid,
+                'loc'=>$row->loc,
                 'loggedin' => TRUE
             );
 
@@ -818,6 +819,8 @@ class Aauth
             'phone'=> $phone,
             'ip_address'=>'::1',
             'id_perusahaan'=>$id_perusahaan,
+            'loc'=>$id_perusahaan,
+            'roleid'=>5,
 			'picture'=>'example.png'
         );
 

@@ -404,9 +404,9 @@ class Customers_model extends CI_Model
         $whr = "";
         if ($this->aauth->get_user()->loc) {
             $whr = "WHERE (geopos_customers.loc=" . $this->aauth->get_user()->loc . " ) ";
-            if (BDATA) $whr = "WHERE (geopos_customers.loc=" . $this->aauth->get_user()->loc . " OR geopos_customers.loc=0 ) ";
+            if (BDATA) $whr = "WHERE (geopos_customers.loc=" . $this->aauth->get_user()->loc . " ) ";
         } elseif (!BDATA) {
-            $whr = "WHERE  geopos_customers.loc=0  ";
+            $whr = " ";
         }
 
         $query = $this->db->query("SELECT c.*,p.pc FROM geopos_cust_group AS c LEFT JOIN ( SELECT gid,COUNT(gid) AS pc FROM geopos_customers $whr GROUP BY gid) AS p ON p.gid=c.id");

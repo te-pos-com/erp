@@ -40,7 +40,6 @@
 
                     <div class="col-sm-6">
                         <select name="lid" class="form-control">
-                            <option value='0'><?php echo $this->lang->line('All') ?></option>
                             <?php
                             foreach ($locations as $row) {
                                 $cid = $row['id'];

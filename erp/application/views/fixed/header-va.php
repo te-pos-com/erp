@@ -38,7 +38,7 @@
                                                 class="ficon ft-map-pin success"></i><?php echo $this->lang->line('business_location') ?></span>
                                 </h6>
                             </li>
-
+                            
                             <li class="dropdown-menu-footer"><span class="dropdown-item text-muted text-center blue"
                                 > <?php $loc = location($this->aauth->get_user()->loc);
                                     echo $loc['cname']; ?></span>
@@ -182,13 +182,7 @@
                 <li class="p-1"><select class="form-control"
                                         onchange="javascript:location.href = baseurl+'settings/switch_location?id='+this.value;"> <?php
                         $loc = location($this->aauth->get_user()->loc);
-                        echo ' <option value="' . $loc['id'] . '"> *' . $loc['cname'] . '*</option>';
-
-                        $loc = locations();
-                        foreach ($loc as $row) {
-                            echo ' <option value="' . $row['id'] . '"> ' . $row['cname'] . '</option>';
-                        }
-                        echo ' <option value="0">Master/Default</option>';
+                        echo ' <option value="' . $loc['id'] . '"> ' . $loc['cname'] . '</option>';
                         ?></select>
                 </li> <?php } ?>
                 <li class="nav-item "><a href="<?= base_url(); ?>dashboard/"><i
