@@ -15,8 +15,8 @@
         <div class="row no-gutters">
 
           <div class="col-lg-4 box">
-            <h3>Basic</h3>
-            <h4>Rp. 150.000<span>Per Bulan</span></h4>
+            <h3><?= $langganan[0]['nama_langganan'] ?></h3>
+            <h4>Rp. <?= number_format($langganan[0]['harga_langganan']) ?><span>Per Bulan</span></h4>
             <ul class="text-center">
             <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -28,12 +28,12 @@
                 <li class="na"><i class="bx bx-x"></i> <span> Manajement Project</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span> Accounting</span></li>
             </ul>
-            <a href="#" class="btn-buy">Langganan</a>
+            <a href="<?= base_url()?>langganan/checkout?i=<?= base64_encode($langganan[0]['id']) ?>" class="btn-buy">Langganan</a>
           </div>
 
           <div class="col-lg-4 box featured">
-            <h3>Profesional</h3>
-            <h4>Rp 350.000<span>Per Bulan</span></h4>
+            <h3><?= $langganan[1]['nama_langganan'] ?></h3>
+            <h4>Rp <?= number_format($langganan[1]['harga_langganan']) ?><span>Per Bulan</span></h4>
             <ul class="text-center">
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -45,12 +45,12 @@
                 <li><i class="bx bx-check"></i> Manajement Project</li>
                 <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="#" class="btn-buy">Langganan</a>
+            <a href="<?= base_url()?>langganan/checkout?i=<?= base64_encode($langganan[1]['id']) ?>" class="btn-buy">Langganan</a>
           </div>
 
           <div class="col-lg-4 box">
-            <h3>Enterpreace</h3>
-            <h4>Rp 50.000.000<span>Pembelian Sorce Code</span></h4>
+            <h3><?= $langganan[2]['nama_langganan'] ?></h3>
+            <h4>Rp <?= number_format($langganan[2]['harga_langganan']) ?><span>Pembelian Sorce Code</span></h4>
             <ul class="text-center">
                 <li><i class="bx bx-check"></i> Free Updatean Program</li>
                 <li><i class="bx bx-check"></i> Semua Fitur Lengkap</li>
@@ -62,7 +62,7 @@
                 <li><i class="bx bx-check"></i> Support Tim</li>
                 <li><i class="bx bx-check"></i> Free Konsultasi</li>
             </ul>
-            <a href="#" class="btn-buy">Beli Program</a>
+            <a href="<?= base_url()?>langganan/checkout?i=<?= base64_encode($langganan[2]['id']) ?>" class="btn-buy">Beli Program</a>
           </div>
 
         </div>
