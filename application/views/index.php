@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Selamat Datang | Te-Pos</title>
+  <title>Selamat Datang | <?= $setting['nama_website']?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= base_url() ?>assets/img/favicon.png" rel="icon">
+  <link href="<?= base_url() ?>assets/img/<?= $setting['favicon']?>" rel="icon">
   <link href="<?= base_url() ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -34,7 +34,9 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="<?= base_url()?>"><img src="<?= base_url()?>assets/img/logo.png"> Te-Pos</a></h1>
+      <h1 class="logo">
+        <a href="<?= base_url()?>"><img src="<?= base_url()?>assets/img/<?= $setting['logo']?>"> <?= $setting['nama_website']?></a>
+      </h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -43,8 +45,9 @@
           <li><a class="nav-link scrollto " href="#portfolio">Fitur</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Harga</a></li>
+          <li><a class="nav-link scrollto" href="<?= base_url()?>patner">Patner</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="https://cloud.te-pos.com/user/register">Coba Gratis 30 Hari</a></li>
+          <li><a class="getstarted scrollto" href="<?= $setting['link_cloud']?>/user/register">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -68,8 +71,8 @@
             <li><i class="ri-check-line"></i> Laporan Yang Lengkap</li>
           </ul>
           <div class="mt-3">
-            <a href="https://cloud.te-pos.com/" class="btn-get-started scrollto">Mulai</a>
-            <a href="https://cloud.te-pos.com/user/register" class="btn-get-quote">Coba Gratis 30 Hari</a>
+            <a href="<?= $setting['link_cloud']?>" class="btn-get-started scrollto">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>/user/register" class="btn-get-quote">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -88,12 +91,12 @@
 
         <div class="row content">
           <div class="col-lg-6">
-            <h2>Hi !, Perkenalkan Tentang Kami</h2>
-            <h3>Kami adalah Tim yang berfokus untuk terus mengembangkan program yang lengkap untuk membantu mempermudah menjalankan proses bisnis  </h3>
+            <h2>Hi !, Perkenalkan Tentang <?= $setting['nama_website']?></h2>
+            <h3><?= $setting['nama_website']?> adalah Aplikasi yang digunakan untuk penjualan, dengan program yang lengkap untuk membantu mempermudah menjalankan proses bisnis  </h3>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Kami menawarkan pengalaman menarik untuk anda, <br/>
+            <?= $setting['nama_website']?> menawarkan pengalaman menarik untuk anda, <br/>
               dengan harga yang terjangkau dan fitur program yang lengkap anda akan merasakan pengalaman yang luar biasa,
               Service yang kami tawarkan dan layanan yang tersedia di dalamnya diantaranya :
             </p>
@@ -103,7 +106,7 @@
               <li><i class="ri-check-double-line"></i> Tanpa ada batasan input produk</li>
             </ul>
             <p class="fst-italic">
-              Berkembang bersama bersama adalah tujuan yang ingin Tim kami capai bersama anda, segera bergabung bersama kami dan rasakan pengalaman yang luar biasa !
+              Berkembang bersama bersama adalah tujuan yang ingin <?= $setting['nama_website']?> capai bersama anda, segera bergabung bersama <?= $setting['nama_website']?> dan rasakan pengalaman yang luar biasa !
             </p>
           </div>
         </div>
@@ -120,8 +123,8 @@
           <div class="col-lg-4">
             <div class="box">
               <span>01</span>
-              <h4>Daftar Gratis 30 hari</h4>
-              <p>Segera gabung dan langsung mendapatkan gratis 30 hari akses program</p>
+              <h4>Daftar Gratis <?= $setting['gratis_langganan']?> hari</h4>
+              <p>Segera gabung dan langsung mendapatkan gratis <?= $setting['gratis_langganan']?> hari akses program</p>
             </div>
           </div>
 
@@ -155,7 +158,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
-              <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($pelanggan)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Total Pelanggan</p>
             </div>
           </div>
@@ -163,7 +166,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="bi bi-journal-richtext"></i>
-              <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($pelanggan_baru)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Pelanggan Baru Bulan Ini</p>
             </div>
           </div>
@@ -171,7 +174,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="bi bi-headset"></i>
-              <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($suport)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Support yang membantu</p>
             </div>
           </div>
@@ -179,7 +182,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="bi bi-people"></i>
-              <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($patner)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Patner</p>
             </div>
           </div>
@@ -559,7 +562,7 @@
 
           <div class="col-lg-4 box">
             <h3>Free</h3>
-            <h4>Rp. 0,00<span>Selama 30 Hari</span></h4>
+            <h4>Rp. 0,00<span>Selama <?= $setting['gratis_langganan']?> Hari</span></h4>
             <ul>
               <li><i class="bx bx-check"></i> Penjualan</li>
               <li><i class="bx bx-check"></i> Pembelian</li>
@@ -702,21 +705,21 @@
                 <div class="info-box">
                   <i class="bx bx-map"></i>
                   <h3>Alamat</h3>
-                  <p>Jl Kalimati No 32, Yogyakarta, 535022</p>
+                  <p><?= $setting['alamat']?></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@te-pos.com<br>contact@te-pos.com</p>
+                  <p><?= $setting['email']?></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-phone-call"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p><?= $setting['no_telp']?></p>
                 </div>
               </div>
             </div>
@@ -765,11 +768,9 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h3>Te-Pos</h3>
             <p>
-              Jl Kalimati No. 32<br>
-              Sleman, 535022<br>
-              Indonesia <br><br>
-              <strong>Phone:</strong> +6281328675727<br>
-              <strong>Email:</strong> info@te-pos.com<br>
+              <?= $setting['alamat']?><br>
+              <strong>Phone:</strong> <?= $setting['no_telp']?><br>
+              <strong>Email:</strong> <?= $setting['email']?><br>
             </p>
           </div>
 
@@ -795,17 +796,16 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Te-Pos</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span><?= $setting['nama_website']?></span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          Designed by <a href="https://te-pos.com/">te-pos.com</a>
+          Designed by <a href="https://<?= $setting['domain_website']?>/"><?= $setting['domain_website']?></a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>

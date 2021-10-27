@@ -762,7 +762,8 @@ class Aauth
         $alamat     =   $data['alamat'];
         $perusahaan =   $data['perusahaan'];
         $phone      =   $data['phone'];
-
+        $referal    =   $data['referal'];
+        
         $valid = TRUE;
 
         $valid_email = (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -806,7 +807,8 @@ class Aauth
         $data_perusahaan = array(
             'cname'=>$perusahaan,
             'address'=>$alamat,
-            'email'=>$email
+            'email'=>$email,
+            'id_referal' => $referal
         );
         if ($this->aauth_db->insert('geopos_system', $data_perusahaan)) {
             

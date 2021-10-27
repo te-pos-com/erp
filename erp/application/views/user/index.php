@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center" style="background-color:#fff">
                     <div class="col-md-7">
-                    <h3 class="text-center">Login to<a href="https://te-pos.com"><img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></a></h3>
+                    <h3 class="text-center">Login to<a href="<?= $setting['link_website']?>"><img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></a></h3>
                     <?php if ($response) {
                                 echo '<div id="notify" class="alert alert-danger" >
                     <a href="#" class="close" data-dismiss="alert">&times;</a> <div class="message">' . $response . '</div>

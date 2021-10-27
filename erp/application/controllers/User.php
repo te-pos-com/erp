@@ -14,6 +14,7 @@ class User extends CI_Controller
         $this->load->library("Aauth");
         $this->load->library("Captcha_u");
         $this->load->library("form_validation");
+        $this->load->model('setting_model');
         $this->captcha = $this->captcha_u->public_key()->captcha;
 
     }
@@ -27,6 +28,7 @@ class User extends CI_Controller
         }
         $data['response'] = '';
         $data['captcha_on'] = $this->captcha;
+        $data['setting'] = $this->setting_model->setting_list();
         $data['captcha'] = $this->captcha_u->public_key()->recaptcha_p;
         if ($this->input->get('e')) {
             $data['response'] = 'Invalid username or password!';
@@ -43,6 +45,7 @@ class User extends CI_Controller
         }
         $data['response'] = '';
         $data['captcha_on'] = $this->captcha;
+        $data['setting'] = $this->setting_model->setting_list();
         $data['captcha'] = $this->captcha_u->public_key()->recaptcha_p;
         if ($this->input->get('e')) {
             $data['response'] = 'Invalid username or password!';
@@ -54,13 +57,20 @@ class User extends CI_Controller
     }
 
     public function doRegister(){
+        if (!empty($this->input->get('r'))){
+            $referal = base64_decode($this->input->get('r'));
+        }
+        else{
+            $referal = 0;
+        }
         $data = array(
             'username'=> $this->input->post('username'),
             'password'=> $this->input->post('password'),
             'email'=> $this->input->post('email'),
             'alamat'=> $this->input->post('alamat'),
             'phone'=> $this->input->post('phone'),
-            'perusahaan'=> $this->input->post('perusahaan')
+            'perusahaan'=> $this->input->post('perusahaan'),
+            'referal' => $referal
         );
         echo $this->aauth->create_user_register($data);        
     }
