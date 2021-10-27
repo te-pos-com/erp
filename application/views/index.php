@@ -562,7 +562,7 @@
 
           <div class="col-lg-4 box">
             <h3>Free</h3>
-            <h4>Rp. 0,00<span>Selama <?= $setting['gratis_langganan']?> Hari</span></h4>
+            <h4>Rp. 0<span>Selama <?= $setting['gratis_langganan']?> Hari</span></h4>
             <ul>
               <li><i class="bx bx-check"></i> Penjualan</li>
               <li><i class="bx bx-check"></i> Pembelian</li>
@@ -579,7 +579,7 @@
 
           <div class="col-lg-4 box featured">
             <h3>Personal</h3>
-            <h4>Rp 250.000,00<span>per bulan</span></h4>
+            <h4>Rp 250.000<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -596,7 +596,7 @@
 
           <div class="col-lg-4 box">
             <h3>Business</h3>
-            <h4>Rp 350.000,00<span>per bulan</span></h4>
+            <h4>Rp 350.000<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -729,7 +729,7 @@
           &copy; Copyright <strong><span><?= $setting['nama_website']?></span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          Designed by <a href="https://<?= $setting['domain_website']?>/"><?= $setting['domain_website']?></a>
+          Designed by <a href="<?= $setting['link_website']?>"><?= $setting['domain_website']?></a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">

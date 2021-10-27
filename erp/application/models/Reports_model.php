@@ -36,7 +36,7 @@ class Reports_model extends CI_Model
             $where .= " AND type='$trans_type AND loc='0'";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get();
@@ -59,7 +59,7 @@ class Reports_model extends CI_Model
             $where .= " AND loc='0'";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
 
 
@@ -84,7 +84,7 @@ class Reports_model extends CI_Model
             $where .= " AND loc='0'";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
 
 
@@ -109,7 +109,7 @@ class Reports_model extends CI_Model
             $where .= " AND loc='0'";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
 
 
@@ -122,7 +122,7 @@ class Reports_model extends CI_Model
 
     //transaction account statement
 
-    var $table = 'geopos_transactions';
+    var $table = 'te_transactions';
     var $column_order = array(null, 'account', 'type', 'cat', 'amount', 'stat');
     var $column_search = array('id', 'account');
     var $order = array('id' => 'asc');
@@ -135,7 +135,7 @@ class Reports_model extends CI_Model
     public function incomestatement()
     {
         $this->db->select_sum('lastbal');
-        $this->db->from('geopos_accounts');
+        $this->db->from('te_accounts');
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
@@ -148,7 +148,7 @@ class Reports_model extends CI_Model
         $lastbal = $result['lastbal'];
 
         $this->db->select_sum('credit');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
@@ -173,7 +173,7 @@ class Reports_model extends CI_Model
 
 
         $this->db->select_sum('credit');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         if ($acid > 0) {
             $this->db->where('acid', $acid);
         }
@@ -200,7 +200,7 @@ class Reports_model extends CI_Model
 
 
         $this->db->select_sum('debit');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
@@ -229,7 +229,7 @@ class Reports_model extends CI_Model
 
 
         $this->db->select_sum('debit');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         if ($acid > 0) {
             $this->db->where('acid', $acid);
         }
@@ -249,7 +249,7 @@ class Reports_model extends CI_Model
 
     public function statistics($limit = false)
     {
-        $this->db->from('geopos_reports');
+        $this->db->from('te_reports');
         // if($limit) $this->db->limit(12);
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get();
@@ -266,7 +266,7 @@ class Reports_model extends CI_Model
             $where = "payerid='$pay_acc' AND (DATE(date) BETWEEN '$sdate' AND '$edate') AND type='$trans_type' AND ext=0";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
@@ -289,7 +289,7 @@ class Reports_model extends CI_Model
             $where = "payerid='$pay_acc' AND (DATE(date) BETWEEN '$sdate' AND '$edate') AND type='$trans_type' AND ext=1";
         }
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where($where);
         if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
@@ -317,21 +317,21 @@ class Reports_model extends CI_Model
     {
 
 
-        $this->db->select_sum('geopos_metadata.col1');
-        $this->db->from('geopos_metadata');
-        $this->db->where('geopos_metadata.type', 9);
-        $this->db->where('DATE(geopos_metadata.d_date) >=', $sdate);
-        $this->db->where('DATE(geopos_metadata.d_date) <=', $edate);
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_metadata.rid', 'left');
+        $this->db->select_sum('te_metadata.col1');
+        $this->db->from('te_metadata');
+        $this->db->where('te_metadata.type', 9);
+        $this->db->where('DATE(te_metadata.d_date) >=', $sdate);
+        $this->db->where('DATE(te_metadata.d_date) <=', $edate);
+        $this->db->join('te_invoices', 'te_invoices.id = te_metadata.rid', 'left');
 
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', $lid);
+            $this->db->where('te_invoices.loc', $lid);
         } else {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $lid);
-            $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $lid);
+            $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         }
 
@@ -345,16 +345,16 @@ class Reports_model extends CI_Model
     {
 
         $this->db->select('c_rate');
-        $this->db->from('geopos_employees');
+        $this->db->from('te_employees');
         $this->db->where('id', $lid);
         $query = $this->db->get();
         $result_e = $query->row_array();
         $this->db->select_sum('total');
-        $this->db->from('geopos_invoices');
+        $this->db->from('te_invoices');
         $this->db->where('eid', $lid);
         $this->db->where('status !=', 'canceled');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $sdate);
-        $this->db->where('DATE(geopos_invoices.invoiceduedate) <=', $edate);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $sdate);
+        $this->db->where('DATE(te_invoices.invoiceduedate) <=', $edate);
         $query = $this->db->get();
         $result = $query->row_array();
         if ($result_e['c_rate'] > 0 AND $result['total'] > 0) {
@@ -376,17 +376,17 @@ class Reports_model extends CI_Model
     public function customsalesstatement($lid, $sdate, $edate)
     {
         $this->db->select_sum('total');
-        $this->db->from('geopos_invoices');
+        $this->db->from('te_invoices');
         $this->db->where('DATE(invoicedate) >=', $sdate);
         $this->db->where('DATE(invoicedate) <=', $edate);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', $lid);
+            $this->db->where('te_invoices.loc', $lid);
         } else {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $lid);
-            $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $lid);
+            $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         }
 
@@ -402,24 +402,24 @@ class Reports_model extends CI_Model
     {
         $this->db->select_sum('qty');
         $this->db->select_sum('subtotal');
-        $this->db->from('geopos_invoice_items');
+        $this->db->from('te_invoice_items');
         $query = $this->db->get();
         $result = $query->row_array();
         $qty = $result['qty'];
         $subtotal = $result['subtotal'];
 
-        $this->db->select_sum('geopos_invoice_items.qty');
-        $this->db->select_sum('geopos_invoice_items.subtotal');
-        $this->db->from('geopos_invoice_items');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
+        $this->db->select_sum('te_invoice_items.qty');
+        $this->db->select_sum('te_invoice_items.subtotal');
+        $this->db->from('te_invoice_items');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
         $month = date('Y-m');
         $today = date('Y-m-d');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', "$month-01");
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $today);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', "$month-01");
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $today);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', 0);
         }
         $query = $this->db->get();
         $result = $query->row_array();
@@ -431,20 +431,20 @@ class Reports_model extends CI_Model
     public function customproductsstatement($lid, $sdate, $edate)
     {
 
-        $this->db->select_sum('geopos_invoice_items.qty');
-        $this->db->select_sum('geopos_invoice_items.subtotal');
-        $this->db->from('geopos_invoice_items');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $sdate);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $edate);
+        $this->db->select_sum('te_invoice_items.qty');
+        $this->db->select_sum('te_invoice_items.subtotal');
+        $this->db->from('te_invoice_items');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $sdate);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $edate);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', $lid);
+            $this->db->where('te_invoices.loc', $lid);
         } else {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $lid);
-            $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $lid);
+            $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         }
 
@@ -457,15 +457,15 @@ class Reports_model extends CI_Model
     public function customproductsstatement_cat($lid, $sdate, $edate)
     {
 
-        $this->db->select_sum('geopos_invoice_items.qty');
-        $this->db->select_sum('geopos_invoice_items.subtotal');
-        $this->db->from('geopos_invoice_items');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
-        $this->db->join('geopos_products', 'geopos_products.pid = geopos_invoice_items.pid', 'left');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $sdate);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $edate);
+        $this->db->select_sum('te_invoice_items.qty');
+        $this->db->select_sum('te_invoice_items.subtotal');
+        $this->db->from('te_invoice_items');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
+        $this->db->join('te_products', 'te_products.pid = te_invoice_items.pid', 'left');
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $sdate);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $edate);
         if ($lid > 0) {
-            $this->db->where('geopos_products.pid', $lid);
+            $this->db->where('te_products.pid', $lid);
         }
         $query = $this->db->get();
         $result = $query->row_array();
@@ -478,32 +478,32 @@ class Reports_model extends CI_Model
     {
         switch ($page) {
             case 'products' :
-                $this->db->select_sum('geopos_invoice_items.qty');
-                $this->db->select_sum('geopos_invoice_items.subtotal');
-                $this->db->from('geopos_invoice_items');
-                $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
+                $this->db->select_sum('te_invoice_items.qty');
+                $this->db->select_sum('te_invoice_items.subtotal');
+                $this->db->from('te_invoice_items');
+                $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $query = $this->db->get();
                 $result = $query->row_array();
                 $qty = $result['qty'];
                 $subtotal = $result['subtotal'];
-                $this->db->select_sum('geopos_invoice_items.qty');
-                $this->db->select_sum('geopos_invoice_items.subtotal');
-                $this->db->from('geopos_invoice_items');
-                $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
+                $this->db->select_sum('te_invoice_items.qty');
+                $this->db->select_sum('te_invoice_items.subtotal');
+                $this->db->from('te_invoice_items');
+                $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $month = date('Y-m');
                 $today = date('Y-m-d');
-                $this->db->where('DATE(geopos_invoices.invoicedate) >=', "$month-01");
-                $this->db->where('DATE(geopos_invoices.invoicedate) <=', $today);
+                $this->db->where('DATE(te_invoices.invoicedate) >=', "$month-01");
+                $this->db->where('DATE(te_invoices.invoicedate) <=', $today);
                 $query = $this->db->get();
                 $result = $query->row_array();
                 $qty_m = $result['qty'];
@@ -512,21 +512,21 @@ class Reports_model extends CI_Model
                 break;
             case 'sales' :
                 $this->db->select_sum('total');
-                $this->db->from('geopos_invoices');
+                $this->db->from('te_invoices');
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $query = $this->db->get();
                 $result = $query->row_array();
                 $lastbal = $result['total'];
                 $this->db->select_sum('total');
-                $this->db->from('geopos_invoices');
+                $this->db->from('te_invoices');
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $month = date('Y-m');
                 $today = date('Y-m-d');
@@ -541,31 +541,31 @@ class Reports_model extends CI_Model
 
             case 'profit':
 
-                $this->db->select_sum('geopos_metadata.col1');
-                $this->db->from('geopos_metadata');
-                $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_metadata.rid', 'left');
-                $this->db->where('geopos_metadata.type', 9);
+                $this->db->select_sum('te_metadata.col1');
+                $this->db->from('te_metadata');
+                $this->db->join('te_invoices', 'te_invoices.id = te_metadata.rid', 'left');
+                $this->db->where('te_metadata.type', 9);
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $query = $this->db->get();
                 $result = $query->row_array();
                 $lastbal = $result['col1'];
-                $this->db->select_sum('geopos_metadata.col1');
-                $this->db->from('geopos_metadata');
-                $this->db->where('geopos_metadata.type', 9);
-                $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_metadata.rid', 'left');
+                $this->db->select_sum('te_metadata.col1');
+                $this->db->from('te_metadata');
+                $this->db->where('te_metadata.type', 9);
+                $this->db->join('te_invoices', 'te_invoices.id = te_metadata.rid', 'left');
                 if ($this->aauth->get_user()->loc) {
-                    $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
                 } elseif (!BDATA) {
-                    $this->db->where('geopos_invoices.loc', 0);
+                    $this->db->where('te_invoices.loc', 0);
                 }
                 $month = date('Y-m');
                 $today = date('Y-m-d');
-                $this->db->where('DATE(geopos_metadata.d_date) >=', "$month-01");
-                $this->db->where('DATE(geopos_metadata.d_date) <=', $today);
+                $this->db->where('DATE(te_metadata.d_date) >=', "$month-01");
+                $this->db->where('DATE(te_metadata.d_date) <=', $today);
                 $query = $this->db->get();
                 $result = $query->row_array();
                 $motnhbal = $result['col1'];
@@ -576,18 +576,18 @@ class Reports_model extends CI_Model
 
         public function product_customer_statements($customer, $sdate, $edate)
     {
-        $this->db->select('geopos_invoice_items.*,geopos_invoices.invoicedate,geopos_invoices.tid AS inv');
-        $this->db->from('geopos_invoice_items');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
+        $this->db->select('te_invoice_items.*,te_invoices.invoicedate,te_invoices.tid AS inv');
+        $this->db->from('te_invoice_items');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
 
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $sdate);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $edate);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $sdate);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $edate);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', 0);
         }
-         $this->db->where('geopos_invoices.csd', $customer);
+         $this->db->where('te_invoices.csd', $customer);
         $query = $this->db->get();
         $result = $query->result_array();
 
@@ -597,17 +597,17 @@ class Reports_model extends CI_Model
 
         public function product_supplier_statements($customer, $sdate, $edate)
     {
-        $this->db->select('geopos_purchase_items.*,geopos_purchase.invoicedate,geopos_purchase.tid AS inv');
-        $this->db->from('geopos_purchase_items');
-        $this->db->join('geopos_purchase', 'geopos_purchase.id = geopos_purchase_items.tid', 'left');
-        $this->db->where('DATE(geopos_purchase.invoicedate) >=', $sdate);
-        $this->db->where('DATE(geopos_purchase.invoicedate) <=', $edate);
+        $this->db->select('te_purchase_items.*,te_purchase.invoicedate,te_purchase.tid AS inv');
+        $this->db->from('te_purchase_items');
+        $this->db->join('te_purchase', 'te_purchase.id = te_purchase_items.tid', 'left');
+        $this->db->where('DATE(te_purchase.invoicedate) >=', $sdate);
+        $this->db->where('DATE(te_purchase.invoicedate) <=', $edate);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_purchase.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_purchase.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_purchase.loc', 0);
+            $this->db->where('te_purchase.loc', 0);
         }
-         $this->db->where('geopos_purchase.csd', $customer);
+         $this->db->where('te_purchase.csd', $customer);
         $query = $this->db->get();
         $result = $query->result_array();
 

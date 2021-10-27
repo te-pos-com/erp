@@ -76,7 +76,7 @@ class Units extends CI_Controller
         $id = $this->input->post('deleteid');
         if ($id) {
 
-            $this->db->delete('geopos_units', array('id' => $id));
+            $this->db->delete('te_units', array('id' => $id));
 
 
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));
@@ -140,7 +140,7 @@ class Units extends CI_Controller
         $id = $this->input->post('deleteid');
         if ($id) {
 
-            $this->db->delete('geopos_units', array('id' => $id));
+            $this->db->delete('te_units', array('id' => $id));
 
 
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));
@@ -207,7 +207,7 @@ class Units extends CI_Controller
         $id = $this->input->post('deleteid');
         if ($id) {
 
-            $this->db->delete('geopos_units', array('id' => $id));
+            $this->db->delete('te_units', array('id' => $id));
 
 
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));

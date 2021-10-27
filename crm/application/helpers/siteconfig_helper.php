@@ -8,7 +8,7 @@ function sitezconfig($input)
     $ci->load->database();
 
     //get data from database
-    $query = $ci->db->query("SELECT * FROM geopos_system WHERE id=1 LIMIT 1");
+    $query = $ci->db->query("SELECT * FROM te_system WHERE id=1 LIMIT 1");
     $row = $query->row_array();
     if (@$row["$input"]) {
         return $row["$input"];
@@ -68,7 +68,7 @@ function amountFormat($number)
     $ci =& get_instance();
     $ci->load->database();
 
-    $query = $ci->db->query("SELECT currency FROM geopos_system WHERE id=1 LIMIT 1");
+    $query = $ci->db->query("SELECT currency FROM te_system WHERE id=1 LIMIT 1");
     $row = $query->row_array();
     $currency = $row['currency'];
 
@@ -89,7 +89,7 @@ function appset()
 {
     $ci =& get_instance();
     $ci->load->database();
-    $query = $ci->db->query("SELECT * FROM geopos_system WHERE id=1 LIMIT 1");
+    $query = $ci->db->query("SELECT * FROM te_system WHERE id=1 LIMIT 1");
     $row = $query->row_array();
     $this->config->set_item('ctitle', $row["cname"]);
     $this->config->set_item('address', $row["address"]);
@@ -151,12 +151,12 @@ function amountExchange($number, $id = 0, $loc = 0)
     $ci =& get_instance();
     $ci->load->database();
     if ($loc > 0 && $id == 0) {
-        $query = $ci->db->query("SELECT cur FROM geopos_locations WHERE id='$loc' LIMIT 1");
+        $query = $ci->db->query("SELECT cur FROM te_locations WHERE id='$loc' LIMIT 1");
         $row = $query->row_array();
         $id = $row['cur'];
     }
     if ($id > 0) {
-        $query = $ci->db->query("SELECT * FROM geopos_currencies WHERE id='$id' LIMIT 1");
+        $query = $ci->db->query("SELECT * FROM te_currencies WHERE id='$id' LIMIT 1");
         $row = $query->row_array();
         $currency = $row['symbol'];
         $rate = $row['rate'];
@@ -173,7 +173,7 @@ function amountExchange($number, $id = 0, $loc = 0)
         }
     } else {
 
-        $query = $ci->db->query("SELECT currency FROM geopos_system WHERE id=1 LIMIT 1");
+        $query = $ci->db->query("SELECT currency FROM te_system WHERE id=1 LIMIT 1");
         $row = $query->row_array();
         $currency = $row['currency'];
 
@@ -198,12 +198,12 @@ function location($number=0)
     $ci->load->database();
 
         //if ($number > 0) {
-        //    $query2 = $ci->db->query("SELECT * FROM geopos_locations WHERE id=$number");
+        //    $query2 = $ci->db->query("SELECT * FROM te_locations WHERE id=$number");
         //    return $query2->row_array();
         //} else {
-            $query2 = $ci->db->query("SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM geopos_system WHERE id=$number LIMIT 1
+            $query2 = $ci->db->query("SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM te_system WHERE id=$number LIMIT 1
             UNION ALL
-            SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM geopos_locations WHERE loc=$number
+            SELECT cname,address,city,region,country,postbox,phone,email,taxid,logo FROM te_locations WHERE loc=$number
             ");
            return $query2->row_array();
         //}

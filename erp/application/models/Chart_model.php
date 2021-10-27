@@ -47,26 +47,26 @@ class Chart_model extends CI_Model
                 $day2 = date('Y-m-d');
                 break;
         }
-        $this->db->select_sum('geopos_invoice_items.qty');
-        $this->db->select_sum('geopos_invoice_items.subtotal');
-        $this->db->select('geopos_invoice_items.pid');
-        $this->db->select('geopos_product_cat.title');
-        $this->db->from('geopos_invoice_items');
-        $this->db->group_by('geopos_product_cat.id');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
-        $this->db->join('geopos_products', 'geopos_products.pid = geopos_invoice_items.pid', 'left');
-        $this->db->join('geopos_product_cat', 'geopos_product_cat.id = geopos_products.pcat', 'left');
+        $this->db->select_sum('te_invoice_items.qty');
+        $this->db->select_sum('te_invoice_items.subtotal');
+        $this->db->select('te_invoice_items.pid');
+        $this->db->select('te_product_cat.title');
+        $this->db->from('te_invoice_items');
+        $this->db->group_by('te_product_cat.id');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
+        $this->db->join('te_products', 'te_products.pid = te_invoice_items.pid', 'left');
+        $this->db->join('te_product_cat', 'te_product_cat.id = te_products.pcat', 'left');
         $month = date('Y-m');
         $today = date('Y-m-d');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $day1);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $day2);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $day1);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $day2);
                     if ($this->aauth->get_user()->loc) {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
-            if (BDATA) $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
+            if (BDATA) $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', 0);
         }
         $query = $this->db->get();
         $result = $query->result_array();
@@ -100,24 +100,24 @@ class Chart_model extends CI_Model
                 break;
         }
 
-        $this->db->select_sum('geopos_invoice_items.qty');
-        $this->db->select('geopos_products.product_name');
-        $this->db->from('geopos_invoice_items');
-        $this->db->group_by('geopos_invoice_items.pid');
-        $this->db->join('geopos_invoices', 'geopos_invoices.id = geopos_invoice_items.tid', 'left');
-        $this->db->join('geopos_products', 'geopos_products.pid = geopos_invoice_items.pid', 'left');
+        $this->db->select_sum('te_invoice_items.qty');
+        $this->db->select('te_products.product_name');
+        $this->db->from('te_invoice_items');
+        $this->db->group_by('te_invoice_items.pid');
+        $this->db->join('te_invoices', 'te_invoices.id = te_invoice_items.tid', 'left');
+        $this->db->join('te_products', 'te_products.pid = te_invoice_items.pid', 'left');
 
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $day1);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $day2);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $day1);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $day2);
                             if ($this->aauth->get_user()->loc) {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
-            if (BDATA) $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
+            if (BDATA) $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', 0);
         }
-        $this->db->order_by('geopos_invoice_items.qty', 'DESC');
+        $this->db->order_by('te_invoice_items.qty', 'DESC');
         $this->db->limit(100);
         $query = $this->db->get();
         $result = $query->result_array();
@@ -151,14 +151,14 @@ class Chart_model extends CI_Model
                 break;
         }
 
-        $this->db->select_sum('geopos_metadata.col1');
-        $this->db->select('geopos_metadata.d_date');
-        $this->db->from('geopos_metadata');
-        $this->db->group_by('geopos_metadata.d_date');
+        $this->db->select_sum('te_metadata.col1');
+        $this->db->select('te_metadata.d_date');
+        $this->db->from('te_metadata');
+        $this->db->group_by('te_metadata.d_date');
         $month = date('Y-m');
         $today = date('Y-m-d');
-        $this->db->where('DATE(geopos_metadata.d_date) >=', $day1);
-        $this->db->where('DATE(geopos_metadata.d_date) <=', $day2);
+        $this->db->where('DATE(te_metadata.d_date) >=', $day1);
+        $this->db->where('DATE(te_metadata.d_date) <=', $day2);
         $query = $this->db->get();
         $result = $query->result_array();
         return $result;
@@ -190,24 +190,24 @@ class Chart_model extends CI_Model
                 $day2 = date('Y-m-d');
                 break;
         }
-        $this->db->select_sum('geopos_invoices.total');
-        $this->db->select('geopos_customers.name');
-        $this->db->from('geopos_invoices');
-        $this->db->group_by('geopos_invoices.csd');
-        $this->db->join('geopos_customers', 'geopos_customers.id = geopos_invoices.csd', 'left');
+        $this->db->select_sum('te_invoices.total');
+        $this->db->select('te_customers.name');
+        $this->db->from('te_invoices');
+        $this->db->group_by('te_invoices.csd');
+        $this->db->join('te_customers', 'te_customers.id = te_invoices.csd', 'left');
         $month = date('Y-m');
         $today = date('Y-m-d');
-        $this->db->where('DATE(geopos_invoices.invoicedate) >=', $day1);
-        $this->db->where('DATE(geopos_invoices.invoicedate) <=', $day2);
+        $this->db->where('DATE(te_invoices.invoicedate) >=', $day1);
+        $this->db->where('DATE(te_invoices.invoicedate) <=', $day2);
                             if ($this->aauth->get_user()->loc) {
             $this->db->group_start();
-            $this->db->where('geopos_invoices.loc', $this->aauth->get_user()->loc);
-            if (BDATA) $this->db->or_where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', $this->aauth->get_user()->loc);
+            if (BDATA) $this->db->or_where('te_invoices.loc', 0);
             $this->db->group_end();
         } elseif (!BDATA) {
-            $this->db->where('geopos_invoices.loc', 0);
+            $this->db->where('te_invoices.loc', 0);
         }
-        $this->db->order_by('geopos_invoices.total', 'DESC');
+        $this->db->order_by('te_invoices.total', 'DESC');
         $this->db->limit(100);
         $query = $this->db->get();
         $result = $query->result_array();
@@ -243,7 +243,7 @@ class Chart_model extends CI_Model
         }
         $this->db->select_sum('credit');
         $this->db->select('date');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->group_by('date');
         $month = date('Y-m');
         $today = date('Y-m-d');
@@ -291,7 +291,7 @@ class Chart_model extends CI_Model
         }
         $this->db->select_sum('debit');
         $this->db->select('date');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->group_by('date');
         $month = date('Y-m');
         $today = date('Y-m-d');
@@ -340,7 +340,7 @@ class Chart_model extends CI_Model
         $this->db->select_sum('debit');
         $this->db->select_sum('credit');
         $this->db->select('type');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->group_by('type');
         $month = date('Y-m');
         $today = date('Y-m-d');

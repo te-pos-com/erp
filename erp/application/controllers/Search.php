@@ -49,7 +49,7 @@ class Search extends CI_Controller
         }
 
         if ($tid) {
-            $query = $this->db->query("SELECT tid FROM geopos_invoices WHERE $whr (UPPER(tid)  LIKE '" . $tid . "%')  LIMIT 4");
+            $query = $this->db->query("SELECT tid FROM te_invoices WHERE $whr (UPPER(tid)  LIKE '" . $tid . "%')  LIMIT 4");
 
             $result = $query->result_array();
 
@@ -82,7 +82,7 @@ class Search extends CI_Controller
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
 
             $result = $query->result_array();
 
@@ -125,7 +125,7 @@ class Search extends CI_Controller
             $whr = ' AND ';
         }
         if ($name != NULL) {
-            $query = $this->db->query("SELECT id,username FROM geopos_users WHERE $whr username  LIKE '%" . $name . "%' LIMIT 6");
+            $query = $this->db->query("SELECT id,username FROM te_users WHERE $whr username  LIKE '%" . $name . "%' LIMIT 6");
 
             $result = $query->result_array();
 
@@ -159,7 +159,7 @@ class Search extends CI_Controller
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_customers WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
 
             $result = $query->result_array();
 
@@ -185,7 +185,7 @@ class Search extends CI_Controller
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_supplier WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_supplier WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
 
             $result = $query->result_array();
 

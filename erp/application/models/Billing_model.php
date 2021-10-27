@@ -25,19 +25,19 @@ class Billing_model extends CI_Model
     {
         $account['id'] = false;
         if ($loc) {
-            $this->db->select('geopos_accounts.id,geopos_accounts.holder,');
-            $this->db->from('geopos_locations');
-            $this->db->where('geopos_locations.id', $loc);
-            $this->db->join('geopos_accounts', 'geopos_locations.ext = geopos_accounts.id', 'left');
+            $this->db->select('te_accounts.id,te_accounts.holder,');
+            $this->db->from('te_locations');
+            $this->db->where('te_locations.id', $loc);
+            $this->db->join('te_accounts', 'te_locations.ext = te_accounts.id', 'left');
             $query = $this->db->get();
             $account = $query->row_array();
         }
         if (!$account['id']) {
-            $this->db->select('geopos_accounts.id,geopos_accounts.holder,');
+            $this->db->select('te_accounts.id,te_accounts.holder,');
             $this->db->from('univarsal_api');
             $this->db->where('univarsal_api.id', 54);
 
-            $this->db->join('geopos_accounts', 'univarsal_api.key1 = geopos_accounts.id', 'left');
+            $this->db->join('te_accounts', 'univarsal_api.key1 = te_accounts.id', 'left');
 
             $query = $this->db->get();
             $account = $query->row_array();
@@ -45,7 +45,7 @@ class Billing_model extends CI_Model
 
         if ($account_d>0) {
            $this->db->select('*');
-            $this->db->from('geopos_accounts');
+            $this->db->from('te_accounts');
             $this->db->where('id', $account_d);
                  if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
@@ -58,10 +58,10 @@ class Billing_model extends CI_Model
         }
 
 
-        $this->db->select('geopos_invoices.*,geopos_customers.name,geopos_customers.id AS cid');
-        $this->db->from('geopos_invoices');
-        $this->db->where('geopos_invoices.id', $tid);
-        $this->db->join('geopos_customers', 'geopos_invoices.csd = geopos_customers.id', 'left');
+        $this->db->select('te_invoices.*,te_customers.name,te_customers.id AS cid');
+        $this->db->from('te_invoices');
+        $this->db->where('te_invoices.id', $tid);
+        $this->db->join('te_customers', 'te_invoices.csd = te_customers.id', 'left');
 
         $query = $this->db->get();
         $invoice = $query->row_array();
@@ -87,7 +87,7 @@ class Billing_model extends CI_Model
             'loc' => $invoice['loc']
         );
         $this->db->trans_start();
-        $this->db->insert('geopos_transactions', $data);
+        $this->db->insert('te_transactions', $data);
         $trans = $this->db->insert_id();
 
 
@@ -99,31 +99,31 @@ class Billing_model extends CI_Model
 
             $this->db->set('status', 'partial');
             $this->db->where('id', $tid);
-            $this->db->update('geopos_invoices');
+            $this->db->update('te_invoices');
 
 
             //account update
             $this->db->set('lastbal', "lastbal+$amount", FALSE);
             $this->db->where('id', $account['id']);
-            $this->db->update('geopos_accounts');
+            $this->db->update('te_accounts');
 
         } else {
             $this->db->set('pmethod', $pmethod);
             $this->db->set('pamnt', "pamnt+$amount", FALSE);
             $this->db->set('status', 'paid');
             $this->db->where('id', $tid);
-            $this->db->update('geopos_invoices');
+            $this->db->update('te_invoices');
             //acount update
             $this->db->set('lastbal', "lastbal+$amount", FALSE);
             $this->db->where('id', $account['id']);
-            $this->db->update('geopos_accounts');
+            $this->db->update('te_accounts');
 
         }
                 $dual = $this->custom->api_config(65);
         if ($dual['key1']) {
 
             $this->db->select('holder');
-            $this->db->from('geopos_accounts');
+            $this->db->from('te_accounts');
             $this->db->where('id', $dual['key2']);
             $query = $this->db->get();
             $account = $query->row_array();
@@ -135,12 +135,12 @@ class Billing_model extends CI_Model
             $data['account'] = $account['holder'];
             $data['note'] = 'Debit ' . $data['note'];
 
-            $this->db->insert('geopos_transactions', $data);
+            $this->db->insert('te_transactions', $data);
 
             //account update
             $this->db->set('lastbal', "lastbal-$amount", FALSE);
             $this->db->where('id', $dual['key2']);
-            $this->db->update('geopos_accounts');
+            $this->db->update('te_accounts');
         }
         $this->aauth->applog("[Payment Invoice $tid]  Transaction-$trans - $amount ", $this->aauth->get_user()->username);
         if ($this->db->trans_complete()) {
@@ -153,7 +153,7 @@ class Billing_model extends CI_Model
     public function gateway($id)
     {
 
-        $this->db->from('geopos_gateways');
+        $this->db->from('te_gateways');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -163,7 +163,7 @@ class Billing_model extends CI_Model
     public function gateway_list($enable = '')
     {
 
-        $this->db->from('geopos_gateways');
+        $this->db->from('te_gateways');
         if ($enable == 'Yes') {
             $this->db->where('enable', 'Yes');
         }
@@ -174,7 +174,7 @@ class Billing_model extends CI_Model
     public function bank_accounts($enable = '')
     {
 
-        $this->db->from('geopos_bank_ac');
+        $this->db->from('te_bank_ac');
         if ($enable == 'Yes') {
             $this->db->where('enable', 'Yes');
         }
@@ -185,7 +185,7 @@ class Billing_model extends CI_Model
     public function bank_account_info($id)
     {
 
-        $this->db->from('geopos_bank_ac');
+        $this->db->from('te_bank_ac');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -207,7 +207,7 @@ class Billing_model extends CI_Model
         $this->db->set($data);
         $this->db->where('id', $gid);
 
-        if ($this->db->update('geopos_gateways')) {
+        if ($this->db->update('te_gateways')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -220,11 +220,11 @@ class Billing_model extends CI_Model
     public function online_pay_settings()
     {
 
-        $this->db->select('univarsal_api.key1 AS default_acid,univarsal_api.key2 AS currency_code,univarsal_api.url AS enable,univarsal_api.method AS bank, geopos_accounts.*');
+        $this->db->select('univarsal_api.key1 AS default_acid,univarsal_api.key2 AS currency_code,univarsal_api.url AS enable,univarsal_api.method AS bank, te_accounts.*');
         $this->db->from('univarsal_api');
         $this->db->where('univarsal_api.id', 54);
 
-        $this->db->join('geopos_accounts', 'univarsal_api.key1 = geopos_accounts.id', 'left');
+        $this->db->join('te_accounts', 'univarsal_api.key1 = te_accounts.id', 'left');
 
         $query = $this->db->get();
         return $query->row_array();
@@ -267,7 +267,7 @@ class Billing_model extends CI_Model
         );
 
 
-        if ($this->db->insert('geopos_bank_ac', $data)) {
+        if ($this->db->insert('te_bank_ac', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED')));
         } else {
@@ -294,7 +294,7 @@ class Billing_model extends CI_Model
         $this->db->set($data);
         $this->db->where('id', $gid);
 
-        if ($this->db->update('geopos_bank_ac')) {
+        if ($this->db->update('te_bank_ac')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -317,7 +317,7 @@ class Billing_model extends CI_Model
         );
 
 
-        if ($this->db->insert('geopos_currencies', $data)) {
+        if ($this->db->insert('te_currencies', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED')));
         } else {
@@ -340,7 +340,7 @@ class Billing_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $gid);
-        if ($this->db->update('geopos_currencies')) {
+        if ($this->db->update('te_currencies')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -381,7 +381,7 @@ class Billing_model extends CI_Model
         $this->db->set('balance', "balance+$amount", FALSE);
         $this->db->where('id', $id);
 
-        $this->db->update('geopos_customers');
+        $this->db->update('te_customers');
 
         $data = array(
             'type' => 21,
@@ -391,7 +391,7 @@ class Billing_model extends CI_Model
         );
 
 
-        if ($this->db->insert('geopos_metadata', $data)) {
+        if ($this->db->insert('te_metadata', $data)) {
             $this->aauth->applog("[Wallet Payment $id]  Amt - $amount ", @$this->aauth->get_user()->username);
             return true;
         } else {
@@ -403,18 +403,18 @@ class Billing_model extends CI_Model
     public function pos_paynow($tid, $amount, $note, $pmethod)
     {
 
-        $this->db->select('geopos_accounts.id,geopos_accounts.holder,');
+        $this->db->select('te_accounts.id,te_accounts.holder,');
         $this->db->from('univarsal_api');
         $this->db->where('univarsal_api.id', 54);
-        $this->db->join('geopos_accounts', 'univarsal_api.key1 = geopos_accounts.id', 'left');
+        $this->db->join('te_accounts', 'univarsal_api.key1 = te_accounts.id', 'left');
 
         $query = $this->db->get();
         $account = $query->row_array();
 
-        $this->db->select('geopos_invoices.*,geopos_customers.name,geopos_customers.id AS cid');
-        $this->db->from('geopos_invoices');
-        $this->db->where('geopos_invoices.id', $tid);
-        $this->db->join('geopos_customers', 'geopos_invoices.csd = geopos_customers.id', 'left');
+        $this->db->select('te_invoices.*,te_customers.name,te_customers.id AS cid');
+        $this->db->from('te_invoices');
+        $this->db->where('te_invoices.id', $tid);
+        $this->db->join('te_customers', 'te_invoices.csd = te_customers.id', 'left');
 
         $query = $this->db->get();
         $invoice = $query->row_array();
@@ -438,7 +438,7 @@ class Billing_model extends CI_Model
             'loc' => $invoice['loc']
         );
         $this->db->trans_start();
-        $this->db->insert('geopos_transactions', $data);
+        $this->db->insert('te_transactions', $data);
         $trans = $this->db->insert_id();
 
 
@@ -450,24 +450,24 @@ class Billing_model extends CI_Model
 
             $this->db->set('status', 'partial');
             $this->db->where('id', $tid);
-            $this->db->update('geopos_invoices');
+            $this->db->update('te_invoices');
 
 
             //account update
             $this->db->set('lastbal', "lastbal+$amount", FALSE);
             $this->db->where('id', $account['id']);
-            $this->db->update('geopos_accounts');
+            $this->db->update('te_accounts');
 
         } else {
             $this->db->set('pmethod', $pmethod);
             $this->db->set('pamnt', "pamnt+$amount", FALSE);
             $this->db->set('status', 'paid');
             $this->db->where('id', $tid);
-            $this->db->update('geopos_invoices');
+            $this->db->update('te_invoices');
             //acount update
             $this->db->set('lastbal', "lastbal+$amount", FALSE);
             $this->db->where('id', $account['id']);
-            $this->db->update('geopos_accounts');
+            $this->db->update('te_accounts');
 
         }
         $this->aauth->applog("[Payment Invoice $tid]  Transaction-$trans - $amount ", $this->aauth->get_user()->username);
@@ -488,16 +488,16 @@ class Billing_model extends CI_Model
             'col2' => 2,
             'd_date' => date('Y-m-d')
         );
-        $this->db->insert('geopos_metadata', $data);
+        $this->db->insert('te_metadata', $data);
         return true;
         }elseif($type==2){
-            $this->db->from('geopos_metadata');
+            $this->db->from('te_metadata');
             $this->db->where('type', 71);
             $this->db->where('rid', $in);
            $query = $this->db->get();
            return $query->row_array();
         }else{
-              $this->db->delete('geopos_metadata', array('type' => 71,'rid'=> $in));
+              $this->db->delete('te_metadata', array('type' => 71,'rid'=> $in));
         }
     }
 

@@ -20,10 +20,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Quote_model extends CI_Model
 {
-    var $table = 'geopos_quotes';
-    var $column_order = array(null, 'geopos_quotes.tid', 'geopos_customers.name', 'geopos_quotes.invoicedate', 'geopos_quotes.total', 'geopos_quotes.status', null);
-    var $column_search = array('geopos_quotes.tid', 'geopos_customers.name', 'geopos_quotes.invoicedate', 'geopos_quotes.total','geopos_quotes.status',);
-    var $order = array('geopos_quotes.tid' => 'desc');
+    var $table = 'te_quotes';
+    var $column_order = array(null, 'te_quotes.tid', 'te_customers.name', 'te_quotes.invoicedate', 'te_quotes.total', 'te_quotes.status', null);
+    var $column_search = array('te_quotes.tid', 'te_customers.name', 'te_quotes.invoicedate', 'te_quotes.total','te_quotes.status',);
+    var $order = array('te_quotes.tid' => 'desc');
 
     public function __construct()
     {
@@ -47,7 +47,7 @@ class Quote_model extends CI_Model
     public function warehouses()
     {
         $this->db->select('*');
-        $this->db->from('geopos_warehouse');
+        $this->db->from('te_warehouse');
        if ($this->aauth->get_user()->loc) {
             $this->db->where('loc', $this->aauth->get_user()->loc);
           if(BDATA)  $this->db->or_where('loc', 0);
@@ -62,16 +62,16 @@ class Quote_model extends CI_Model
     public function quote_details($id)
     {
 
-        $this->db->select('geopos_quotes.*,geopos_quotes.id AS iid,SUM(geopos_quotes.shipping + geopos_quotes.ship_tax) AS shipping,geopos_customers.*,geopos_quotes.loc as loc,geopos_customers.id AS cid,geopos_terms.id AS termid,geopos_terms.title AS termtit,geopos_terms.terms AS terms');
+        $this->db->select('te_quotes.*,te_quotes.id AS iid,SUM(te_quotes.shipping + te_quotes.ship_tax) AS shipping,te_customers.*,te_quotes.loc as loc,te_customers.id AS cid,te_terms.id AS termid,te_terms.title AS termtit,te_terms.terms AS terms');
         $this->db->from($this->table);
-        $this->db->where('geopos_quotes.id', $id);
+        $this->db->where('te_quotes.id', $id);
          if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_quotes.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_quotes.loc', $this->aauth->get_user()->loc);
         } elseif (!BDATA) {
-            $this->db->where('geopos_quotes.loc', 0);
+            $this->db->where('te_quotes.loc', 0);
         }
-        $this->db->join('geopos_customers', 'geopos_quotes.csd = geopos_customers.id', 'left');
-        $this->db->join('geopos_terms', 'geopos_terms.id = geopos_quotes.term', 'left');
+        $this->db->join('te_customers', 'te_quotes.csd = te_customers.id', 'left');
+        $this->db->join('te_terms', 'te_terms.id = te_quotes.term', 'left');
         $query = $this->db->get();
         return $query->row_array();
 
@@ -81,7 +81,7 @@ class Quote_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_quotes_items');
+        $this->db->from('te_quotes_items');
         $this->db->where('tid', $id);
         $query = $this->db->get();
         return $query->result_array();
@@ -93,17 +93,17 @@ class Quote_model extends CI_Model
     {
         $this->db->trans_start();
           if ($this->aauth->get_user()->loc) {
-                $res = $this->db->delete('geopos_quotes', array('id' => $id, 'loc' => $this->aauth->get_user()->loc));
+                $res = $this->db->delete('te_quotes', array('id' => $id, 'loc' => $this->aauth->get_user()->loc));
         }
         else {
             if (BDATA) {
-                    $res = $this->db->delete('geopos_quotes', array('id' => $id));
+                    $res = $this->db->delete('te_quotes', array('id' => $id));
 
             } else {
-                    $res = $this->db->delete('geopos_quotes', array('id' => $id,'loc' => 0));
+                    $res = $this->db->delete('te_quotes', array('id' => $id,'loc' => 0));
             }
         }
-        if ($this->db->affected_rows()) $this->db->delete('geopos_quotes_items', array('tid' => $id));
+        if ($this->db->affected_rows()) $this->db->delete('te_quotes_items', array('tid' => $id));
         if ($this->db->trans_complete()) {
             return true;
         } else {
@@ -115,20 +115,20 @@ class Quote_model extends CI_Model
     private function _get_datatables_query($eid)
     {
 
-        $this->db->select('geopos_quotes.id,geopos_quotes.tid,geopos_quotes.invoicedate,geopos_quotes.invoiceduedate,geopos_quotes.total,geopos_quotes.status,geopos_customers.name');
+        $this->db->select('te_quotes.id,te_quotes.tid,te_quotes.invoicedate,te_quotes.invoiceduedate,te_quotes.total,te_quotes.status,te_customers.name');
         $this->db->from($this->table);
-        if ($eid) $this->db->where('geopos_quotes.eid', $eid);
+        if ($eid) $this->db->where('te_quotes.eid', $eid);
                 if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_quotes.loc', $this->aauth->get_user()->loc);
+            $this->db->where('te_quotes.loc', $this->aauth->get_user()->loc);
         }
-        elseif(!BDATA) { $this->db->where('geopos_quotes.loc', 0); }
+        elseif(!BDATA) { $this->db->where('te_quotes.loc', 0); }
                         if ($this->input->post('start_date') && $this->input->post('end_date')) // if datatable send POST for search
         {
-            $this->db->where('DATE(geopos_quotes.invoicedate) >=', datefordatabase($this->input->post('start_date')));
-            $this->db->where('DATE(geopos_quotes.invoicedate) <=', datefordatabase($this->input->post('end_date')));
+            $this->db->where('DATE(te_quotes.invoicedate) >=', datefordatabase($this->input->post('start_date')));
+            $this->db->where('DATE(te_quotes.invoicedate) <=', datefordatabase($this->input->post('end_date')));
         }
 
-        $this->db->join('geopos_customers', 'geopos_quotes.csd=geopos_customers.id', 'left');
+        $this->db->join('te_customers', 'te_quotes.csd=te_customers.id', 'left');
 
         $i = 0;
 
@@ -166,8 +166,8 @@ class Quote_model extends CI_Model
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_quotes.loc', $this->aauth->get_user()->loc);
-        }  elseif(!BDATA) { $this->db->where('geopos_quotes.loc', 0); }
+            $this->db->where('te_quotes.loc', $this->aauth->get_user()->loc);
+        }  elseif(!BDATA) { $this->db->where('te_quotes.loc', 0); }
         $query = $this->db->get();
         return $query->result();
     }
@@ -176,20 +176,20 @@ class Quote_model extends CI_Model
     {
         $this->_get_datatables_query($eid);
     if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_quotes.loc', $this->aauth->get_user()->loc);
-        }  elseif(!BDATA) { $this->db->where('geopos_quotes.loc', 0); }
+            $this->db->where('te_quotes.loc', $this->aauth->get_user()->loc);
+        }  elseif(!BDATA) { $this->db->where('te_quotes.loc', 0); }
         $query = $this->db->get();
         return $query->num_rows();
     }
 
     public function count_all($eid)
     {
-        $this->db->select('geopos_quotes.id');
+        $this->db->select('te_quotes.id');
         $this->db->from($this->table);
          if ($this->aauth->get_user()->loc) {
-            $this->db->where('geopos_quotes.loc', $this->aauth->get_user()->loc);
-        }  elseif(!BDATA) { $this->db->where('geopos_quotes.loc', 0); }
-        if ($eid) $this->db->where('geopos_quotes.eid', $eid);
+            $this->db->where('te_quotes.loc', $this->aauth->get_user()->loc);
+        }  elseif(!BDATA) { $this->db->where('te_quotes.loc', 0); }
+        if ($eid) $this->db->where('te_quotes.eid', $eid);
         return $this->db->count_all_results();
     }
 
@@ -197,7 +197,7 @@ class Quote_model extends CI_Model
     public function billingterms()
     {
         $this->db->select('id,title');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
         $this->db->where('type', 2);
         $this->db->or_where('type', 0);
         $query = $this->db->get();
@@ -206,10 +206,10 @@ class Quote_model extends CI_Model
 
     public function employee($id)
     {
-        $this->db->select('geopos_employees.name,geopos_employees.sign,geopos_users.roleid');
-        $this->db->from('geopos_employees');
-        $this->db->where('geopos_employees.id', $id);
-        $this->db->join('geopos_users', 'geopos_employees.id = geopos_users.id', 'left');
+        $this->db->select('te_employees.name,te_employees.sign,te_users.roleid');
+        $this->db->from('te_employees');
+        $this->db->where('te_employees.id', $id);
+        $this->db->join('te_users', 'te_employees.id = te_users.id', 'left');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -221,7 +221,7 @@ class Quote_model extends CI_Model
         $products = $this->quote_products($id);
         $this->db->trans_start();
         $this->db->select('tid');
-        $this->db->from('geopos_invoices');
+        $this->db->from('te_invoices');
         $this->db->where('i_class', 0);
         $this->db->order_by('tid', 'DESC');
         $this->db->limit(1);
@@ -235,7 +235,7 @@ class Quote_model extends CI_Model
         $prodindex = 0;
         if($invoice['loc']==$this->aauth->get_user()->loc) {
             $data = array('tid' => $iid, 'invoicedate' => $invoice['invoicedate'], 'invoiceduedate' => $invoice['invoicedate'], 'subtotal' => $invoice['invoicedate'], 'shipping' => $invoice['shipping'], 'discount' => $invoice['discount'], 'tax' => $invoice['tax'], 'total' => $invoice['total'], 'notes' => $invoice['notes'], 'csd' => $invoice['csd'], 'eid' => $invoice['eid'], 'items' => $invoice['items'], 'taxstatus' => $invoice['taxstatus'], 'discstatus' => $invoice['discstatus'], 'format_discount' => $invoice['format_discount'], 'refer' => $invoice['refer'], 'term' => $invoice['term'],'multi' => $invoice['multi'], 'loc' => $invoice['loc']);
-            $this->db->insert('geopos_invoices', $data);
+            $this->db->insert('te_invoices', $data);
             $iid = $this->db->insert_id();
             foreach ($products as $row) {
                 $amt = $row['qty'];
@@ -258,19 +258,19 @@ class Quote_model extends CI_Model
                 $prodindex++;
                 $this->db->set('qty', "qty-$amt", FALSE);
                 $this->db->where('pid', $row['pid']);
-                $this->db->update('geopos_products');
+                $this->db->update('te_products');
             }
 
 
-            $this->db->insert_batch('geopos_invoice_items', $productlist);
+            $this->db->insert_batch('te_invoice_items', $productlist);
 
 
             //profit calculation
             $t_profit = 0;
-            $this->db->select('geopos_invoice_items.pid, geopos_invoice_items.price, geopos_invoice_items.qty, geopos_products.fproduct_price');
-            $this->db->from('geopos_invoice_items');
-            $this->db->join('geopos_products', 'geopos_products.pid = geopos_invoice_items.pid', 'left');
-            $this->db->where('geopos_invoice_items.tid', $iid);
+            $this->db->select('te_invoice_items.pid, te_invoice_items.price, te_invoice_items.qty, te_products.fproduct_price');
+            $this->db->from('te_invoice_items');
+            $this->db->join('te_products', 'te_products.pid = te_invoice_items.pid', 'left');
+            $this->db->where('te_invoice_items.tid', $iid);
             $query = $this->db->get();
             $pids = $query->result_array();
             foreach ($pids as $profit) {
@@ -280,12 +280,12 @@ class Quote_model extends CI_Model
             }
             $data = array('type' => 9, 'rid' => $iid, 'col1' => rev_amountExchange_s($t_profit, $invoice['multi'], $this->aauth->get_user()->loc), 'd_date' => $invoice['invoicedate']);
 
-            $this->db->insert('geopos_metadata', $data);
+            $this->db->insert('te_metadata', $data);
 
             if ($this->db->trans_complete()) {
                 $this->db->set('status', 'accepted');
                 $this->db->where('id', $id);
-                $this->db->update('geopos_quotes');
+                $this->db->update('te_quotes');
                 return true;
             } else {
                 return false;
@@ -305,7 +305,7 @@ class Quote_model extends CI_Model
         $products = $this->quote_products($id);
         $this->db->trans_start();
         $this->db->select('tid');
-        $this->db->from('geopos_purchase');
+        $this->db->from('te_purchase');
         $this->db->order_by('tid', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
@@ -318,7 +318,7 @@ class Quote_model extends CI_Model
         $prodindex = 0;
         if($invoice['loc']==$this->aauth->get_user()->loc) {
             $data = array('tid' => $iid, 'invoicedate' => $invoice['invoicedate'], 'invoiceduedate' => $invoice['invoicedate'], 'subtotal' => $invoice['invoicedate'], 'shipping' => $invoice['shipping'], 'discount' => $invoice['discount'], 'tax' => $invoice['tax'], 'total' => $invoice['total'], 'notes' => $invoice['notes'], 'csd' => $person, 'eid' => $invoice['eid'], 'items' => $invoice['items'], 'taxstatus' => $invoice['taxstatus'], 'discstatus' => $invoice['discstatus'], 'format_discount' => $invoice['format_discount'], 'refer' => $invoice['refer'], 'term' => $invoice['term'],'multi' => $invoice['multi'], 'loc' => $invoice['loc']);
-            $this->db->insert('geopos_purchase', $data);
+            $this->db->insert('te_purchase', $data);
             $iid = $this->db->insert_id();
             foreach ($products as $row) {
                 $amt = $row['qty'];
@@ -341,11 +341,11 @@ class Quote_model extends CI_Model
                 $prodindex++;
                 $this->db->set('qty', "qty+$amt", FALSE);
                 $this->db->where('pid', $row['pid']);
-                $this->db->update('geopos_products');
+                $this->db->update('te_products');
             }
 
 
-            $this->db->insert_batch('geopos_purchase_items', $productlist);
+            $this->db->insert_batch('te_purchase_items', $productlist);
 
 
 
@@ -353,7 +353,7 @@ class Quote_model extends CI_Model
             if ($this->db->trans_complete()) {
                 $this->db->set('status', 'accepted');
                 $this->db->where('id', $id);
-                $this->db->update('geopos_quotes');
+                $this->db->update('te_quotes');
                 return true;
             } else {
                 return false;
@@ -370,7 +370,7 @@ class Quote_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_currencies');
+        $this->db->from('te_currencies');
 
         $query = $this->db->get();
         return $query->result_array();
@@ -380,7 +380,7 @@ class Quote_model extends CI_Model
     public function currency_d($id)
     {
         $this->db->select('*');
-        $this->db->from('geopos_currencies');
+        $this->db->from('te_currencies');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -391,7 +391,7 @@ class Quote_model extends CI_Model
 
         $data = array('type' => $type, 'rid' => $id, 'col1' => $meta_data);
         if ($id) {
-            return $this->db->insert('geopos_metadata', $data);
+            return $this->db->insert('te_metadata', $data);
         } else {
             return 0;
         }
@@ -399,10 +399,10 @@ class Quote_model extends CI_Model
 
     public function attach($id)
     {
-        $this->db->select('geopos_metadata.*');
-        $this->db->from('geopos_metadata');
-        $this->db->where('geopos_metadata.type', 2);
-        $this->db->where('geopos_metadata.rid', $id);
+        $this->db->select('te_metadata.*');
+        $this->db->from('te_metadata');
+        $this->db->where('te_metadata.type', 2);
+        $this->db->where('te_metadata.rid', $id);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -410,7 +410,7 @@ class Quote_model extends CI_Model
     public function meta_delete($id, $type, $name)
     {
         if (@unlink(FCPATH . 'userfiles/attach/' . $name)) {
-            return $this->db->delete('geopos_metadata', array('rid' => $id, 'type' => $type, 'col1' => $name));
+            return $this->db->delete('te_metadata', array('rid' => $id, 'type' => $type, 'col1' => $name));
         }
     }
 

@@ -155,7 +155,7 @@ class Tickets extends CI_Controller
 
         $this->db->set('status', $status);
         $this->db->where('id', $tid);
-        $this->db->update('geopos_tickets');
+        $this->db->update('te_tickets');
 
         echo json_encode(array('status' => 'Success', 'message' =>
             $this->lang->line('UPDATED'), 'pstatus' => $status));

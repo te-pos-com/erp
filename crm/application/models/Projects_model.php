@@ -21,8 +21,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Projects_model extends CI_Model
 {
 
-    var $column_order = array('geopos_projects.status', 'geopos_projects.name', 'geopos_projects.edate', 'geopos_projects.worth', null);
-    var $column_search = array('geopos_projects.name', 'geopos_projects.edate', 'geopos_projects.status');
+    var $column_order = array('te_projects.status', 'te_projects.name', 'te_projects.edate', 'te_projects.worth', null);
+    var $column_search = array('te_projects.name', 'te_projects.edate', 'te_projects.status');
     var $tcolumn_order = array('status', 'name', 'duedate', 'start', null, null);
     var $tcolumn_search = array('name', 'edate', 'status');
     var $order = array('id' => 'desc');
@@ -30,47 +30,47 @@ class Projects_model extends CI_Model
 
     public function explore($id)
     {
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
 
         if ($result['prj'] == $id) {
 //project
-            $this->db->select('geopos_projects.*,geopos_customers.name AS customer,geopos_customers.email');
-            $this->db->from('geopos_projects');
-            $this->db->where('geopos_projects.id', $id);
-            $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-            $this->db->where('geopos_project_meta.meta_key=', 2);
-            $this->db->where('geopos_project_meta.meta_data=', 'true');
-            $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-            $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+            $this->db->select('te_projects.*,te_customers.name AS customer,te_customers.email');
+            $this->db->from('te_projects');
+            $this->db->where('te_projects.id', $id);
+            $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+            $this->db->where('te_project_meta.meta_key=', 2);
+            $this->db->where('te_project_meta.meta_data=', 'true');
+            $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+            $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
             $query = $this->db->get();
             $project = $query->row_array();
 
             //employee
 
-            $this->db->select('geopos_employees.name');
-            $this->db->from('geopos_project_meta');
-            $this->db->where('geopos_project_meta.pid', $id);
-            $this->db->where('geopos_project_meta.meta_key', 6);
-            $this->db->join('geopos_employees', 'geopos_project_meta.meta_data = geopos_employees.id', 'left');
+            $this->db->select('te_employees.name');
+            $this->db->from('te_project_meta');
+            $this->db->where('te_project_meta.pid', $id);
+            $this->db->where('te_project_meta.meta_key', 6);
+            $this->db->join('te_employees', 'te_project_meta.meta_data = te_employees.id', 'left');
             $query = $this->db->get();
             $employee = $query->result_array();
 
             //invoices
-            $this->db->select('geopos_invoices.*');
-            $this->db->from('geopos_project_meta');
-            $this->db->where('geopos_project_meta.pid', $id);
-            $this->db->where('geopos_project_meta.meta_key', 11);
-            $this->db->join('geopos_invoices', 'geopos_project_meta.meta_data = geopos_invoices.id', 'left');
+            $this->db->select('te_invoices.*');
+            $this->db->from('te_project_meta');
+            $this->db->where('te_project_meta.pid', $id);
+            $this->db->where('te_project_meta.meta_key', 11);
+            $this->db->join('te_invoices', 'te_project_meta.meta_data = te_invoices.id', 'left');
             $query = $this->db->get();
             $invoices = $query->result_array();
 
@@ -82,28 +82,28 @@ class Projects_model extends CI_Model
     public function details($id)
     {
 //project
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
 
 
         if ($result['prj'] == $id) {
-            $this->db->select('geopos_projects.*,geopos_projects.id AS prj, geopos_customers.name AS customer,geopos_project_meta.*');
+            $this->db->select('te_projects.*,te_projects.id AS prj, te_customers.name AS customer,te_project_meta.*');
 
-            $this->db->from('geopos_projects');
-            $this->db->where('geopos_projects.id', $id);
-            $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-            $this->db->where('geopos_project_meta.meta_key', 2);
-            $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-            $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+            $this->db->from('te_projects');
+            $this->db->where('te_projects.id', $id);
+            $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+            $this->db->where('te_project_meta.meta_key', 2);
+            $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+            $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
             $query = $this->db->get();
             return $query->row_array();
@@ -112,15 +112,15 @@ class Projects_model extends CI_Model
 
     private function _project_datatables_query($cday = '')
     {
-        $this->db->select('geopos_projects.*,geopos_customers.name AS customer');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key=', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.*,te_customers.name AS customer');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key=', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
         if ($cday) {
-            $this->db->where('DATE(geopos_projects.edate)=', $cday);
+            $this->db->where('DATE(te_projects.edate)=', $cday);
         }
 
 
@@ -187,7 +187,7 @@ class Projects_model extends CI_Model
 				COUNT(IF( status = 'Waiting', id, NULL)) AS Waiting,
 				COUNT(IF( status = 'Progress', id, NULL)) AS Progress,
 				COUNT(IF( status = 'Finished', id, NULL)) AS Finished			
-				FROM geopos_projects WHERE cid='" . $this->session->userdata('user_details')[0]->cid . "'");
+				FROM te_projects WHERE cid='" . $this->session->userdata('user_details')[0]->cid . "'");
 
         echo json_encode($query->result_array());
 
@@ -198,7 +198,7 @@ class Projects_model extends CI_Model
     private function _task_datatables_query($cday = '')
     {
 
-        $this->db->from('geopos_todolist');
+        $this->db->from('te_todolist');
         $this->db->where('related', 1);
         if ($cday) {
 
@@ -273,25 +273,25 @@ class Projects_model extends CI_Model
     public function task_thread($id)
     {
 
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
 
         if ($result['prj'] == $id) {
-            $this->db->select('geopos_todolist.*, geopos_employees.name AS emp');
-            $this->db->from('geopos_todolist');
-            $this->db->where('geopos_todolist.related', 1);
-            $this->db->where('geopos_todolist.rid', $id);
-            $this->db->join('geopos_employees', 'geopos_todolist.eid = geopos_employees.id', 'left');
-            $this->db->order_by('geopos_todolist.id', 'desc');
+            $this->db->select('te_todolist.*, te_employees.name AS emp');
+            $this->db->from('te_todolist');
+            $this->db->where('te_todolist.related', 1);
+            $this->db->where('te_todolist.rid', $id);
+            $this->db->join('te_employees', 'te_todolist.eid = te_employees.id', 'left');
+            $this->db->order_by('te_todolist.id', 'desc');
             $query = $this->db->get();
             return $query->result_array();
         }
@@ -301,14 +301,14 @@ class Projects_model extends CI_Model
     public function milestones($id)
     {
 
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
@@ -316,7 +316,7 @@ class Projects_model extends CI_Model
         if ($result['prj'] == $id) {
             $this->db->select('*');
 
-            $this->db->from('geopos_milestones');
+            $this->db->from('te_milestones');
             $this->db->where('pid', $id);
             $this->db->order_by('id', 'desc');
             $query = $this->db->get();
@@ -327,21 +327,21 @@ class Projects_model extends CI_Model
     public function milestones_list($id)
     {
 
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
 
 
         if ($result['prj'] == $id) {
-            $query = $this->db->query('SELECT geopos_milestones.*,geopos_todolist.name as task FROM geopos_milestones LEFT JOIN geopos_project_meta ON geopos_project_meta.meta_data=geopos_milestones.id AND geopos_project_meta.meta_key=8 LEFT JOIN geopos_todolist ON geopos_project_meta.value=geopos_todolist.id WHERE geopos_milestones.pid=' . $id . ' ORDER BY geopos_milestones.id DESC;');
+            $query = $this->db->query('SELECT te_milestones.*,te_todolist.name as task FROM te_milestones LEFT JOIN te_project_meta ON te_project_meta.meta_data=te_milestones.id AND te_project_meta.meta_key=8 LEFT JOIN te_todolist ON te_project_meta.value=te_todolist.id WHERE te_milestones.pid=' . $id . ' ORDER BY te_milestones.id DESC;');
             return $query->result_array();
         }
 
@@ -352,14 +352,14 @@ class Projects_model extends CI_Model
     public function p_files($id)
     {
 
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.meta_data=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.meta_data=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
@@ -367,7 +367,7 @@ class Projects_model extends CI_Model
 
         if ($result['prj'] == $id) {
             $this->db->select('*');
-            $this->db->from('geopos_project_meta');
+            $this->db->from('te_project_meta');
             $this->db->where('pid', $id);
             $this->db->where('meta_key', 9);
             $query = $this->db->get();
@@ -381,28 +381,28 @@ class Projects_model extends CI_Model
     public function comments_thread($id)
     {
 
-        $this->db->select('geopos_projects.id AS prj');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->where('geopos_projects.cid=', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.value=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.id AS prj');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->where('te_projects.cid=', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.value=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
 
 
         if ($result['prj'] == $id) {
-            $this->db->select('geopos_project_meta.value, geopos_project_meta.key3,geopos_employees.name AS employee, geopos_customers.name AS customer');
+            $this->db->select('te_project_meta.value, te_project_meta.key3,te_employees.name AS employee, te_customers.name AS customer');
 
-            $this->db->from('geopos_project_meta');
-            $this->db->where('geopos_project_meta.pid', $id);
-            $this->db->where('geopos_project_meta.meta_key', 13);
-            $this->db->join('geopos_employees', 'geopos_project_meta.meta_data = geopos_employees.id', 'left');
-            $this->db->join('geopos_customers', 'geopos_project_meta.key3 = geopos_customers.id', 'left');
-            $this->db->order_by('geopos_project_meta.id', 'desc');
+            $this->db->from('te_project_meta');
+            $this->db->where('te_project_meta.pid', $id);
+            $this->db->where('te_project_meta.meta_key', 13);
+            $this->db->join('te_employees', 'te_project_meta.meta_data = te_employees.id', 'left');
+            $this->db->join('te_customers', 'te_project_meta.key3 = te_customers.id', 'left');
+            $this->db->order_by('te_project_meta.id', 'desc');
             $query = $this->db->get();
             return $query->result_array();
         } else {
@@ -413,14 +413,14 @@ class Projects_model extends CI_Model
     public function add_comment($comment, $prid, $cust)
     {
 
-        $this->db->select('geopos_projects.*,geopos_projects.id AS prj, geopos_customers.name AS customer,geopos_project_meta.*');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $prid);
-        $this->db->where('geopos_projects.cid=', $cust);
-        $this->db->where('geopos_project_meta.meta_key', 2);
-        $this->db->where('geopos_project_meta.value=', 'true');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
+        $this->db->select('te_projects.*,te_projects.id AS prj, te_customers.name AS customer,te_project_meta.*');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $prid);
+        $this->db->where('te_projects.cid=', $cust);
+        $this->db->where('te_project_meta.meta_key', 2);
+        $this->db->where('te_project_meta.value=', 'true');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
 
         $query = $this->db->get();
         $result = $query->row_array();
@@ -429,7 +429,7 @@ class Projects_model extends CI_Model
 
             $data = array('pid' => $prid, 'meta_key' => 13, 'key3' => $cust, 'value' => $comment . '<br><small>@' . date('Y-m-d H:i:s') . '</small>');
             if ($prid) {
-                return $this->db->insert('geopos_project_meta', $data);
+                return $this->db->insert('te_project_meta', $data);
             } else {
                 return 0;
             }

@@ -54,18 +54,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Dapatkan penghasilan tambahan dengan berjualan produk kami</h1>
+          <h1 data-aos="fade-up">Dapatkan Penghasilan Tambahan Dengan Jualan Produk <?= $setting['nama_website']?></h1>
           <br/>
           <h2 data-aos="fade-up" data-aos-delay="400">Pasarkan produk kami dan dapatkan penghasilan <b><?= $setting['presentase_patner']?>%</b> dari nominal langganan dan perpanjang langganan.
           </h2>
-          <h2 data-aos="fade-up" data-aos-delay="400">
-          Untuk memulai pemasaran produk masuk ke akun anda dan klik menu <b>patner</b> dan mulai sebarkan link referal anda untuk mengajak orang bergabung dan berlangganan.</h2>
           <div data-aos="fade-up" data-aos-delay="800">
             <a href="<?= $setting['link_cloud']?>/patner" class="btn-get-started scrollto">Mulai</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-          <img src="<?= base_url()?>assets/patner/assets/img/hero-img.png" class="img-fluid animated" alt="">
+          <img src="<?= base_url()?>assets/patner/assets/img/hero-img.jpg" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -284,7 +282,7 @@
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-            Designed by <a href="https://<?= $setting['domain_website']?>/"><?= $setting['domain_website']?></a>
+            Designed by <a href="<?= $setting['link_website']?>"><?= $setting['domain_website']?></a>
           </div>
         </div>
         <div class="col-lg-6">

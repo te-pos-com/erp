@@ -29,13 +29,13 @@ class Manager_model extends CI_Model
     var $tcolumn_search = array('name', 'edate', 'status');
     var $order = array('id' => 'asc');
 
-    var $pcolumn_order = array('geopos_projects.status', 'geopos_projects.name', 'geopos_projects.edate', 'geopos_projects.worth', null);
-    var $pcolumn_search = array('geopos_projects.name', 'geopos_projects.edate', 'geopos_projects.status');
+    var $pcolumn_order = array('te_projects.status', 'te_projects.name', 'te_projects.edate', 'te_projects.worth', null);
+    var $pcolumn_search = array('te_projects.name', 'te_projects.edate', 'te_projects.status');
 
     private function _task_datatables_query($cday = '')
     {
 
-        $this->db->from('geopos_todolist');
+        $this->db->from('te_todolist');
         if ($cday) {
             $this->db->where('DATE(duedate)=', $cday);
         }
@@ -104,7 +104,7 @@ class Manager_model extends CI_Model
     {
 
         $data = array('tdate' => date('Y-m-d H:i:s'), 'name' => $name, 'status' => $status, 'start' => $stdate, 'duedate' => $tdate, 'description' => $content, 'eid' => $employee, 'related' => 0, 'priority' => $priority, 'rid' => 0);
-        return $this->db->insert('geopos_todolist', $data);
+        return $this->db->insert('te_todolist', $data);
     }
 
     public function edittask($id, $name, $status, $priority, $stdate, $tdate, $employee, $content)
@@ -114,8 +114,8 @@ class Manager_model extends CI_Model
         $this->db->set($data);
         $this->db->where('id', $id);
         $this->db->where('eid', $this->aauth->get_user()->id);
-        return $this->db->update('geopos_todolist');
-        //return $this->db->insert('geopos_todolist', $data);
+        return $this->db->update('te_todolist');
+        //return $this->db->insert('te_todolist', $data);
     }
 
     public function editproject($id, $name, $status, $priority, $progress, $customer, $sdate, $edate, $tag, $phase, $content, $budget, $customerview, $customer_comment, $link_to_cal, $color, $ptype, $employee)
@@ -125,9 +125,9 @@ class Manager_model extends CI_Model
         $data = array('name' => $name, 'status' => $status, 'priority' => $priority, 'progress' => $progress, 'cid' => $customer, 'sdate' => $sdate, 'edate' => $edate, 'tag' => $tag, 'phase' => $phase, 'note' => $content, 'worth' => $budget, 'ptype' => $ptype);
         $this->db->set($data);
         $this->db->where('id', $id);
-        $out = $this->db->update('geopos_projects');
+        $out = $this->db->update('te_projects');
 
-        $this->db->delete('geopos_events', array('rel' => 1, 'rid' => $id));
+        $this->db->delete('te_events', array('rel' => 1, 'rid' => $id));
         if ($link_to_cal > 0) {
             if ($link_to_cal == 1) {
                 $sdate = $edate;
@@ -140,14 +140,14 @@ class Manager_model extends CI_Model
                 'rel' => 1,
                 'rid' => $id
             );
-            $this->db->insert('geopos_events', $data);
+            $this->db->insert('te_events', $data);
         }
         if ($employee) {
-            $this->db->delete('geopos_project_meta', array('pid' => $id, 'meta_key' => 19));
+            $this->db->delete('te_project_meta', array('pid' => $id, 'meta_key' => 19));
             foreach ($employee as $key => $value) {
 
                 $data = array('pid' => $id, 'meta_key' => 19, 'meta_data' => $value);
-                $this->db->insert('geopos_project_meta', $data);
+                $this->db->insert('te_project_meta', $data);
             }
         }
 
@@ -156,7 +156,7 @@ class Manager_model extends CI_Model
         $this->db->where('pid', $id);
         $this->db->where('meta_key', 2);
 
-        return $this->db->update('geopos_project_meta');
+        return $this->db->update('te_project_meta');
     }
 
 
@@ -167,23 +167,23 @@ class Manager_model extends CI_Model
         $this->db->set($data);
         $this->db->where('id', $id);
         $this->db->where('eid', $this->aauth->get_user()->id);
-        return $this->db->update('geopos_todolist');
+        return $this->db->update('te_todolist');
     }
 
     public function deletetask($id)
     {
 
-        return $this->db->delete('geopos_todolist', array('id' => $id));
+        return $this->db->delete('te_todolist', array('id' => $id));
     }
 
     public function viewtask($id)
     {
 
-        $this->db->select('geopos_todolist.*,geopos_employees.name AS emp, assi.name AS assign');
-        $this->db->from('geopos_todolist');
-        $this->db->where('geopos_todolist.id', $id);
-        $this->db->join('geopos_employees', 'geopos_employees.id = geopos_todolist.eid', 'left');
-        $this->db->join('geopos_employees AS assi', 'assi.id = geopos_todolist.aid', 'left');
+        $this->db->select('te_todolist.*,te_employees.name AS emp, assi.name AS assign');
+        $this->db->from('te_todolist');
+        $this->db->where('te_todolist.id', $id);
+        $this->db->join('te_employees', 'te_employees.id = te_todolist.eid', 'left');
+        $this->db->join('te_employees AS assi', 'assi.id = te_todolist.aid', 'left');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -191,7 +191,7 @@ class Manager_model extends CI_Model
     public function pending_tasks_user($id)
     {
         $this->db->select('*');
-        $this->db->from('geopos_todolist');
+        $this->db->from('te_todolist');
         $this->db->where('status', 'Due');
         $this->db->where('eid', $id);
         $this->db->order_by('DATE(duedate)', 'ASC');
@@ -205,14 +205,14 @@ class Manager_model extends CI_Model
 
     private function _project_datatables_query($cday = '')
     {
-        $this->db->select("geopos_projects.*,geopos_customers.name AS customer");
-        $this->db->from('geopos_projects');
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
-        $this->db->join('geopos_project_meta', 'geopos_project_meta.pid = geopos_projects.id', 'left');
-        $this->db->where('geopos_project_meta.meta_key', 19);
-        $this->db->where('geopos_project_meta.meta_data', $this->aauth->get_user()->id);
+        $this->db->select("te_projects.*,te_customers.name AS customer");
+        $this->db->from('te_projects');
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
+        $this->db->join('te_project_meta', 'te_project_meta.pid = te_projects.id', 'left');
+        $this->db->where('te_project_meta.meta_key', 19);
+        $this->db->where('te_project_meta.meta_data', $this->aauth->get_user()->id);
         if ($cday) {
-            $this->db->where('DATE(geopos_projects.edate)=', $cday);
+            $this->db->where('DATE(te_projects.edate)=', $cday);
         }
 
 
@@ -275,10 +275,10 @@ class Manager_model extends CI_Model
     {
 
         $query = $this->db->query("SELECT
-				COUNT(IF( geopos_projects.status = 'Waiting', geopos_projects.id, NULL)) AS Waiting,
-				COUNT(IF( geopos_projects.status = 'Progress', geopos_projects.id, NULL)) AS Progress,
-				COUNT(IF( geopos_projects.status = 'Finished', geopos_projects.id, NULL)) AS Finished			
-				FROM geopos_projects LEFT JOIN geopos_project_meta ON geopos_project_meta.pid=geopos_projects.id WHERE geopos_project_meta.meta_key=19 AND geopos_project_meta.meta_data=" . $this->aauth->get_user()->id . "");
+				COUNT(IF( te_projects.status = 'Waiting', te_projects.id, NULL)) AS Waiting,
+				COUNT(IF( te_projects.status = 'Progress', te_projects.id, NULL)) AS Progress,
+				COUNT(IF( te_projects.status = 'Finished', te_projects.id, NULL)) AS Finished			
+				FROM te_projects LEFT JOIN te_project_meta ON te_project_meta.pid=te_projects.id WHERE te_project_meta.meta_key=19 AND te_project_meta.meta_data=" . $this->aauth->get_user()->id . "");
 
         echo json_encode($query->result_array());
 
@@ -290,7 +290,7 @@ class Manager_model extends CI_Model
 				COUNT(IF( status = 'Due', id, NULL)) AS Due,
 				COUNT(IF( status = 'Progress', id, NULL)) AS Progress,
 				COUNT(IF( status = 'Done', id, NULL)) AS Done
-				FROM geopos_todolist WHERE related=1 AND rid=$id AND aid=" . $this->aauth->get_user()->id . "");
+				FROM te_todolist WHERE related=1 AND rid=$id AND aid=" . $this->aauth->get_user()->id . "");
 
         echo json_encode($query->result_array());
 
@@ -300,31 +300,31 @@ class Manager_model extends CI_Model
     public function explore($id)
     {
         //project
-        $this->db->select('geopos_projects.*,geopos_customers.name AS customer,geopos_customers.email');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->join('geopos_customers', 'geopos_projects.cid = geopos_customers.id', 'left');
+        $this->db->select('te_projects.*,te_customers.name AS customer,te_customers.email');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->join('te_customers', 'te_projects.cid = te_customers.id', 'left');
         $query = $this->db->get();
         $project = $query->row_array();
         //employee
-        $this->db->select('geopos_employees.name');
-        $this->db->from('geopos_project_meta');
-        $this->db->where('geopos_project_meta.pid', $id);
-        $this->db->where('geopos_project_meta.meta_key', 6);
-        $this->db->join('geopos_employees', 'geopos_project_meta.meta_data = geopos_employees.id', 'left');
+        $this->db->select('te_employees.name');
+        $this->db->from('te_project_meta');
+        $this->db->where('te_project_meta.pid', $id);
+        $this->db->where('te_project_meta.meta_key', 6);
+        $this->db->join('te_employees', 'te_project_meta.meta_data = te_employees.id', 'left');
         $query = $this->db->get();
         $employee = $query->result_array();
         //invoices
-        $this->db->select('geopos_invoices.*');
-        $this->db->from('geopos_project_meta');
-        $this->db->where('geopos_project_meta.pid', $id);
-        $this->db->where('geopos_project_meta.meta_key', 11);
-        $this->db->join('geopos_invoices', 'geopos_project_meta.meta_data = geopos_invoices.tid', 'left');
+        $this->db->select('te_invoices.*');
+        $this->db->from('te_project_meta');
+        $this->db->where('te_project_meta.pid', $id);
+        $this->db->where('te_project_meta.meta_key', 11);
+        $this->db->join('te_invoices', 'te_project_meta.meta_data = te_invoices.tid', 'left');
         $query = $this->db->get();
         $invoices = $query->result_array();
                    //clock
         $this->db->select('*');
-        $this->db->from('geopos_project_meta');
+        $this->db->from('te_project_meta');
         $this->db->where('pid', $id);
         $this->db->where('meta_key', 29);
         $this->db->where('meta_data', $this->aauth->get_user()->id);
@@ -338,7 +338,7 @@ class Manager_model extends CI_Model
     private function _ptask_datatables_query($cday = '')
     {
 
-        $this->db->from('geopos_todolist');
+        $this->db->from('te_todolist');
         $this->db->where('related', 1);
         if ($cday) {
 
@@ -410,12 +410,12 @@ class Manager_model extends CI_Model
     public function task_thread($id)
     {
 
-        $this->db->select('geopos_todolist.*, geopos_employees.name AS emp');
-        $this->db->from('geopos_todolist');
-        $this->db->where('geopos_todolist.related', 1);
-        $this->db->where('geopos_todolist.rid', $id);
-        $this->db->join('geopos_employees', 'geopos_todolist.eid = geopos_employees.id', 'left');
-        $this->db->order_by('geopos_todolist.id', 'desc');
+        $this->db->select('te_todolist.*, te_employees.name AS emp');
+        $this->db->from('te_todolist');
+        $this->db->where('te_todolist.related', 1);
+        $this->db->where('te_todolist.rid', $id);
+        $this->db->join('te_employees', 'te_todolist.eid = te_employees.id', 'left');
+        $this->db->order_by('te_todolist.id', 'desc');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -423,7 +423,7 @@ class Manager_model extends CI_Model
     public function milestones_list($id)
     {
 
-        $query = $this->db->query('SELECT geopos_milestones.*,geopos_todolist.name as task FROM geopos_milestones LEFT JOIN geopos_project_meta ON geopos_project_meta.meta_data=geopos_milestones.id AND geopos_project_meta.meta_key=8 LEFT JOIN geopos_todolist ON geopos_project_meta.value=geopos_todolist.id WHERE geopos_milestones.pid=' . $id . ' ORDER BY geopos_milestones.id DESC;');
+        $query = $this->db->query('SELECT te_milestones.*,te_todolist.name as task FROM te_milestones LEFT JOIN te_project_meta ON te_project_meta.meta_data=te_milestones.id AND te_project_meta.meta_key=8 LEFT JOIN te_todolist ON te_project_meta.value=te_todolist.id WHERE te_milestones.pid=' . $id . ' ORDER BY te_milestones.id DESC;');
         return $query->result_array();
 
 
@@ -432,8 +432,8 @@ class Manager_model extends CI_Model
     public function activities($id)
     {
 
-        $this->db->select('geopos_project_meta.value');
-        $this->db->from('geopos_project_meta');
+        $this->db->select('te_project_meta.value');
+        $this->db->from('te_project_meta');
         $this->db->where('pid', $id);
         $this->db->where('meta_key', 12);
         $query = $this->db->get();
@@ -444,7 +444,7 @@ class Manager_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_project_meta');
+        $this->db->from('te_project_meta');
         $this->db->where('pid', $id);
         $this->db->where('meta_key', 9);
         $query = $this->db->get();
@@ -454,26 +454,26 @@ class Manager_model extends CI_Model
     public function comments_thread($id)
     {
 
-        $this->db->select('geopos_project_meta.value, geopos_project_meta.key3,geopos_employees.name AS employee, geopos_customers.name AS customer');
-        $this->db->from('geopos_project_meta');
-        $this->db->where('geopos_project_meta.pid', $id);
-        $this->db->where('geopos_project_meta.meta_key', 13);
-        $this->db->join('geopos_employees', 'geopos_project_meta.meta_data = geopos_employees.id', 'left');
-        $this->db->join('geopos_customers', 'geopos_project_meta.key3 = geopos_customers.id', 'left');
-        $this->db->order_by('geopos_project_meta.id', 'desc');
+        $this->db->select('te_project_meta.value, te_project_meta.key3,te_employees.name AS employee, te_customers.name AS customer');
+        $this->db->from('te_project_meta');
+        $this->db->where('te_project_meta.pid', $id);
+        $this->db->where('te_project_meta.meta_key', 13);
+        $this->db->join('te_employees', 'te_project_meta.meta_data = te_employees.id', 'left');
+        $this->db->join('te_customers', 'te_project_meta.key3 = te_customers.id', 'left');
+        $this->db->order_by('te_project_meta.id', 'desc');
         $query = $this->db->get();
         return $query->result_array();
     }
 
     public function list_project_employee($id)
     {
-        $this->db->select('geopos_employees.*');
-        $this->db->from('geopos_project_meta');
-        $this->db->where('geopos_project_meta.pid', $id);
-        $this->db->where('geopos_project_meta.meta_key', 19);
-        $this->db->join('geopos_employees', 'geopos_employees.id = geopos_project_meta.meta_data', 'left');
-        $this->db->join('geopos_users', 'geopos_employees.id = geopos_users.id', 'left');
-        $this->db->order_by('geopos_users.roleid', 'DESC');
+        $this->db->select('te_employees.*');
+        $this->db->from('te_project_meta');
+        $this->db->where('te_project_meta.pid', $id);
+        $this->db->where('te_project_meta.meta_key', 19);
+        $this->db->join('te_employees', 'te_employees.id = te_project_meta.meta_data', 'left');
+        $this->db->join('te_users', 'te_employees.id = te_users.id', 'left');
+        $this->db->order_by('te_users.roleid', 'DESC');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -482,7 +482,7 @@ class Manager_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_milestones');
+        $this->db->from('te_milestones');
         $this->db->where('pid', $id);
         $this->db->order_by('id', 'desc');
         $query = $this->db->get();
@@ -498,7 +498,7 @@ class Manager_model extends CI_Model
             $title = '[Milestone] ' . $name;
             $this->add_activity($title, $prid);
 
-            return $this->db->insert('geopos_milestones', $data);
+            return $this->db->insert('te_milestones', $data);
 
         } else {
             return 0;
@@ -510,7 +510,7 @@ class Manager_model extends CI_Model
 
         $data = array('pid' => $prid, 'meta_key' => 12, 'value' => $name . ' @' . date('Y-m-d H:i:s'));
         if ($prid) {
-            return $this->db->insert('geopos_project_meta', $data);
+            return $this->db->insert('te_project_meta', $data);
         } else {
             return 0;
         }
@@ -522,7 +522,7 @@ class Manager_model extends CI_Model
         $data = array('tdate' => date('Y-m-d H:i:s'), 'name' => $name, 'status' => $status, 'start' => $stdate, 'duedate' => $tdate, 'description' => $content, 'eid' => $employee, 'aid' => $assign, 'related' => 1, 'priority' => $priority, 'rid' => $prid);
         if ($prid) {
 
-            $this->db->insert('geopos_todolist', $data);
+            $this->db->insert('te_todolist', $data);
             $last = $this->db->insert_id();
 
             if ($milestone) {
@@ -542,7 +542,7 @@ class Manager_model extends CI_Model
 
         $data = array('pid' => $prid, 'meta_key' => $meta_key, 'meta_data' => $meta_data, 'value' => $value);
         if ($prid) {
-            return $this->db->insert('geopos_project_meta', $data);
+            return $this->db->insert('te_project_meta', $data);
         } else {
             return 0;
         }
@@ -551,19 +551,19 @@ class Manager_model extends CI_Model
     private function communication($id, $sub)
     {
 
-        $this->db->select('geopos_projects.name as pname,geopos_projects.ptype,geopos_customers.name as cust,geopos_customers.email');
-        $this->db->from('geopos_projects');
-        $this->db->where('geopos_projects.id', $id);
-        $this->db->join('geopos_customers', "geopos_customers.id = geopos_projects.cid", 'left');
+        $this->db->select('te_projects.name as pname,te_projects.ptype,te_customers.name as cust,te_customers.email');
+        $this->db->from('te_projects');
+        $this->db->where('te_projects.id', $id);
+        $this->db->join('te_customers', "te_customers.id = te_projects.cid", 'left');
         $query = $this->db->get();
         $result = $query->row_array();
 
         if ($result['ptype'] == '1') {
-            $this->db->select('geopos_users.email,geopos_users.username');
-            $this->db->from('geopos_project_meta');
-            $this->db->where('geopos_project_meta.pid', $id);
-            $this->db->where('geopos_project_meta.meta_key', 19);
-            $this->db->join('geopos_users', "geopos_project_meta.meta_data = geopos_users.id", 'left');
+            $this->db->select('te_users.email,te_users.username');
+            $this->db->from('te_project_meta');
+            $this->db->where('te_project_meta.pid', $id);
+            $this->db->where('te_project_meta.meta_key', 19);
+            $this->db->join('te_users', "te_project_meta.meta_data = te_users.id", 'left');
             $query = $this->db->get();
             $result_c = $query->result_array();
             $message = '<h3>Dear Project Participant,</h3>
@@ -575,11 +575,11 @@ class Manager_model extends CI_Model
 
         } else if ($result['ptype'] == '2') {
 
-            $this->db->select('geopos_users.email,geopos_users.username');
-            $this->db->from('geopos_project_meta');
-            $this->db->where('geopos_project_meta.pid', $id);
-            $this->db->where('geopos_project_meta.meta_key', 19);
-            $this->db->join('geopos_users', "geopos_project_meta.meta_data = geopos_users.id", 'left');
+            $this->db->select('te_users.email,te_users.username');
+            $this->db->from('te_project_meta');
+            $this->db->where('te_project_meta.pid', $id);
+            $this->db->where('te_project_meta.meta_key', 19);
+            $this->db->join('te_users', "te_project_meta.meta_data = te_users.id", 'left');
             $query = $this->db->get();
             $result_c = $query->result_array();
             $message = '<h3>Dear Project Participant,</h3>
@@ -601,14 +601,14 @@ class Manager_model extends CI_Model
     {
 
         $this->db->select('value');
-        $this->db->from('geopos_project_meta');
+        $this->db->from('te_project_meta');
         $this->db->where('pid', $pid);
         $this->db->where('meta_key', 9);
         $this->db->where('meta_data', $mid);
         $query = $this->db->get();
         $result = $query->row_array();
         unlink(FCPATH . 'userfiles/project/' . $result['value']);
-        $this->db->delete('geopos_project_meta', array('pid' => $pid, 'meta_key' => 9, 'meta_data' => $mid));
+        $this->db->delete('te_project_meta', array('pid' => $pid, 'meta_key' => 9, 'meta_data' => $mid));
     }
 
 

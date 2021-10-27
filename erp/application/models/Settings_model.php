@@ -24,7 +24,7 @@ class Settings_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_system');
+        $this->db->from('te_system');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -46,7 +46,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
                   if ($data_share != BDATA) {
@@ -71,7 +71,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -88,7 +88,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -134,7 +134,7 @@ class Settings_model extends CI_Model
         $data = array('prefix' => $invoiceprefix);
         $this->db->set($data);
         $this->db->where('id', 1);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -152,7 +152,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -165,7 +165,7 @@ class Settings_model extends CI_Model
     public function companylogo($id, $pic)
     {
         $this->db->select('logo');
-        $this->db->from('geopos_system');
+        $this->db->from('te_system');
         $this->db->where('id', $id);
         $query = $this->db->get();
         $result = $query->row_array();
@@ -174,7 +174,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             unlink(FCPATH . 'userfiles/company/' . $result['logo']);
             unlink(FCPATH . 'userfiles/company/thumbnail/' . $result['logo']);
         }
@@ -185,7 +185,7 @@ class Settings_model extends CI_Model
     public function email_smtp()
     {
         $this->db->select('*');
-        $this->db->from('geopos_smtp');
+        $this->db->from('te_smtp');
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -203,7 +203,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', 1);
-        if ($this->db->update('geopos_smtp')) {
+        if ($this->db->update('te_smtp')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -236,7 +236,7 @@ class Settings_model extends CI_Model
     public function get_terms($id)
     {
         $this->db->select('*');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -245,7 +245,7 @@ class Settings_model extends CI_Model
     public function billingterms()
     {
         $this->db->select('id,title,type');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -253,7 +253,7 @@ class Settings_model extends CI_Model
     public function slabs()
     {
         $this->db->select('*');
-        $this->db->from('geopos_config');
+        $this->db->from('te_config');
         $this->db->where('type', 2);
         $query = $this->db->get();
         return $query->result_array();
@@ -268,7 +268,7 @@ class Settings_model extends CI_Model
             'val3' => $ttype,
             'val4' => $ttype2
         );
-        if ($this->db->insert('geopos_config', $data)) {
+        if ($this->db->insert('te_config', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED')));
         } else {
@@ -284,7 +284,7 @@ class Settings_model extends CI_Model
             'type' => $type,
             'terms' => $term
         );
-        if ($this->db->insert('geopos_terms', $data)) {
+        if ($this->db->insert('te_terms', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED')));
         } else {
@@ -302,7 +302,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_terms', $data)) {
+        if ($this->db->update('te_terms', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -315,7 +315,7 @@ class Settings_model extends CI_Model
     public function edit_terms()
     {
         $this->db->select('id,title');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -341,11 +341,11 @@ class Settings_model extends CI_Model
 
     public function currency()
     {
-        $this->db->select('geopos_system.currency,univarsal_api.*');
-        $this->db->from('geopos_system');
+        $this->db->select('te_system.currency,univarsal_api.*');
+        $this->db->from('te_system');
         $this->db->where('univarsal_api.id', 4);
-        $this->db->where('geopos_system.id', 1);
-        $this->db->join('univarsal_api', 'geopos_system.id = 1', 'left');
+        $this->db->where('te_system.id', 1);
+        $this->db->join('univarsal_api', 'te_system.id = 1', 'left');
         $query = $this->db->get();
         return $query->row_array();
 
@@ -358,7 +358,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        $this->db->update('geopos_system');
+        $this->db->update('te_system');
         $data = array(
             'key1' => $deci_sep,
             'key2' => $thous_sep,
@@ -382,11 +382,11 @@ class Settings_model extends CI_Model
     public function delete_terms($id)
     {
         $this->db->select('id');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
 
         $query = $this->db->get();
         if ($query->num_rows() > 1) {
-            return $this->db->delete('geopos_terms', array('id' => $id));
+            return $this->db->delete('te_terms', array('id' => $id));
         } else {
             return false;
         }
@@ -395,7 +395,7 @@ class Settings_model extends CI_Model
 
     public function delete_slab($id)
     {
-        return $this->db->delete('geopos_config', array('id' => $id, 'type' => 2));
+        return $this->db->delete('te_config', array('id' => $id, 'type' => 2));
     }
 
     public function update_tax($id, $taxid, $taxstatus, $tdirection)
@@ -407,7 +407,7 @@ class Settings_model extends CI_Model
         $this->db->set($data);
         $this->db->where('id', $id);
 
-        if ($this->db->update('geopos_system')) {
+        if ($this->db->update('te_system')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {
@@ -452,7 +452,7 @@ class Settings_model extends CI_Model
     public function logs()
     {
         $this->db->select('*');
-        $this->db->from('geopos_log');
+        $this->db->from('te_log');
         $this->db->order_by('id', 'DESC');
         $this->db->limit(150, 'DESC');
         $query = $this->db->get();
@@ -506,7 +506,7 @@ class Settings_model extends CI_Model
 
         if ($id) {
             $this->db->select('*');
-            $this->db->from('geopos_custom_fields');
+            $this->db->from('te_custom_fields');
             $this->db->where('id', $id);
             $query = $this->db->get();
             return $query->row_array();
@@ -514,7 +514,7 @@ class Settings_model extends CI_Model
 
 
             $this->db->select('*');
-            $this->db->from('geopos_custom_fields');
+            $this->db->from('te_custom_fields');
 
             $query = $this->db->get();
             return $query->result_array();
@@ -534,7 +534,7 @@ class Settings_model extends CI_Model
 
         );
 
-        if ($this->db->insert('geopos_custom_fields', $data)) {
+        if ($this->db->insert('te_custom_fields', $data)) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED') . "  <a href='add_custom_field' class='btn btn-indigo btn-lg'><span class='icon-plus-circle' aria-hidden='true'></span>  </a>   <a href='custom_fields' class='btn btn-info btn-lg'><span class='icon-list' aria-hidden='true'></span>  </a>"));
         } else {
@@ -557,7 +557,7 @@ class Settings_model extends CI_Model
         );
         $this->db->set($data);
         $this->db->where('id', $id);
-        if ($this->db->update('geopos_custom_fields')) {
+        if ($this->db->update('te_custom_fields')) {
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
         } else {

@@ -30,33 +30,33 @@ class Search_products extends CI_Controller
         $wid = $this->input->post('wid', true);
         $qw = '';
         if ($wid > 0) {
-            $qw = "(geopos_products.warehouse='$wid') AND ";
+            $qw = "(te_products.warehouse='$wid') AND ";
         }
-        if ($billing_settings['key2']) $qw .= "(geopos_products.expiry IS NULL OR DATE (geopos_products.expiry)<" . date('Y-m-d') . ") AND ";
+        if ($billing_settings['key2']) $qw .= "(te_products.expiry IS NULL OR DATE (te_products.expiry)<" . date('Y-m-d') . ") AND ";
         $join = '';
 
         if ($this->aauth->get_user()->loc) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            $join2 = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            $join2 = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            if (BDATA) $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
             $qw .= ' AND ';
         }
         $e = '';
         if ($billing_settings['key1'] == 1) {
-            $e .= ',geopos_product_serials.serial';
-            $join .= 'LEFT JOIN geopos_product_serials ON geopos_product_serials.product_id=geopos_products.pid';
-            $qw .= '(geopos_product_serials.status=0) AND ';
+            $e .= ',te_product_serials.serial';
+            $join .= 'LEFT JOIN te_product_serials ON te_product_serials.product_id=te_products.pid';
+            $qw .= '(te_product_serials.status=0) AND ';
         }
 
         if ($name) {
 
             if ($billing_settings['key1'] == 2) {
-                $e .= ',geopos_product_serials.serial';
-                $query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_product_serials LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "(UPPER(geopos_product_serials.serial) LIKE '" . strtoupper($name) . "%')  LIMIT 6");
+                $e .= ',te_product_serials.serial';
+                $query = $this->db->query("SELECT te_products.pid,te_products.product_name,te_products.product_price,te_products.product_code,te_products.taxrate,te_products.disrate,te_products.product_des,te_products.qty,te_products.unit $e  FROM te_product_serials LEFT JOIN te_products  ON te_products.pid=te_product_serials.product_id $join WHERE " . $qw . "(UPPER(te_product_serials.serial) LIKE '" . strtoupper($name) . "%')  LIMIT 6");
             } else {
-                $query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%') OR (UPPER(geopos_products.product_code) LIKE '" . strtoupper($name) . "%') LIMIT 6");
+                $query = $this->db->query("SELECT te_products.pid,te_products.product_name,te_products.product_price,te_products.product_code,te_products.taxrate,te_products.disrate,te_products.product_des,te_products.qty,te_products.unit $e  FROM te_products $join WHERE " . $qw . "(UPPER(te_products.product_name) LIKE '%" . strtoupper($name) . "%') OR (UPPER(te_products.product_code) LIKE '" . strtoupper($name) . "%') LIMIT 6");
             }
 
             $result = $query->result_array();
@@ -78,18 +78,18 @@ class Search_products extends CI_Controller
         $wid = $this->input->post('wid', true);
         $qw = '';
         if ($wid > 0) {
-            $qw = "(geopos_products.warehouse='$wid' ) AND ";
+            $qw = "(te_products.warehouse='$wid' ) AND ";
         }
         $join = '';
         if ($this->aauth->get_user()->loc) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            if (BDATA) $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
             $qw .= ' AND ';
         }
         if ($name) {
-            $query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_code,geopos_products.fproduct_price,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.unit FROM geopos_products $join WHERE " . $qw . "UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%' OR UPPER(geopos_products.product_code) LIKE '" . strtoupper($name) . "%' LIMIT 6");
+            $query = $this->db->query("SELECT te_products.pid,te_products.product_name,te_products.product_code,te_products.fproduct_price,te_products.taxrate,te_products.disrate,te_products.product_des,te_products.unit FROM te_products $join WHERE " . $qw . "UPPER(te_products.product_name) LIKE '%" . strtoupper($name) . "%' OR UPPER(te_products.product_code) LIKE '" . strtoupper($name) . "%' LIMIT 6");
 
             $result = $query->result_array();
             foreach ($result as $row) {
@@ -115,7 +115,7 @@ class Search_products extends CI_Controller
             $whr = '  AND ';
         }
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email,discount_c FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email,discount_c FROM te_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
             $result = $query->result_array();
             echo '<ol>';
             $i = 1;
@@ -133,11 +133,11 @@ class Search_products extends CI_Controller
     {
         $result = array();
         $out = array();
-        $tbl = 'geopos_customers';
+        $tbl = 'te_customers';
         $name = $this->input->get('keyword', true);
 
         $ty = $this->input->get('ty', true);
-        if ($ty) $tbl = 'geopos_supplier';
+        if ($ty) $tbl = 'te_supplier';
         $whr = '';
 
 
@@ -178,7 +178,7 @@ class Search_products extends CI_Controller
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,phone,discount_c FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,phone,discount_c FROM te_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
             $result = $query->result_array();
             echo '<ol>';
             $i = 1;
@@ -206,7 +206,7 @@ class Search_products extends CI_Controller
             $whr = ' AND ';
         }
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_supplier WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_supplier WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
             $result = $query->result_array();
             echo '<ol>';
             $i = 1;
@@ -230,26 +230,26 @@ class Search_products extends CI_Controller
         $wid = $this->input->post('wid', true);
         $qw = '';
         if ($wid > 0) {
-            $qw .= "(geopos_products.warehouse='$wid') AND ";
+            $qw .= "(te_products.warehouse='$wid') AND ";
         }
-        if ($billing_settings['key2']) $qw .= "(geopos_products.expiry IS NULL OR DATE (geopos_products.expiry)<" . date('Y-m-d') . ") AND ";
+        if ($billing_settings['key2']) $qw .= "(te_products.expiry IS NULL OR DATE (te_products.expiry)<" . date('Y-m-d') . ") AND ";
         if ($cid > 0) {
-            $qw .= "(geopos_products.pcat='$cid') AND ";
+            $qw .= "(te_products.pcat='$cid') AND ";
         }
         $join = '';
         if ($this->aauth->get_user()->loc) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            if (BDATA) $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
             $qw .= ' AND ';
         }
 
         $e = '';
         if ($billing_settings['key1'] == 1) {
-            $e .= ',geopos_product_serials.serial';
-            $join .= 'LEFT JOIN geopos_product_serials ON geopos_product_serials.product_id=geopos_products.pid ';
-            $qw .= '(geopos_product_serials.status=0) AND  ';
+            $e .= ',te_product_serials.serial';
+            $join .= 'LEFT JOIN te_product_serials ON te_product_serials.product_id=te_products.pid ';
+            $qw .= '(te_product_serials.status=0) AND  ';
         }
 
 
@@ -262,15 +262,15 @@ class Search_products extends CI_Controller
                 $barcode = substr_replace($barcode, $b[$i], $c[$i], 0);
             }
 
-            $bar = " OR (geopos_products.barcode LIKE '" . (substr($barcode, 0, -1)) . "%' OR geopos_products.barcode LIKE '" . $name . "%')";
+            $bar = " OR (te_products.barcode LIKE '" . (substr($barcode, 0, -1)) . "%' OR te_products.barcode LIKE '" . $name . "%')";
         }
         if ($billing_settings['key1'] == 2) {
 
-            $query = "SELECT geopos_products.*,geopos_product_serials.serial FROM geopos_product_serials  LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "geopos_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (geopos_products.qty>0) LIMIT 16";
+            $query = "SELECT te_products.*,te_product_serials.serial FROM te_product_serials  LEFT JOIN te_products  ON te_products.pid=te_product_serials.product_id $join WHERE " . $qw . "te_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (te_products.qty>0) LIMIT 16";
 
 
         } else {
-            $query = "SELECT geopos_products.* $e FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR geopos_products.product_code LIKE '" . strtoupper($name) . "%') AND (geopos_products.qty>0) LIMIT 16";
+            $query = "SELECT te_products.* $e FROM te_products $join WHERE " . $qw . "(UPPER(te_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR te_products.product_code LIKE '" . strtoupper($name) . "%') AND (te_products.qty>0) LIMIT 16";
 
         }
 
@@ -318,47 +318,47 @@ $flag_p=false;
         $qw = '';
 
         if ($wid > 0) {
-            $qw .= "(geopos_products.warehouse='$wid') AND ";
+            $qw .= "(te_products.warehouse='$wid') AND ";
         }
-        if ($billing_settings['key2']) $qw .= "(geopos_products.expiry IS NULL OR DATE (geopos_products.expiry)<" . date('Y-m-d') . ") AND ";
+        if ($billing_settings['key2']) $qw .= "(te_products.expiry IS NULL OR DATE (te_products.expiry)<" . date('Y-m-d') . ") AND ";
         if ($cid > 0) {
-            $qw .= "(geopos_products.pcat='$cid') AND ";
+            $qw .= "(te_products.pcat='$cid') AND ";
         }
         $join = '';
 
         if ($this->aauth->get_user()->loc) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            if (BDATA) $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
             $qw .= ' AND ';
         }
 
         $e = '';
         if ($billing_settings['key1'] == 1) {
-            $e .= ',geopos_product_serials.serial';
-            $join .= 'LEFT JOIN geopos_product_serials ON geopos_product_serials.product_id=geopos_products.pid ';
-            $qw .= '(geopos_product_serials.status=0) AND  ';
+            $e .= ',te_product_serials.serial';
+            $join .= 'LEFT JOIN te_product_serials ON te_product_serials.product_id=te_products.pid ';
+            $qw .= '(te_product_serials.status=0) AND  ';
         }
 
         $bar = '';
    $p_class='v2_select_pos_item';
         if ($enable_bar=='true' AND is_numeric($name) AND strlen($name)>8) {
 $flag_p=true;
-            $bar = " (geopos_products.barcode = '" . (substr($name, 0, -1)) . "' OR geopos_products.barcode LIKE '" . $name . "%')";
+            $bar = " (te_products.barcode = '" . (substr($name, 0, -1)) . "' OR te_products.barcode LIKE '" . $name . "%')";
 
-               $query = "SELECT geopos_products.*  FROM geopos_products $join WHERE " . $qw . "$bar AND (geopos_products.qty>0) ORDER BY geopos_products.product_name LIMIT 6";
+               $query = "SELECT te_products.*  FROM te_products $join WHERE " . $qw . "$bar AND (te_products.qty>0) ORDER BY te_products.product_name LIMIT 6";
                $p_class='v2_select_pos_item_bar';
 
         } elseif ($enable_bar=='false' OR !$enable_bar ) {
             $flag_p=true;
             if ($billing_settings['key1'] == 2) {
 
-                $query = "SELECT geopos_products.*,geopos_product_serials.serial FROM geopos_product_serials  LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "geopos_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (geopos_products.qty>0) LIMIT 18";
+                $query = "SELECT te_products.*,te_product_serials.serial FROM te_product_serials  LEFT JOIN te_products  ON te_products.pid=te_product_serials.product_id $join WHERE " . $qw . "te_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (te_products.qty>0) LIMIT 18";
 
             } else {
 
-                $query = "SELECT geopos_products.* $e FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR geopos_products.product_code LIKE '" . strtoupper($name) . "%') AND (geopos_products.qty>0) ORDER BY geopos_products.product_name LIMIT 18";
+                $query = "SELECT te_products.* $e FROM te_products $join WHERE " . $qw . "(UPPER(te_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR te_products.product_code LIKE '" . strtoupper($name) . "%') AND (te_products.qty>0) ORDER BY te_products.product_name LIMIT 18";
             }
 
 
@@ -411,25 +411,25 @@ if($flag_p) {
         $qw = '';
 
         if ($wid > 0) {
-            $qw .= "(geopos_product_groups.warehouse='$wid') AND ";
+            $qw .= "(te_product_groups.warehouse='$wid') AND ";
         }
 
         $join = '';
 
         if ($this->aauth->get_user()->loc) {
-             $qw .= "(geopos_product_groups.loc='".$this->aauth->get_user()->loc."') AND ";
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
-            if (BDATA) $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(geopos_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
+             $qw .= "(te_product_groups.loc='".$this->aauth->get_user()->loc."') AND ";
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
+            if (BDATA) $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND '; else $qw .= '(te_warehouse.loc=' . $this->aauth->get_user()->loc . ' ) AND ';
         } elseif (!BDATA) {
-            $join = 'LEFT JOIN geopos_warehouse ON geopos_warehouse.id=geopos_products.warehouse';
+            $join = 'LEFT JOIN te_warehouse ON te_warehouse.id=te_products.warehouse';
             $qw .= ' AND ';
         }
 
         $e = '';
         if ($billing_settings['key1'] == 1) {
-            $e .= ',geopos_product_serials.serial';
-            $join .= 'LEFT JOIN geopos_product_serials ON geopos_product_serials.product_id=geopos_products.pid ';
-            $qw .= '(geopos_product_serials.status=0) AND  ';
+            $e .= ',te_product_serials.serial';
+            $join .= 'LEFT JOIN te_product_serials ON te_product_serials.product_id=te_products.pid ';
+            $qw .= '(te_product_serials.status=0) AND  ';
         }
 
         $bar = '';
@@ -442,15 +442,15 @@ if($flag_p) {
                 $barcode = substr_replace($barcode, $b[$i], $c[$i], 0);
             }
             //    echo(substr($barcode, 0, -1));
-            $bar = " OR (geopos_products.barcode LIKE '" . (substr($barcode, 0, -1)) . "%' OR geopos_products.barcode LIKE '" . $name . "%')";
-            //  $query = "SELECT geopos_products.* FROM geopos_products $join WHERE " . $qw . " $bar AND (geopos_products.qty>0) LIMIT 16";
+            $bar = " OR (te_products.barcode LIKE '" . (substr($barcode, 0, -1)) . "%' OR te_products.barcode LIKE '" . $name . "%')";
+            //  $query = "SELECT te_products.* FROM te_products $join WHERE " . $qw . " $bar AND (te_products.qty>0) LIMIT 16";
         }
         if ($billing_settings['key1'] == 2) {
 
-            $query = "SELECT geopos_products.*,geopos_product_serials.serial FROM geopos_product_serials  LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "geopos_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (geopos_products.qty>0) LIMIT 18";
+            $query = "SELECT te_products.*,te_product_serials.serial FROM te_product_serials  LEFT JOIN te_products  ON te_products.pid=te_product_serials.product_id $join WHERE " . $qw . "te_product_serials.serial LIKE '" . strtoupper($name) . "%'  AND (te_products.qty>0) LIMIT 18";
 
         } else {
-            $query = "SELECT geopos_products.* $e FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR geopos_products.product_code LIKE '" . strtoupper($name) . "%') AND (geopos_products.qty>0) ORDER BY geopos_products.product_name LIMIT 18";
+            $query = "SELECT te_products.* $e FROM te_products $join WHERE " . $qw . "(UPPER(te_products.product_name) LIKE '%" . strtoupper($name) . "%' $bar OR te_products.product_code LIKE '" . strtoupper($name) . "%') AND (te_products.qty>0) ORDER BY te_products.product_name LIMIT 18";
         }
 
         $query = $this->db->query($query);

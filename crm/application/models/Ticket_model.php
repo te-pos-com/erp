@@ -31,13 +31,13 @@ class Ticket_model extends CI_Model
 
     public function thread_list($id)
     {
-        $this->db->select('geopos_tickets_th.*,geopos_customers.name AS custo,geopos_employees.name AS emp');
-        $this->db->from('geopos_tickets');
-        $this->db->join('geopos_tickets_th', 'geopos_tickets.id=geopos_tickets_th.tid', 'left');
-        $this->db->join('geopos_customers', 'geopos_tickets_th.cid=geopos_customers.id', 'left');
-        $this->db->join('geopos_employees', 'geopos_tickets_th.eid=geopos_employees.id', 'left');
-        $this->db->where('geopos_tickets.cid', $this->session->userdata('user_details')[0]->cid);
-        $this->db->where('geopos_tickets_th.tid', $id);
+        $this->db->select('te_tickets_th.*,te_customers.name AS custo,te_employees.name AS emp');
+        $this->db->from('te_tickets');
+        $this->db->join('te_tickets_th', 'te_tickets.id=te_tickets_th.tid', 'left');
+        $this->db->join('te_customers', 'te_tickets_th.cid=te_customers.id', 'left');
+        $this->db->join('te_employees', 'te_tickets_th.eid=te_employees.id', 'left');
+        $this->db->where('te_tickets.cid', $this->session->userdata('user_details')[0]->cid);
+        $this->db->where('te_tickets_th.tid', $id);
 
         $query = $this->db->get();
         return $query->result_array();
@@ -54,11 +54,11 @@ class Ticket_model extends CI_Model
 
     public function thread_info($id)
     {
-        $this->db->select('geopos_tickets.*, geopos_customers.name');
-        $this->db->from('geopos_tickets');
-        $this->db->join('geopos_customers', 'geopos_tickets.cid=geopos_customers.id', 'left');
-        $this->db->where('geopos_tickets.id', $id);
-        $this->db->where('geopos_tickets.cid', $this->session->userdata('user_details')[0]->cid);
+        $this->db->select('te_tickets.*, te_customers.name');
+        $this->db->from('te_tickets');
+        $this->db->join('te_customers', 'te_tickets.cid=te_customers.id', 'left');
+        $this->db->where('te_tickets.id', $id);
+        $this->db->where('te_tickets.cid', $this->session->userdata('user_details')[0]->cid);
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -99,7 +99,7 @@ class Ticket_model extends CI_Model
 
             $this->db->set($data1);
             $this->db->where('id', $thread_id);
-            $this->db->update('geopos_tickets');
+            $this->db->update('te_tickets');
 
             if ($this->ticket()->key2) {
 
@@ -108,9 +108,9 @@ class Ticket_model extends CI_Model
 
             }
 
-            if (isset($multi[0])) return $this->db->insert_batch('geopos_tickets_th', $multi);
+            if (isset($multi[0])) return $this->db->insert_batch('te_tickets_th', $multi);
 
-            return $this->db->insert('geopos_tickets_th', $data);
+            return $this->db->insert('te_tickets_th', $data);
         } else {
             return false;
         }
@@ -121,7 +121,7 @@ class Ticket_model extends CI_Model
     function addticket($subject, $message, $filename)
     {
         $data = array('subject' => $subject, 'created' => date('Y-m-d H:i:s'), 'cid' => $this->session->userdata('user_details')[0]->cid, 'status' => 'Waiting');
-        $this->db->insert('geopos_tickets', $data);
+        $this->db->insert('te_tickets', $data);
         $thread_id = $this->db->insert_id();
 
         $multi = array();
@@ -147,9 +147,9 @@ class Ticket_model extends CI_Model
 
         }
 
-        if (isset($multi[0])) return $this->db->insert_batch('geopos_tickets_th', $multi);
+        if (isset($multi[0])) return $this->db->insert_batch('te_tickets_th', $multi);
 
-        return $this->db->insert('geopos_tickets_th', $data);
+        return $this->db->insert('te_tickets_th', $data);
 
 
     }
@@ -158,7 +158,7 @@ class Ticket_model extends CI_Model
     {
         $this->load->library('ultimatemailer');
         $this->db->select('host,port,auth,auth_type,username,password,sender');
-        $this->db->from('geopos_smtp');
+        $this->db->from('te_smtp');
         $query = $this->db->get();
         $smtpresult = $query->row_array();
         $host = $smtpresult['host'];
@@ -177,7 +177,7 @@ class Ticket_model extends CI_Model
     function deleteticket($id)
     {
         $this->db->select('attach');
-        $this->db->from('geopos_tickets_th');
+        $this->db->from('te_tickets_th');
         $this->db->where('id', $id);
         $query = $this->db->get();
         $result = $query->row_array();
@@ -204,7 +204,7 @@ class Ticket_model extends CI_Model
     private function ticket_datatables_query()
     {
 
-        $this->db->from('geopos_tickets');
+        $this->db->from('te_tickets');
         $this->db->where('cid', $this->session->userdata('user_details')[0]->cid);
 
         $i = 0;

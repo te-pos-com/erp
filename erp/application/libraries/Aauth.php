@@ -810,7 +810,7 @@ class Aauth
             'email'=>$email,
             'id_referal' => $referal
         );
-        if ($this->aauth_db->insert('geopos_system', $data_perusahaan)) {
+        if ($this->aauth_db->insert('te_system', $data_perusahaan)) {
             
             $id_perusahaan = $this->aauth_db->insert_id();
             $data_location = array(
@@ -819,7 +819,7 @@ class Aauth
                 'email'=>$email,
                 'loc'=>$id_perusahaan
             );
-            $this->aauth_db->insert('geopos_locations', $data_location);
+            $this->aauth_db->insert('te_locations', $data_location);
             $id_location = $this->aauth_db->insert_id();
         }
 
@@ -861,7 +861,7 @@ class Aauth
                 'id_paket'=>1,
                 'exp_date' => $tglexpired
             );  
-            $this->aauth_db->insert('geopos_register', $register);
+            $this->aauth_db->insert('te_register', $register);
             
             // if otp actived
             if ($this->config_vars['totp_active'] == TRUE AND $this->config_vars['totp_only_on_ip_change'] == TRUE) {
@@ -1048,7 +1048,7 @@ class Aauth
         if($role=='r_-1') $role='r_6';
         $this->aauth_db->select($role);
         $this->aauth_db->where('id', $module_id);
-        $query = $this->aauth_db->get('geopos_premissions');
+        $query = $this->aauth_db->get('te_premissions');
         $out=$query->row_array();
         return $out[$role];
     }
@@ -1280,7 +1280,7 @@ class Aauth
     {
         $query = $this->aauth_db->where('cname', $nama_perusahaan);
 
-        $query = $this->aauth_db->get('geopos_system');
+        $query = $this->aauth_db->get('te_system');
 
         if ($query->num_rows() > 0)
             return TRUE;
@@ -2214,19 +2214,19 @@ class Aauth
      */
     public function list_pms($limit = 5, $offset = 0, $receiver_id = NULL, $sender_id = NULL)
     {
-        $this->aauth_db->select('geopos_pms.*,geopos_pms.id AS pid,geopos_employees.*');
-        $this->aauth_db->from('geopos_pms');
+        $this->aauth_db->select('te_pms.*,te_pms.id AS pid,te_employees.*');
+        $this->aauth_db->from('te_pms');
         if (is_numeric($receiver_id)) {
-            $query = $this->aauth_db->where('geopos_pms.receiver_id', $receiver_id);
-            $query = $this->aauth_db->where('geopos_pms.pm_deleted_receiver', 0);
+            $query = $this->aauth_db->where('te_pms.receiver_id', $receiver_id);
+            $query = $this->aauth_db->where('te_pms.pm_deleted_receiver', 0);
         }
         if (is_numeric($sender_id)) {
-            $query = $this->aauth_db->where('geopos_pms.sender_id', $sender_id);
-            $query = $this->aauth_db->where('geopos_pms.pm_deleted_sender', 0);
+            $query = $this->aauth_db->where('te_pms.sender_id', $sender_id);
+            $query = $this->aauth_db->where('te_pms.pm_deleted_sender', 0);
         }
 
-        $this->aauth_db->order_by('geopos_pms.id', 'DESC');
-        $this->aauth_db->join('geopos_employees', 'geopos_employees.id = geopos_pms.sender_id', 'left');
+        $this->aauth_db->order_by('te_pms.id', 'DESC');
+        $this->aauth_db->join('te_employees', 'te_employees.id = te_pms.sender_id', 'left');
         $this->aauth_db->limit($limit, $offset);
         //	$query = $this->aauth_db->get( $this->config_vars['pms'], $limit, $offset);
         $query = $this->aauth_db->get();
@@ -2707,7 +2707,7 @@ class Aauth
 
     function applog($input1, $input2='')
     {
-         $this->aauth_db->insert('geopos_log', array('note'=>$input1,'user'=>$input2,'created'=>date('Y-m-d H:i:s')));
+         $this->aauth_db->insert('te_log', array('note'=>$input1,'user'=>$input2,'created'=>date('Y-m-d H:i:s')));
     }
 
      public function clock()
@@ -2715,7 +2715,7 @@ class Aauth
 
          $this->aauth_db->select('clock');
          $this->aauth_db->where('id', $this->CI->session->userdata('id'));
-         $this->aauth_db->from('geopos_employees');
+         $this->aauth_db->from('te_employees');
          $query = $this->aauth_db->get();
          $emp = $query->row_array();
          return $emp['clock'];

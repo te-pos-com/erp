@@ -168,7 +168,7 @@ class Paymentgateways extends CI_Controller
     {
         $id = $this->input->post('deleteid');
         if ($id) {
-            $this->db->delete('geopos_bank_ac', array('id' => $id));
+            $this->db->delete('te_bank_ac', array('id' => $id));
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));
         } else {
             echo json_encode(array('status' => 'Error', 'message' => $this->lang->line('ERROR')));
@@ -244,7 +244,7 @@ class Paymentgateways extends CI_Controller
     {
         $id = $this->input->post('deleteid');
         if ($id) {
-            $this->db->delete('geopos_currencies', array('id' => $id));
+            $this->db->delete('te_currencies', array('id' => $id));
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));
         } else {
             echo json_encode(array('status' => 'Error', 'message' => $this->lang->line('ERROR')));

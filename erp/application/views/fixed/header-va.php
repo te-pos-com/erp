@@ -64,7 +64,7 @@
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav float-right"><?php if ($this->aauth->get_user()->roleid == 5) { ?>
+                <ul class="nav navbar-nav float-right"><?php if ($this->aauth->get_user()->roleid == 5 || $this->aauth->get_user()->roleid == 0) { ?>
                 <?php } ?>
                 <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link " href="#"
                                                                     data-toggle="dropdown"> <?php echo $this->lang->line('admin_settings') ?> </a>
@@ -589,7 +589,7 @@
     <div class="main-menu-content">
 
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <?php if ($this->aauth->get_user()->roleid == 5) { ?>
+            <?php if ($this->aauth->get_user()->roleid == 5 || $this->aauth->get_user()->roleid == 0) { ?>
                 <li class="p-1"><select class="form-control"
                                         onchange="javascript:location.href = baseurl+'settings/switch_location?id='+this.value;"> <?php
                          $loc = location($this->aauth->get_user()->loc);
@@ -1071,7 +1071,7 @@
                 </ul>
                 </li>
             <?php }
-            if ($this->aauth->get_user()->roleid ==5) {
+            if ($this->aauth->get_user()->roleid ==5 || $this->aauth->get_user()->roleid ==0) {
                 ?>
                 <li class="menu-item   has-sub <?php if ($this->li_a == "export") {
                     echo ' open';

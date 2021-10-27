@@ -25,7 +25,7 @@ class Langganan extends CI_Controller
         $head['usernm'] = $this->aauth->get_user()->username;
         $head['title'] = 'Langganan';
         $this->load->view('fixed/header', $head);
-        $this->load->view('langganan/list', $data);
+        $this->load->view('langganan/list', $head);
         $this->load->view('fixed/footer');
     }
 
