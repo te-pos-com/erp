@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Promo_model extends CI_Model
 {
 
-    var $table = 'geopos_promo';
+    var $table = 'te_promo';
     var $column_order = array(null, 'code', 'valid', 'amount', null);
     var $column_search = array('code', 'valid', 'amount');
     var $order = array('id' => 'desc');
@@ -150,12 +150,12 @@ class Promo_model extends CI_Model
             'location' => $this->aauth->get_user()->loc
         );
 
-        if ($this->db->insert('geopos_promo', $data)) {
+        if ($this->db->insert('te_promo', $data)) {
             //$cid = $this->db->insert_id();
             if ($pay_acc > 0) {
                 $amount = $amount * $qty;
                 $this->db->select('holder');
-                $this->db->from('geopos_accounts');
+                $this->db->from('te_accounts');
                 $this->db->where('id', $pay_acc);
                 $query = $this->db->get();
                 $account = $query->row_array();
@@ -176,8 +176,8 @@ class Promo_model extends CI_Model
                 );
                 $this->db->set('lastbal', "lastbal-$amount", FALSE);
                 $this->db->where('id', $pay_acc);
-                $this->db->update('geopos_accounts');
-                $this->db->insert('geopos_transactions', $data);
+                $this->db->update('te_accounts');
+                $this->db->insert('te_transactions', $data);
             }
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED')));
@@ -203,7 +203,7 @@ class Promo_model extends CI_Model
 				COUNT(IF( active = '0', id, NULL)) AS Active,
 				COUNT(IF( active = '1', id, NULL)) AS Used,
 				COUNT(IF( active = '2', id, NULL)) AS Expired
-				FROM geopos_promo $whr");
+				FROM te_promo $whr");
         echo json_encode($query->result_array());
 
     }
@@ -211,7 +211,7 @@ class Promo_model extends CI_Model
     public function accountslist()
     {
         $this->db->select('*');
-        $this->db->from('geopos_accounts');
+        $this->db->from('te_accounts');
                     if ($this->aauth->get_user()->loc) {
             $this->db->group_start();
             $this->db->where('loc', $this->aauth->get_user()->loc);
@@ -230,7 +230,7 @@ class Promo_model extends CI_Model
         $data = array('active' => $stat);
         $this->db->set($data);
         $this->db->where('id', $id);
-        return $this->db->update('geopos_promo');
+        return $this->db->update('te_promo');
     }
 
 

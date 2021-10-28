@@ -1,21 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Employee extends CI_Controller
@@ -276,7 +259,7 @@ class Employee extends CI_Controller
         } else {
 
             $this->db->select('banned');
-            $this->db->from('geopos_users');
+            $this->db->from('te_users');
             $this->db->where('id', $uid);
             $query = $this->db->get();
             $result = $query->row_array();
@@ -331,9 +314,9 @@ class Employee extends CI_Controller
                 'You can not delete yourself!'));
         } else {
 
-            $this->db->delete('geopos_employees', array('id' => $uid));
+            $this->db->delete('te_employees', array('id' => $uid));
 
-            $this->db->delete('geopos_users', array('id' => $uid));
+            $this->db->delete('te_users', array('id' => $uid));
 
             echo json_encode(array('status' => 'Success', 'message' =>
                 'User Profile deleted successfully! Please refresh the page!'));
@@ -546,7 +529,7 @@ class Employee extends CI_Controller
             $data = array('r_1' => $val1, 'r_2' => $val2, 'r_3' => $val3, 'r_4' => $val4, 'r_5' => $val5, 'r_6' => $val6, 'r_7' => $val7);
             $this->db->set($data);
             $this->db->where('id', $i);
-            $this->db->update('geopos_premissions');
+            $this->db->update('te_premissions');
         }
 
         echo json_encode(array('status' => 'Success', 'message' =>
@@ -783,10 +766,10 @@ class Employee extends CI_Controller
 
         $whr = '';
         if ($this->aauth->get_user()->loc) {
-            $whr = ' (geopos_users.loc=' . $this->aauth->get_user()->loc . ') AND ';
+            $whr = ' (te_users.loc=' . $this->aauth->get_user()->loc . ') AND ';
         }
         if ($name) {
-            $query = $this->db->query("SELECT geopos_employees.* ,geopos_users.email FROM geopos_employees  LEFT JOIN geopos_users ON geopos_users.id=geopos_employees.id  WHERE $whr (UPPER(geopos_employees.name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(geopos_employees.phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT te_employees.* ,te_users.email FROM te_employees  LEFT JOIN te_users ON te_users.id=te_employees.id  WHERE $whr (UPPER(te_employees.name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(te_employees.phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
             $result = $query->result_array();
             echo '<ol>';
             $i = 1;

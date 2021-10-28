@@ -1,11 +1,5 @@
 <?php
-/**
- * Class to handle coupon operations
- * Changes by Alex Rabinovich (@putchi)
- *
- * @author Joash Pereira
- * @date  2015-06-05
- */
+
 class Coupon {
     CONST MIN_LENGTH = 8;
 

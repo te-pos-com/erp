@@ -1,21 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -139,7 +122,7 @@ class Import extends CI_Controller
         }
         unlink(FCPATH . 'userfiles/' . $name);
         if (count($sheetData[0]) == 9) {
-            $out = $this->db->insert_batch('geopos_products', $products);
+            $out = $this->db->insert_batch('te_products', $products);
             if ($out) {
                 echo json_encode(array('status' => 'Success', 'message' =>
                     "Product Data Imported Successfully!"));
@@ -227,7 +210,7 @@ class Import extends CI_Controller
         $data2 = array();
 
         $this->db->select('id');
-        $this->db->from('geopos_customers');
+        $this->db->from('te_customers');
         $this->db->order_by('id', 'DESC');
         $this->db->limit(1);
 
@@ -289,7 +272,7 @@ class Import extends CI_Controller
         }
         // unlink(FCPATH . 'userfiles/' . $name);
         if (count($sheetData[0]) == 19) {
-            $out = $this->db->insert_batch('geopos_customers', $data);
+            $out = $this->db->insert_batch('te_customers', $data);
             $out = $this->db->insert_batch('users', $data2);
             if ($out) {
                 echo json_encode(array('status' => 'Success', 'message' =>

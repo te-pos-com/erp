@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -62,7 +46,7 @@ class Settings extends CI_Controller
 
             $head['usernm'] = $this->aauth->get_user()->username;
             $head['title'] = 'Company Settings';
-            $data['company'] = $this->settings->company_details(1);
+            $data['company'] = $this->settings->company_details($this->aauth->get_user()->id_perusahaan);
 
             $this->load->view('fixed/header', $head);
             $this->load->view('settings/company', $data);
@@ -480,7 +464,7 @@ class Settings extends CI_Controller
         } else {
 
             $this->db->select('*');
-            $this->db->from('geopos_warehouse');
+            $this->db->from('te_warehouse');
 
             if ($this->aauth->get_user()->loc) {
                 $this->db->where('loc', 0);
@@ -659,8 +643,8 @@ class Settings extends CI_Controller
     {
         $id = $this->input->post('deleteid');
 
-        if ($this->db->delete('geopos_custom_fields', array('id' => $id))) {
-            $this->db->delete('geopos_custom_data', array('field_id' => $id));
+        if ($this->db->delete('te_custom_fields', array('id' => $id))) {
+            $this->db->delete('te_custom_data', array('field_id' => $id));
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));
         } else {
             echo json_encode(array('status' => 'Error', 'message' => $this->lang->line('ERROR')));
@@ -760,7 +744,7 @@ class Settings extends CI_Controller
     public function db_error()
     {
         $query = $this->db->query("SELECT i.id, SUM(i.total) AS total,i.status,i.i_class,c.name,c.picture,i.csd
-FROM geopos_invoices AS i LEFT JOIN geopos_customers AS c ON i.csd=c.id GROUP BY  i.csd ORDER BY  i.id  LIMIT 10");
+FROM te_invoices AS i LEFT JOIN te_customers AS c ON i.csd=c.id GROUP BY  i.csd ORDER BY  i.id  LIMIT 10");
         $error = $this->db->error();
         if (@$error['code']) {
             echo ' Critical Error: SQL Strict Mode Enabled! Please disable it to run app properly!';
@@ -779,7 +763,7 @@ FROM geopos_invoices AS i LEFT JOIN geopos_customers AS c ON i.csd=c.id GROUP BY
         );
         $this->db->set($data);
         $this->db->where('id', $this->aauth->get_user()->id);
-        $this->db->update('geopos_users');
+        $this->db->update('te_users');
         redirect(base_url('dashboard'));
     }
 

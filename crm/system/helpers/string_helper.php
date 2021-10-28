@@ -122,7 +122,7 @@ if ( ! function_exists('strip_quotes'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('geopos_quotes_to_entities'))
+if ( ! function_exists('te_quotes_to_entities'))
 {
 	/**
 	 * Quotes to Entities

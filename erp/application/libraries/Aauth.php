@@ -1,47 +1,7 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Aauth is a User Authorizationsend_pm Library for CodeIgniter 2.x, which aims to make
- * easy some essential jobs such as login, permissions and access operations.
- * Despite ease of use, it has also very advanced features like private messages,
- * groupping, access management, public access etc..
- *
- * @author        Emre Akay <emreakayfb@hotmail.com>
- * @contributor Jacob Tomlinson
- * @contributor Tim Swagger (Renowne, LLC) <tim@renowne.com>
- * @contributor Raphael Jackstadt <info@rejack.de>
- *
- * @copyright 2014-2016 Emre Akay
- *
- * @version 2.5.12
- *
- * @license LGPL
- * @license http://opensource.org/licenses/LGPL-3.0 Lesser GNU Public License
- *
- * The latest version of Aauth can be obtained from:
- * https://github.com/emreakay/CodeIgniter-Aauth
- *
- * @todo separate (on some level) the unvalidated users from the "banned" users
- */
 class Aauth
 {
 
@@ -296,6 +256,8 @@ class Aauth
                 'username' => $row->username,
                 'email' => $row->email,
                 's_role' => 'r_'.$row->roleid,
+                'loc'=>$row->loc,
+                'id_perusahaan'=>$row->id_perusahaan,
                 'loggedin' => TRUE
             );
 
@@ -799,7 +761,9 @@ class Aauth
         $username   =   $data['username'];
         $alamat     =   $data['alamat'];
         $perusahaan =   $data['perusahaan'];
-
+        $phone      =   $data['phone'];
+        $referal    =   $data['referal'];
+        
         $valid = TRUE;
 
         $valid_email = (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -827,6 +791,12 @@ class Aauth
             $valid = FALSE;
             return json_encode(array('error'=>true,'message'=>'Email sudah pernah digunakan'));
         }
+
+        if ($this->user_exist_by_phone($phone)) {
+            $this->error($this->CI->lang->line('aauth_error_email_exists'));
+            $valid = FALSE;
+            return json_encode(array('error'=>true,'message'=>'No. Telp sudah pernah digunakan'));
+        }
     
         if ($this->user_exist_by_perusahaan($perusahaan)) {
             $this->error($this->CI->lang->line('aauth_error_perusahaan_exists'));
@@ -837,31 +807,37 @@ class Aauth
         $data_perusahaan = array(
             'cname'=>$perusahaan,
             'address'=>$alamat,
-            'email'=>$email
+            'email'=>$email,
+            'id_referal' => $referal
         );
-        if ($this->aauth_db->insert('geopos_system', $data_perusahaan)) {
+        if ($this->aauth_db->insert('te_system', $data_perusahaan)) {
+            
             $id_perusahaan = $this->aauth_db->insert_id();
+            $data_location = array(
+                'cname'=>$perusahaan,
+                'address'=>$alamat,
+                'email'=>$email,
+                'loc'=>$id_perusahaan
+            );
+            $this->aauth_db->insert('te_locations', $data_location);
+            $id_location = $this->aauth_db->insert_id();
         }
 
         $data = array(
             'email' => $email,
-            'pass' => $this->hash_password($pass, 0), // Password cannot be blank but user_id required for salt, setting bad password for now
+            'pass' => $this->hash_password($pass, 0),
             'username' => (!$username) ? '' : $username,
             'date_created' => date("Y-m-d H:i:s"),
+            'phone'=> $phone,
             'ip_address'=>'::1',
             'id_perusahaan'=>$id_perusahaan,
-			'picture'=>'example.png',
+            'loc'=>$id_location,
             'roleid'=>5,
-            'loc'=>$id_perusahaan,
+			'picture'=>'example.png'
         );
 
-
-
-
         if ($this->aauth_db->insert($this->config_vars['users'], $data)) {
-
             $user_id = $this->aauth_db->insert_id();
-            
             $masatrial = '30';
             $tglinstal = date('Y-m-d');
             $today = strtotime($tglinstal);
@@ -877,13 +853,15 @@ class Aauth
                 'c_date' => date("Y-m-d H:i:s"),
                 'cash' => 0, 
                 'card' => 0,
-                'bank'=>0,
+                'bank'  =>  0,
                 'cheque'=>0,
                 'r_change'=>0,
                 'active'=>0,
+                'tgl_mulai'=>date("Y-m-d H:i:s"),
+                'id_paket'=>1,
                 'exp_date' => $tglexpired
             );  
-            $this->aauth_db->insert('geopos_register', $register);
+            $this->aauth_db->insert('te_register', $register);
             
 
 
@@ -1073,7 +1051,7 @@ class Aauth
         if($role=='r_-1') $role='r_6';
         $this->aauth_db->select($role);
         $this->aauth_db->where('id', $module_id);
-        $query = $this->aauth_db->get('geopos_premissions');
+        $query = $this->aauth_db->get('te_premissions');
         $out=$query->row_array();
         return $out[$role];
     }
@@ -1289,11 +1267,23 @@ class Aauth
             return FALSE;
     }
 
+    public function user_exist_by_phone($user_phone)
+    {
+        $query = $this->aauth_db->where('phone', $user_phone);
+
+        $query = $this->aauth_db->get($this->config_vars['users']);
+
+        if ($query->num_rows() > 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+
     public function user_exist_by_perusahaan($nama_perusahaan)
     {
         $query = $this->aauth_db->where('cname', $nama_perusahaan);
 
-        $query = $this->aauth_db->get('geopos_system');
+        $query = $this->aauth_db->get('te_system');
 
         if ($query->num_rows() > 0)
             return TRUE;
@@ -2227,19 +2217,19 @@ class Aauth
      */
     public function list_pms($limit = 5, $offset = 0, $receiver_id = NULL, $sender_id = NULL)
     {
-        $this->aauth_db->select('geopos_pms.*,geopos_pms.id AS pid,geopos_employees.*');
-        $this->aauth_db->from('geopos_pms');
+        $this->aauth_db->select('te_pms.*,te_pms.id AS pid,te_employees.*');
+        $this->aauth_db->from('te_pms');
         if (is_numeric($receiver_id)) {
-            $query = $this->aauth_db->where('geopos_pms.receiver_id', $receiver_id);
-            $query = $this->aauth_db->where('geopos_pms.pm_deleted_receiver', 0);
+            $query = $this->aauth_db->where('te_pms.receiver_id', $receiver_id);
+            $query = $this->aauth_db->where('te_pms.pm_deleted_receiver', 0);
         }
         if (is_numeric($sender_id)) {
-            $query = $this->aauth_db->where('geopos_pms.sender_id', $sender_id);
-            $query = $this->aauth_db->where('geopos_pms.pm_deleted_sender', 0);
+            $query = $this->aauth_db->where('te_pms.sender_id', $sender_id);
+            $query = $this->aauth_db->where('te_pms.pm_deleted_sender', 0);
         }
 
-        $this->aauth_db->order_by('geopos_pms.id', 'DESC');
-        $this->aauth_db->join('geopos_employees', 'geopos_employees.id = geopos_pms.sender_id', 'left');
+        $this->aauth_db->order_by('te_pms.id', 'DESC');
+        $this->aauth_db->join('te_employees', 'te_employees.id = te_pms.sender_id', 'left');
         $this->aauth_db->limit($limit, $offset);
         //	$query = $this->aauth_db->get( $this->config_vars['pms'], $limit, $offset);
         $query = $this->aauth_db->get();
@@ -2720,7 +2710,7 @@ class Aauth
 
     function applog($input1, $input2='')
     {
-         $this->aauth_db->insert('geopos_log', array('note'=>$input1,'user'=>$input2,'created'=>date('Y-m-d H:i:s')));
+         $this->aauth_db->insert('te_log', array('note'=>$input1,'user'=>$input2,'created'=>date('Y-m-d H:i:s')));
     }
 
      public function clock()
@@ -2728,7 +2718,7 @@ class Aauth
 
          $this->aauth_db->select('clock');
          $this->aauth_db->where('id', $this->CI->session->userdata('id'));
-         $this->aauth_db->from('geopos_employees');
+         $this->aauth_db->from('te_employees');
          $query = $this->aauth_db->get();
          $emp = $query->row_array();
          return $emp['clock'];

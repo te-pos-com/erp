@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -78,7 +62,7 @@ class Promo extends CI_Controller
         $id = $this->input->post('deleteid');
         if ($id) {
             $this->db->select('*');
-            $this->db->from('geopos_promo');
+            $this->db->from('te_promo');
             $this->db->where('id', $id);
             $query = $this->db->get();
             $promo = $query->row_array();
@@ -86,7 +70,7 @@ class Promo extends CI_Controller
             if ($promo['reflect'] > 0) {
                 $amount = $promo['amount'] * $promo['available'];
                 $this->db->select('holder');
-                $this->db->from('geopos_accounts');
+                $this->db->from('te_accounts');
                 $this->db->where('id', $promo['reflect']);
                 $query = $this->db->get();
                 $account = $query->row_array();
@@ -107,10 +91,10 @@ class Promo extends CI_Controller
                 );
                 $this->db->set('lastbal', "lastbal+$amount", FALSE);
                 $this->db->where('id', $promo['reflect']);
-                $this->db->update('geopos_accounts');
-                $this->db->insert('geopos_transactions', $data);
+                $this->db->update('te_accounts');
+                $this->db->insert('te_transactions', $data);
             }
-            $this->db->delete('geopos_promo', array('id' => $id));
+            $this->db->delete('te_promo', array('id' => $id));
 
 
             echo json_encode(array('status' => 'Success', 'message' => $this->lang->line('DELETED')));

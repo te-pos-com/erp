@@ -1,21 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Printer extends CI_Controller
@@ -112,7 +95,7 @@ class Printer extends CI_Controller
     {
         $id = $this->input->post('deleteid');
         if ($id) {
-            $this->db->delete('geopos_config', array('id' => $id, 'type' => 1));
+            $this->db->delete('te_config', array('id' => $id, 'type' => 1));
             echo json_encode(array('status' => 'Success', 'message' => 'Printer Removed'));
         } else {
             echo json_encode(array('status' => 'Error', 'message' => $this->lang->line('ERROR')));

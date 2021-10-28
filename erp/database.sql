@@ -51,10 +51,10 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_accounts`
+-- Table structure for table `te_accounts`
 --
 
-CREATE TABLE `geopos_accounts` (
+CREATE TABLE `te_accounts` (
   `id` int(5) NOT NULL,
   `acn` varchar(35) NOT NULL,
   `holder` varchar(100) NOT NULL,
@@ -66,19 +66,19 @@ CREATE TABLE `geopos_accounts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_accounts`
+-- Dumping data for table `te_accounts`
 --
 
-INSERT INTO `geopos_accounts` (`id`, `acn`, `holder`, `adate`, `lastbal`, `code`, `loc`, `account_type`) VALUES
+INSERT INTO `te_accounts` (`id`, `acn`, `holder`, `adate`, `lastbal`, `code`, `loc`, `account_type`) VALUES
 (1, '123456', 'Sales Account', '2018-01-01 00:00:00', '0.00', 'Default Sales Account', 0, 'Basic');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_attendance`
+-- Table structure for table `te_attendance`
 --
 
-CREATE TABLE `geopos_attendance` (
+CREATE TABLE `te_attendance` (
   `id` int(11) NOT NULL,
   `emp` int(11) NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -92,10 +92,10 @@ CREATE TABLE `geopos_attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_bank_ac`
+-- Table structure for table `te_bank_ac`
 --
 
-CREATE TABLE `geopos_bank_ac` (
+CREATE TABLE `te_bank_ac` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `bank` varchar(50) NOT NULL,
@@ -110,10 +110,10 @@ CREATE TABLE `geopos_bank_ac` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_config`
+-- Table structure for table `te_config`
 --
 
-CREATE TABLE `geopos_config` (
+CREATE TABLE `te_config` (
   `id` int(11) NOT NULL,
   `type` int(3) NOT NULL,
   `val1` varchar(50) NOT NULL,
@@ -127,10 +127,10 @@ CREATE TABLE `geopos_config` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_currencies`
+-- Table structure for table `te_currencies`
 --
 
-CREATE TABLE `geopos_currencies` (
+CREATE TABLE `te_currencies` (
   `id` int(4) NOT NULL,
   `code` varchar(3) CHARACTER SET latin1 DEFAULT NULL,
   `symbol` varchar(3) DEFAULT NULL,
@@ -144,10 +144,10 @@ CREATE TABLE `geopos_currencies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_customers`
+-- Table structure for table `te_customers`
 --
 
-CREATE TABLE `geopos_customers` (
+CREATE TABLE `te_customers` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -178,19 +178,19 @@ CREATE TABLE `geopos_customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_customers`
+-- Dumping data for table `te_customers`
 --
 
-INSERT INTO `geopos_customers` (`id`, `name`, `phone`, `address`, `city`, `region`, `country`, `postbox`, `email`, `picture`, `gid`, `company`, `taxid`, `name_s`, `phone_s`, `email_s`, `address_s`, `city_s`, `region_s`, `country_s`, `postbox_s`, `balance`, `loc`, `docid`, `custom1`, `discount_c`, `reg_date`) VALUES
+INSERT INTO `te_customers` (`id`, `name`, `phone`, `address`, `city`, `region`, `country`, `postbox`, `email`, `picture`, `gid`, `company`, `taxid`, `name_s`, `phone_s`, `email_s`, `address_s`, `city_s`, `region_s`, `country_s`, `postbox_s`, `balance`, `loc`, `docid`, `custom1`, `discount_c`, `reg_date`) VALUES
 (1, 'Walk-in Client', '0987654321', NULL, NULL, NULL, NULL, NULL, 'example@example.com', 'example.png', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_custom_data`
+-- Table structure for table `te_custom_data`
 --
 
-CREATE TABLE `geopos_custom_data` (
+CREATE TABLE `te_custom_data` (
   `id` int(11) NOT NULL,
   `field_id` int(11) NOT NULL,
   `rid` int(11) NOT NULL,
@@ -201,10 +201,10 @@ CREATE TABLE `geopos_custom_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_custom_fields`
+-- Table structure for table `te_custom_fields`
 --
 
-CREATE TABLE `geopos_custom_fields` (
+CREATE TABLE `te_custom_fields` (
   `id` int(11) NOT NULL,
   `f_module` int(3) NOT NULL,
   `f_type` varchar(30) NOT NULL,
@@ -218,10 +218,10 @@ CREATE TABLE `geopos_custom_fields` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_cust_group`
+-- Table structure for table `te_cust_group`
 --
 
-CREATE TABLE `geopos_cust_group` (
+CREATE TABLE `te_cust_group` (
   `id` int(10) NOT NULL,
   `title` varchar(60) DEFAULT NULL,
   `summary` varchar(250) DEFAULT NULL,
@@ -229,19 +229,19 @@ CREATE TABLE `geopos_cust_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_cust_group`
+-- Dumping data for table `te_cust_group`
 --
 
-INSERT INTO `geopos_cust_group` (`id`, `title`, `summary`, `disc_rate`) VALUES
+INSERT INTO `te_cust_group` (`id`, `title`, `summary`, `disc_rate`) VALUES
 (1, 'Default Group', 'Default Group', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_documents`
+-- Table structure for table `te_documents`
 --
 
-CREATE TABLE `geopos_documents` (
+CREATE TABLE `te_documents` (
   `id` int(11) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `filename` varchar(50) DEFAULT NULL,
@@ -255,10 +255,10 @@ CREATE TABLE `geopos_documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_draft`
+-- Table structure for table `te_draft`
 --
 
-CREATE TABLE `geopos_draft` (
+CREATE TABLE `te_draft` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `invoicedate` date NOT NULL,
@@ -290,10 +290,10 @@ CREATE TABLE `geopos_draft` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_draft_items`
+-- Table structure for table `te_draft_items`
 --
 
-CREATE TABLE `geopos_draft_items` (
+CREATE TABLE `te_draft_items` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `pid` int(11) NOT NULL DEFAULT 0,
@@ -314,10 +314,10 @@ CREATE TABLE `geopos_draft_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_employees`
+-- Table structure for table `te_employees`
 --
 
-CREATE TABLE `geopos_employees` (
+CREATE TABLE `te_employees` (
   `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -341,19 +341,19 @@ CREATE TABLE `geopos_employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_employees`
+-- Dumping data for table `te_employees`
 --
 
-INSERT INTO `geopos_employees` (`id`, `username`, `name`, `address`, `city`, `region`, `country`, `postbox`, `phone`, `phonealt`, `picture`, `sign`, `joindate`, `dept`, `degis`, `salary`, `clock`, `clockin`, `clockout`, `c_rate`) VALUES
+INSERT INTO `te_employees` (`id`, `username`, `name`, `address`, `city`, `region`, `country`, `postbox`, `phone`, `phonealt`, `picture`, `sign`, `joindate`, `dept`, `degis`, `salary`, `clock`, `clockin`, `clockout`, `c_rate`) VALUES
 (13, 'admin', 'BusinessOwner', 'Test Street', 'Test City', 'Test Region', 'Test Country', '123456', '12345678', '0', 'example.png', 'sign.png', '2021-07-20 16:13:07', NULL, NULL, '0.00', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_events`
+-- Table structure for table `te_events`
 --
 
-CREATE TABLE `geopos_events` (
+CREATE TABLE `te_events` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -368,10 +368,10 @@ CREATE TABLE `geopos_events` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_gateways`
+-- Table structure for table `te_gateways`
 --
 
-CREATE TABLE `geopos_gateways` (
+CREATE TABLE `te_gateways` (
   `id` int(5) NOT NULL,
   `name` varchar(50) NOT NULL,
   `enable` enum('Yes','No') NOT NULL,
@@ -385,10 +385,10 @@ CREATE TABLE `geopos_gateways` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `geopos_gateways`
+-- Dumping data for table `te_gateways`
 --
 
-INSERT INTO `geopos_gateways` (`id`, `name`, `enable`, `key1`, `key2`, `currency`, `dev_mode`, `ord`, `surcharge`, `extra`) VALUES
+INSERT INTO `te_gateways` (`id`, `name`, `enable`, `key1`, `key2`, `currency`, `dev_mode`, `ord`, `surcharge`, `extra`) VALUES
 (1, 'Stripe', 'Yes', 'sk_test_secratekey', 'stripe_public_key', 'USD', 'true', 1, '0.00', 'none'),
 (2, 'Authorize.Net', 'Yes', 'TRANSACTIONKEY', 'LOGINID', 'AUD', 'true', 2, '0.00', 'none'),
 (3, 'Pin Payments', 'Yes', 'TEST', 'none', 'AUD', 'true', 3, '0.00', 'none'),
@@ -401,10 +401,10 @@ INSERT INTO `geopos_gateways` (`id`, `name`, `enable`, `key1`, `key2`, `currency
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_goals`
+-- Table structure for table `te_goals`
 --
 
-CREATE TABLE `geopos_goals` (
+CREATE TABLE `te_goals` (
   `id` int(1) NOT NULL,
   `income` bigint(20) NOT NULL,
   `expense` bigint(20) NOT NULL,
@@ -413,19 +413,19 @@ CREATE TABLE `geopos_goals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_goals`
+-- Dumping data for table `te_goals`
 --
 
-INSERT INTO `geopos_goals` (`id`, `income`, `expense`, `sales`, `netincome`) VALUES
+INSERT INTO `te_goals` (`id`, `income`, `expense`, `sales`, `netincome`) VALUES
 (1, 999999, 999999, 999999, 999999);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_hrm`
+-- Table structure for table `te_hrm`
 --
 
-CREATE TABLE `geopos_hrm` (
+CREATE TABLE `te_hrm` (
   `id` int(11) NOT NULL,
   `typ` int(2) NOT NULL,
   `rid` int(11) NOT NULL,
@@ -437,10 +437,10 @@ CREATE TABLE `geopos_hrm` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_invoices`
+-- Table structure for table `te_invoices`
 --
 
-CREATE TABLE `geopos_invoices` (
+CREATE TABLE `te_invoices` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `invoicedate` date NOT NULL,
@@ -474,10 +474,10 @@ CREATE TABLE `geopos_invoices` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_invoice_items`
+-- Table structure for table `te_invoice_items`
 --
 
-CREATE TABLE `geopos_invoice_items` (
+CREATE TABLE `te_invoice_items` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `pid` int(11) NOT NULL DEFAULT 0,
@@ -499,10 +499,10 @@ CREATE TABLE `geopos_invoice_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_locations`
+-- Table structure for table `te_locations`
 --
 
-CREATE TABLE `geopos_locations` (
+CREATE TABLE `te_locations` (
   `id` int(3) NOT NULL,
   `cname` varchar(100) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -522,10 +522,10 @@ CREATE TABLE `geopos_locations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_log`
+-- Table structure for table `te_log`
 --
 
-CREATE TABLE `geopos_log` (
+CREATE TABLE `te_log` (
   `id` int(11) NOT NULL,
   `note` mediumtext NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -533,10 +533,10 @@ CREATE TABLE `geopos_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_log`
+-- Dumping data for table `te_log`
 --
 
-INSERT INTO `geopos_log` (`id`, `note`, `created`, `user`) VALUES
+INSERT INTO `te_log` (`id`, `note`, `created`, `user`) VALUES
 (1, '[Logged In] romankhoiru@gmail.com', '2021-07-20 09:13:45', ''),
 (2, '[Logged Out] admin', '2021-07-20 09:17:36', ''),
 (3, '[Logged In] romankhoiru@gmail.com', '2021-07-20 10:41:03', ''),
@@ -546,10 +546,10 @@ INSERT INTO `geopos_log` (`id`, `note`, `created`, `user`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_login_attempts`
+-- Table structure for table `te_login_attempts`
 --
 
-CREATE TABLE `geopos_login_attempts` (
+CREATE TABLE `te_login_attempts` (
   `id` int(11) NOT NULL,
   `ip_address` varchar(39) DEFAULT '0',
   `timestamp` datetime DEFAULT NULL,
@@ -559,10 +559,10 @@ CREATE TABLE `geopos_login_attempts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_metadata`
+-- Table structure for table `te_metadata`
 --
 
-CREATE TABLE `geopos_metadata` (
+CREATE TABLE `te_metadata` (
   `id` int(11) NOT NULL,
   `type` int(3) NOT NULL,
   `rid` int(11) NOT NULL,
@@ -574,10 +574,10 @@ CREATE TABLE `geopos_metadata` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_milestones`
+-- Table structure for table `te_milestones`
 --
 
-CREATE TABLE `geopos_milestones` (
+CREATE TABLE `te_milestones` (
   `id` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -590,10 +590,10 @@ CREATE TABLE `geopos_milestones` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_movers`
+-- Table structure for table `te_movers`
 --
 
-CREATE TABLE `geopos_movers` (
+CREATE TABLE `te_movers` (
   `id` int(11) NOT NULL,
   `d_type` int(3) NOT NULL,
   `rid1` int(11) NOT NULL,
@@ -606,10 +606,10 @@ CREATE TABLE `geopos_movers` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_notes`
+-- Table structure for table `te_notes`
 --
 
-CREATE TABLE `geopos_notes` (
+CREATE TABLE `te_notes` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text DEFAULT NULL,
@@ -624,10 +624,10 @@ CREATE TABLE `geopos_notes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_pms`
+-- Table structure for table `te_pms`
 --
 
-CREATE TABLE `geopos_pms` (
+CREATE TABLE `te_pms` (
   `id` int(11) UNSIGNED NOT NULL,
   `sender_id` int(11) UNSIGNED NOT NULL,
   `receiver_id` int(11) UNSIGNED NOT NULL,
@@ -642,10 +642,10 @@ CREATE TABLE `geopos_pms` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_premissions`
+-- Table structure for table `te_premissions`
 --
 
-CREATE TABLE `geopos_premissions` (
+CREATE TABLE `te_premissions` (
   `id` int(11) NOT NULL,
   `module` enum('Sales','Stock','Crm','Project','Accounts','Miscellaneous','Employees','Assign Project','Customer Profile','Reports','Delete') NOT NULL,
   `r_1` int(1) NOT NULL,
@@ -659,10 +659,10 @@ CREATE TABLE `geopos_premissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `geopos_premissions`
+-- Dumping data for table `te_premissions`
 --
 
-INSERT INTO `geopos_premissions` (`id`, `module`, `r_1`, `r_2`, `r_3`, `r_4`, `r_5`, `r_6`, `r_7`, `r_8`) VALUES
+INSERT INTO `te_premissions` (`id`, `module`, `r_1`, `r_2`, `r_3`, `r_4`, `r_5`, `r_6`, `r_7`, `r_8`) VALUES
 (1, 'Sales', 0, 1, 1, 1, 1, 0, 0, 0),
 (2, 'Stock', 1, 0, 1, 1, 1, 0, 0, 0),
 (3, 'Crm', 0, 0, 1, 1, 1, 0, 0, 0),
@@ -678,10 +678,10 @@ INSERT INTO `geopos_premissions` (`id`, `module`, `r_1`, `r_2`, `r_3`, `r_4`, `r
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_products`
+-- Table structure for table `te_products`
 --
 
-CREATE TABLE `geopos_products` (
+CREATE TABLE `te_products` (
   `pid` int(11) NOT NULL,
   `pcat` int(3) NOT NULL DEFAULT 1,
   `warehouse` int(11) NOT NULL DEFAULT 1,
@@ -709,10 +709,10 @@ CREATE TABLE `geopos_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_product_cat`
+-- Table structure for table `te_product_cat`
 --
 
-CREATE TABLE `geopos_product_cat` (
+CREATE TABLE `te_product_cat` (
   `id` int(3) NOT NULL,
   `title` varchar(100) NOT NULL,
   `extra` varchar(255) DEFAULT NULL,
@@ -721,19 +721,19 @@ CREATE TABLE `geopos_product_cat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_product_cat`
+-- Dumping data for table `te_product_cat`
 --
 
-INSERT INTO `geopos_product_cat` (`id`, `title`, `extra`, `c_type`, `rel_id`) VALUES
+INSERT INTO `te_product_cat` (`id`, `title`, `extra`, `c_type`, `rel_id`) VALUES
 (1, 'General', 'General Cat', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_product_serials`
+-- Table structure for table `te_product_serials`
 --
 
-CREATE TABLE `geopos_product_serials` (
+CREATE TABLE `te_product_serials` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `serial` varchar(200) DEFAULT NULL,
@@ -743,10 +743,10 @@ CREATE TABLE `geopos_product_serials` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_projects`
+-- Table structure for table `te_projects`
 --
 
-CREATE TABLE `geopos_projects` (
+CREATE TABLE `te_projects` (
   `id` int(11) NOT NULL,
   `p_id` varchar(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -766,10 +766,10 @@ CREATE TABLE `geopos_projects` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_project_meta`
+-- Table structure for table `te_project_meta`
 --
 
-CREATE TABLE `geopos_project_meta` (
+CREATE TABLE `te_project_meta` (
   `id` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
   `meta_key` int(11) NOT NULL,
@@ -782,10 +782,10 @@ CREATE TABLE `geopos_project_meta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_promo`
+-- Table structure for table `te_promo`
 --
 
-CREATE TABLE `geopos_promo` (
+CREATE TABLE `te_promo` (
   `id` int(11) NOT NULL,
   `code` varchar(15) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
@@ -801,10 +801,10 @@ CREATE TABLE `geopos_promo` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_purchase`
+-- Table structure for table `te_purchase`
 --
 
-CREATE TABLE `geopos_purchase` (
+CREATE TABLE `te_purchase` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `invoicedate` date NOT NULL,
@@ -835,10 +835,10 @@ CREATE TABLE `geopos_purchase` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_purchase_items`
+-- Table structure for table `te_purchase_items`
 --
 
-CREATE TABLE `geopos_purchase_items` (
+CREATE TABLE `te_purchase_items` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
@@ -858,10 +858,10 @@ CREATE TABLE `geopos_purchase_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_quotes`
+-- Table structure for table `te_quotes`
 --
 
-CREATE TABLE `geopos_quotes` (
+CREATE TABLE `te_quotes` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `invoicedate` date NOT NULL,
@@ -893,10 +893,10 @@ CREATE TABLE `geopos_quotes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_quotes_items`
+-- Table structure for table `te_quotes_items`
 --
 
-CREATE TABLE `geopos_quotes_items` (
+CREATE TABLE `te_quotes_items` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
@@ -916,10 +916,10 @@ CREATE TABLE `geopos_quotes_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_register`
+-- Table structure for table `te_register`
 --
 
-CREATE TABLE `geopos_register` (
+CREATE TABLE `te_register` (
   `id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `o_date` datetime NOT NULL,
@@ -933,19 +933,19 @@ CREATE TABLE `geopos_register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_register`
+-- Dumping data for table `te_register`
 --
 
-INSERT INTO `geopos_register` (`id`, `uid`, `o_date`, `c_date`, `cash`, `card`, `bank`, `cheque`, `r_change`, `active`) VALUES
+INSERT INTO `te_register` (`id`, `uid`, `o_date`, `c_date`, `cash`, `card`, `bank`, `cheque`, `r_change`, `active`) VALUES
 (1, 8, '2021-07-20 09:14:22', '0000-00-00 00:00:00', '0.00', '0.00', '0.00', '0.00', '0.00', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_reports`
+-- Table structure for table `te_reports`
 --
 
-CREATE TABLE `geopos_reports` (
+CREATE TABLE `te_reports` (
   `id` int(11) NOT NULL,
   `month` varchar(10) DEFAULT NULL,
   `year` int(4) NOT NULL,
@@ -959,10 +959,10 @@ CREATE TABLE `geopos_reports` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_restkeys`
+-- Table structure for table `te_restkeys`
 --
 
-CREATE TABLE `geopos_restkeys` (
+CREATE TABLE `te_restkeys` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `key` varchar(40) DEFAULT NULL,
@@ -976,10 +976,10 @@ CREATE TABLE `geopos_restkeys` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_smtp`
+-- Table structure for table `te_smtp`
 --
 
-CREATE TABLE `geopos_smtp` (
+CREATE TABLE `te_smtp` (
   `id` int(11) NOT NULL,
   `host` varchar(100) NOT NULL,
   `port` int(11) NOT NULL,
@@ -991,19 +991,19 @@ CREATE TABLE `geopos_smtp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_smtp`
+-- Dumping data for table `te_smtp`
 --
 
-INSERT INTO `geopos_smtp` (`id`, `host`, `port`, `auth`, `auth_type`, `username`, `password`, `sender`) VALUES
+INSERT INTO `te_smtp` (`id`, `host`, `port`, `auth`, `auth_type`, `username`, `password`, `sender`) VALUES
 (1, 'smtp.com', 587, 'true', 'none', 'support@example.com', '123456', 'support@example.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_stock_r`
+-- Table structure for table `te_stock_r`
 --
 
-CREATE TABLE `geopos_stock_r` (
+CREATE TABLE `te_stock_r` (
   `id` int(11) NOT NULL,
   `tid` int(8) NOT NULL,
   `invoicedate` date NOT NULL,
@@ -1035,10 +1035,10 @@ CREATE TABLE `geopos_stock_r` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_stock_r_items`
+-- Table structure for table `te_stock_r_items`
 --
 
-CREATE TABLE `geopos_stock_r_items` (
+CREATE TABLE `te_stock_r_items` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
@@ -1058,10 +1058,10 @@ CREATE TABLE `geopos_stock_r_items` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_supplier`
+-- Table structure for table `te_supplier`
 --
 
-CREATE TABLE `geopos_supplier` (
+CREATE TABLE `te_supplier` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -1081,10 +1081,10 @@ CREATE TABLE `geopos_supplier` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_system`
+-- Table structure for table `te_system`
 --
 
-CREATE TABLE `geopos_system` (
+CREATE TABLE `te_system` (
   `id` int(1) NOT NULL,
   `cname` char(50) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -1107,19 +1107,19 @@ CREATE TABLE `geopos_system` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_system`
+-- Dumping data for table `te_system`
 --
 
-INSERT INTO `geopos_system` (`id`, `cname`, `address`, `city`, `region`, `country`, `postbox`, `phone`, `email`, `taxid`, `tax`, `currency`, `currency_format`, `prefix`, `dformat`, `zone`, `logo`, `lang`, `foundation`) VALUES
+INSERT INTO `te_system` (`id`, `cname`, `address`, `city`, `region`, `country`, `postbox`, `phone`, `email`, `taxid`, `tax`, `currency`, `currency_format`, `prefix`, `dformat`, `zone`, `logo`, `lang`, `foundation`) VALUES
 (1, 'ABC Company', '412 Example South Street,', 'Los Angeles', 'FL', 'USA', '123', '410-987-89-60', 'support@ultimatekode.com', '23442', -1, 'Rp.', 0, 'SRN', 1, 'Etc/Greenwich', 'logo.png', 'indonesian', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_terms`
+-- Table structure for table `te_terms`
 --
 
-CREATE TABLE `geopos_terms` (
+CREATE TABLE `te_terms` (
   `id` int(4) NOT NULL,
   `title` varchar(100) NOT NULL,
   `type` int(1) NOT NULL,
@@ -1127,19 +1127,19 @@ CREATE TABLE `geopos_terms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_terms`
+-- Dumping data for table `te_terms`
 --
 
-INSERT INTO `geopos_terms` (`id`, `title`, `type`, `terms`) VALUES
+INSERT INTO `te_terms` (`id`, `title`, `type`, `terms`) VALUES
 (1, 'Payment On Receipt', 0, '<p>1. 10% discount if payment received within ten days otherwise payment 30 days\r\n            after invoice date<br></p>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_tickets`
+-- Table structure for table `te_tickets`
 --
 
-CREATE TABLE `geopos_tickets` (
+CREATE TABLE `te_tickets` (
   `id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
@@ -1151,10 +1151,10 @@ CREATE TABLE `geopos_tickets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_tickets_th`
+-- Table structure for table `te_tickets_th`
 --
 
-CREATE TABLE `geopos_tickets_th` (
+CREATE TABLE `te_tickets_th` (
   `id` int(11) NOT NULL,
   `tid` int(11) NOT NULL,
   `message` text DEFAULT NULL,
@@ -1167,10 +1167,10 @@ CREATE TABLE `geopos_tickets_th` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_todolist`
+-- Table structure for table `te_todolist`
 --
 
-CREATE TABLE `geopos_todolist` (
+CREATE TABLE `te_todolist` (
   `id` int(11) NOT NULL,
   `tdate` date NOT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -1188,10 +1188,10 @@ CREATE TABLE `geopos_todolist` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_transactions`
+-- Table structure for table `te_transactions`
 --
 
-CREATE TABLE `geopos_transactions` (
+CREATE TABLE `te_transactions` (
   `id` int(11) NOT NULL,
   `acid` int(11) NOT NULL,
   `account` varchar(200) NOT NULL,
@@ -1213,19 +1213,19 @@ CREATE TABLE `geopos_transactions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_trans_cat`
+-- Table structure for table `te_trans_cat`
 --
 
-CREATE TABLE `geopos_trans_cat` (
+CREATE TABLE `te_trans_cat` (
   `id` int(11) NOT NULL,
   `name` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_trans_cat`
+-- Dumping data for table `te_trans_cat`
 --
 
-INSERT INTO `geopos_trans_cat` (`id`, `name`) VALUES
+INSERT INTO `te_trans_cat` (`id`, `name`) VALUES
 (1, 'Income'),
 (2, 'Expenses'),
 (3, 'Other');
@@ -1233,10 +1233,10 @@ INSERT INTO `geopos_trans_cat` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_units`
+-- Table structure for table `te_units`
 --
 
-CREATE TABLE `geopos_units` (
+CREATE TABLE `te_units` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `code` varchar(5) NOT NULL,
@@ -1248,10 +1248,10 @@ CREATE TABLE `geopos_units` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_users`
+-- Table structure for table `te_users`
 --
 
-CREATE TABLE `geopos_users` (
+CREATE TABLE `te_users` (
   `id` int(11) UNSIGNED NOT NULL,
   `email` varchar(100) NOT NULL,
   `pass` varchar(64) NOT NULL,
@@ -1272,19 +1272,19 @@ CREATE TABLE `geopos_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_users`
+-- Dumping data for table `te_users`
 --
 
-INSERT INTO `geopos_users` (`id`, `email`, `pass`, `username`, `banned`, `last_login`, `last_activity`, `date_created`, `forgot_exp`, `remember_time`, `remember_exp`, `verification_code`, `totp_secret`, `ip_address`, `roleid`, `picture`, `loc`) VALUES
+INSERT INTO `te_users` (`id`, `email`, `pass`, `username`, `banned`, `last_login`, `last_activity`, `date_created`, `forgot_exp`, `remember_time`, `remember_exp`, `verification_code`, `totp_secret`, `ip_address`, `roleid`, `picture`, `loc`) VALUES
 (8, 'romankhoiru@gmail.com', '8e7d10c7c802e6cc70ddc57bcb1477eb8f3083b0f088f9427e4d56600b065bbe', 'admin', 0, '2021-07-20 11:07:38', '2021-07-20 11:07:38', '2021-07-20 11:12:42', NULL, NULL, NULL, '', NULL, '::1', 5, 'example.png', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `geopos_warehouse`
+-- Table structure for table `te_warehouse`
 --
 
-CREATE TABLE `geopos_warehouse` (
+CREATE TABLE `te_warehouse` (
   `id` int(3) NOT NULL,
   `title` varchar(100) NOT NULL,
   `extra` varchar(255) DEFAULT NULL,
@@ -1292,10 +1292,10 @@ CREATE TABLE `geopos_warehouse` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `geopos_warehouse`
+-- Dumping data for table `te_warehouse`
 --
 
-INSERT INTO `geopos_warehouse` (`id`, `title`, `extra`, `loc`) VALUES
+INSERT INTO `te_warehouse` (`id`, `title`, `extra`, `loc`) VALUES
 (1, 'Main WareHouse', 'The Main WareHouse', 0);
 
 -- --------------------------------------------------------
@@ -1400,76 +1400,76 @@ ALTER TABLE `ci_sessions`
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
 --
--- Indexes for table `geopos_accounts`
+-- Indexes for table `te_accounts`
 --
-ALTER TABLE `geopos_accounts`
+ALTER TABLE `te_accounts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `acn` (`acn`),
   ADD KEY `id` (`id`);
 
 --
--- Indexes for table `geopos_attendance`
+-- Indexes for table `te_attendance`
 --
-ALTER TABLE `geopos_attendance`
+ALTER TABLE `te_attendance`
   ADD PRIMARY KEY (`id`),
   ADD KEY `emp` (`emp`);
 
 --
--- Indexes for table `geopos_bank_ac`
+-- Indexes for table `te_bank_ac`
 --
-ALTER TABLE `geopos_bank_ac`
+ALTER TABLE `te_bank_ac`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_config`
+-- Indexes for table `te_config`
 --
-ALTER TABLE `geopos_config`
+ALTER TABLE `te_config`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`);
 
 --
--- Indexes for table `geopos_currencies`
+-- Indexes for table `te_currencies`
 --
-ALTER TABLE `geopos_currencies`
+ALTER TABLE `te_currencies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_customers`
+-- Indexes for table `te_customers`
 --
-ALTER TABLE `geopos_customers`
+ALTER TABLE `te_customers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gid` (`gid`);
 
 --
--- Indexes for table `geopos_custom_data`
+-- Indexes for table `te_custom_data`
 --
-ALTER TABLE `geopos_custom_data`
+ALTER TABLE `te_custom_data`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fid` (`field_id`,`rid`);
 
 --
--- Indexes for table `geopos_custom_fields`
+-- Indexes for table `te_custom_fields`
 --
-ALTER TABLE `geopos_custom_fields`
+ALTER TABLE `te_custom_fields`
   ADD PRIMARY KEY (`id`),
   ADD KEY `f_module` (`f_module`);
 
 --
--- Indexes for table `geopos_cust_group`
+-- Indexes for table `te_cust_group`
 --
-ALTER TABLE `geopos_cust_group`
+ALTER TABLE `te_cust_group`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_documents`
+-- Indexes for table `te_documents`
 --
-ALTER TABLE `geopos_documents`
+ALTER TABLE `te_documents`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_draft`
+-- Indexes for table `te_draft`
 --
-ALTER TABLE `geopos_draft`
+ALTER TABLE `te_draft`
   ADD PRIMARY KEY (`id`),
   ADD KEY `eid` (`eid`),
   ADD KEY `csd` (`csd`),
@@ -1478,43 +1478,43 @@ ALTER TABLE `geopos_draft`
   ADD KEY `loc` (`loc`);
 
 --
--- Indexes for table `geopos_draft_items`
+-- Indexes for table `te_draft_items`
 --
-ALTER TABLE `geopos_draft_items`
+ALTER TABLE `te_draft_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `invoice` (`tid`),
   ADD KEY `i_class` (`i_class`);
 
 --
--- Indexes for table `geopos_employees`
+-- Indexes for table `te_employees`
 --
-ALTER TABLE `geopos_employees`
+ALTER TABLE `te_employees`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_events`
+-- Indexes for table `te_events`
 --
-ALTER TABLE `geopos_events`
+ALTER TABLE `te_events`
   ADD PRIMARY KEY (`id`),
   ADD KEY `rel` (`rel`),
   ADD KEY `rid` (`rid`);
 
 --
--- Indexes for table `geopos_gateways`
+-- Indexes for table `te_gateways`
 --
-ALTER TABLE `geopos_gateways`
+ALTER TABLE `te_gateways`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_hrm`
+-- Indexes for table `te_hrm`
 --
-ALTER TABLE `geopos_hrm`
+ALTER TABLE `te_hrm`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_invoices`
+-- Indexes for table `te_invoices`
 --
-ALTER TABLE `geopos_invoices`
+ALTER TABLE `te_invoices`
   ADD PRIMARY KEY (`id`),
   ADD KEY `eid` (`eid`),
   ADD KEY `csd` (`csd`),
@@ -1523,233 +1523,233 @@ ALTER TABLE `geopos_invoices`
   ADD KEY `loc` (`loc`);
 
 --
--- Indexes for table `geopos_invoice_items`
+-- Indexes for table `te_invoice_items`
 --
-ALTER TABLE `geopos_invoice_items`
+ALTER TABLE `te_invoice_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `invoice` (`tid`),
   ADD KEY `i_class` (`i_class`);
 
 --
--- Indexes for table `geopos_locations`
+-- Indexes for table `te_locations`
 --
-ALTER TABLE `geopos_locations`
+ALTER TABLE `te_locations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_log`
+-- Indexes for table `te_log`
 --
-ALTER TABLE `geopos_log`
+ALTER TABLE `te_log`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_login_attempts`
+-- Indexes for table `te_login_attempts`
 --
-ALTER TABLE `geopos_login_attempts`
+ALTER TABLE `te_login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_metadata`
+-- Indexes for table `te_metadata`
 --
-ALTER TABLE `geopos_metadata`
+ALTER TABLE `te_metadata`
   ADD PRIMARY KEY (`id`),
   ADD KEY `type` (`type`),
   ADD KEY `rid` (`rid`);
 
 --
--- Indexes for table `geopos_milestones`
+-- Indexes for table `te_milestones`
 --
-ALTER TABLE `geopos_milestones`
+ALTER TABLE `te_milestones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_movers`
+-- Indexes for table `te_movers`
 --
-ALTER TABLE `geopos_movers`
+ALTER TABLE `te_movers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `d_type` (`d_type`,`rid1`,`rid2`,`rid3`);
 
 --
--- Indexes for table `geopos_notes`
+-- Indexes for table `te_notes`
 --
-ALTER TABLE `geopos_notes`
+ALTER TABLE `te_notes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_pms`
+-- Indexes for table `te_pms`
 --
-ALTER TABLE `geopos_pms`
+ALTER TABLE `te_pms`
   ADD PRIMARY KEY (`id`),
   ADD KEY `full_index` (`id`,`sender_id`,`receiver_id`,`date_read`);
 
 --
--- Indexes for table `geopos_premissions`
+-- Indexes for table `te_premissions`
 --
-ALTER TABLE `geopos_premissions`
+ALTER TABLE `te_premissions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_products`
+-- Indexes for table `te_products`
 --
-ALTER TABLE `geopos_products`
+ALTER TABLE `te_products`
   ADD PRIMARY KEY (`pid`),
   ADD KEY `pcat` (`pcat`),
   ADD KEY `warehouse` (`warehouse`);
 
 --
--- Indexes for table `geopos_product_cat`
+-- Indexes for table `te_product_cat`
 --
-ALTER TABLE `geopos_product_cat`
+ALTER TABLE `te_product_cat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_product_serials`
+-- Indexes for table `te_product_serials`
 --
-ALTER TABLE `geopos_product_serials`
+ALTER TABLE `te_product_serials`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_projects`
+-- Indexes for table `te_projects`
 --
-ALTER TABLE `geopos_projects`
+ALTER TABLE `te_projects`
   ADD PRIMARY KEY (`id`),
   ADD KEY `p_id` (`p_id`);
 
 --
--- Indexes for table `geopos_project_meta`
+-- Indexes for table `te_project_meta`
 --
-ALTER TABLE `geopos_project_meta`
+ALTER TABLE `te_project_meta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pid` (`pid`),
   ADD KEY `meta_key` (`meta_key`),
   ADD KEY `key3` (`key3`);
 
 --
--- Indexes for table `geopos_promo`
+-- Indexes for table `te_promo`
 --
-ALTER TABLE `geopos_promo`
+ALTER TABLE `te_promo`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `code_2` (`code`),
   ADD KEY `code` (`code`);
 
 --
--- Indexes for table `geopos_purchase`
+-- Indexes for table `te_purchase`
 --
-ALTER TABLE `geopos_purchase`
+ALTER TABLE `te_purchase`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `invoice` (`tid`),
   ADD KEY `eid` (`eid`),
   ADD KEY `csd` (`csd`);
 
 --
--- Indexes for table `geopos_purchase_items`
+-- Indexes for table `te_purchase_items`
 --
-ALTER TABLE `geopos_purchase_items`
+ALTER TABLE `te_purchase_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `invoice` (`tid`);
 
 --
--- Indexes for table `geopos_quotes`
+-- Indexes for table `te_quotes`
 --
-ALTER TABLE `geopos_quotes`
+ALTER TABLE `te_quotes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `invoice` (`tid`),
   ADD KEY `eid` (`eid`),
   ADD KEY `csd` (`csd`);
 
 --
--- Indexes for table `geopos_quotes_items`
+-- Indexes for table `te_quotes_items`
 --
-ALTER TABLE `geopos_quotes_items`
+ALTER TABLE `te_quotes_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `invoice` (`tid`);
 
 --
--- Indexes for table `geopos_register`
+-- Indexes for table `te_register`
 --
-ALTER TABLE `geopos_register`
+ALTER TABLE `te_register`
   ADD PRIMARY KEY (`id`),
   ADD KEY `uid` (`uid`),
   ADD KEY `active` (`active`);
 
 --
--- Indexes for table `geopos_reports`
+-- Indexes for table `te_reports`
 --
-ALTER TABLE `geopos_reports`
+ALTER TABLE `te_reports`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_restkeys`
+-- Indexes for table `te_restkeys`
 --
-ALTER TABLE `geopos_restkeys`
+ALTER TABLE `te_restkeys`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_smtp`
+-- Indexes for table `te_smtp`
 --
-ALTER TABLE `geopos_smtp`
+ALTER TABLE `te_smtp`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_stock_r`
+-- Indexes for table `te_stock_r`
 --
-ALTER TABLE `geopos_stock_r`
+ALTER TABLE `te_stock_r`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `invoice` (`tid`),
   ADD KEY `eid` (`eid`),
   ADD KEY `csd` (`csd`);
 
 --
--- Indexes for table `geopos_stock_r_items`
+-- Indexes for table `te_stock_r_items`
 --
-ALTER TABLE `geopos_stock_r_items`
+ALTER TABLE `te_stock_r_items`
   ADD PRIMARY KEY (`id`),
   ADD KEY `invoice` (`tid`) KEY_BLOCK_SIZE=1024 USING BTREE;
 
 --
--- Indexes for table `geopos_supplier`
+-- Indexes for table `te_supplier`
 --
-ALTER TABLE `geopos_supplier`
+ALTER TABLE `te_supplier`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gid` (`gid`);
 
 --
--- Indexes for table `geopos_system`
+-- Indexes for table `te_system`
 --
-ALTER TABLE `geopos_system`
+ALTER TABLE `te_system`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_terms`
+-- Indexes for table `te_terms`
 --
-ALTER TABLE `geopos_terms`
+ALTER TABLE `te_terms`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_tickets`
+-- Indexes for table `te_tickets`
 --
-ALTER TABLE `geopos_tickets`
+ALTER TABLE `te_tickets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_tickets_th`
+-- Indexes for table `te_tickets_th`
 --
-ALTER TABLE `geopos_tickets_th`
+ALTER TABLE `te_tickets_th`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tid` (`tid`),
   ADD KEY `cid` (`cid`),
   ADD KEY `eid` (`eid`);
 
 --
--- Indexes for table `geopos_todolist`
+-- Indexes for table `te_todolist`
 --
-ALTER TABLE `geopos_todolist`
+ALTER TABLE `te_todolist`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_transactions`
+-- Indexes for table `te_transactions`
 --
-ALTER TABLE `geopos_transactions`
+ALTER TABLE `te_transactions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `loc` (`loc`),
   ADD KEY `acid` (`acid`),
@@ -1757,29 +1757,29 @@ ALTER TABLE `geopos_transactions`
   ADD KEY `tid` (`tid`);
 
 --
--- Indexes for table `geopos_trans_cat`
+-- Indexes for table `te_trans_cat`
 --
-ALTER TABLE `geopos_trans_cat`
+ALTER TABLE `te_trans_cat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_units`
+-- Indexes for table `te_units`
 --
-ALTER TABLE `geopos_units`
+ALTER TABLE `te_units`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `geopos_users`
+-- Indexes for table `te_users`
 --
-ALTER TABLE `geopos_users`
+ALTER TABLE `te_users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `email` (`email`),
   ADD KEY `username` (`username`);
 
 --
--- Indexes for table `geopos_warehouse`
+-- Indexes for table `te_warehouse`
 --
-ALTER TABLE `geopos_warehouse`
+ALTER TABLE `te_warehouse`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1800,315 +1800,315 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `geopos_accounts`
+-- AUTO_INCREMENT for table `te_accounts`
 --
-ALTER TABLE `geopos_accounts`
+ALTER TABLE `te_accounts`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_attendance`
+-- AUTO_INCREMENT for table `te_attendance`
 --
-ALTER TABLE `geopos_attendance`
+ALTER TABLE `te_attendance`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_bank_ac`
+-- AUTO_INCREMENT for table `te_bank_ac`
 --
-ALTER TABLE `geopos_bank_ac`
+ALTER TABLE `te_bank_ac`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_config`
+-- AUTO_INCREMENT for table `te_config`
 --
-ALTER TABLE `geopos_config`
+ALTER TABLE `te_config`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_currencies`
+-- AUTO_INCREMENT for table `te_currencies`
 --
-ALTER TABLE `geopos_currencies`
+ALTER TABLE `te_currencies`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_customers`
+-- AUTO_INCREMENT for table `te_customers`
 --
-ALTER TABLE `geopos_customers`
+ALTER TABLE `te_customers`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_custom_data`
+-- AUTO_INCREMENT for table `te_custom_data`
 --
-ALTER TABLE `geopos_custom_data`
+ALTER TABLE `te_custom_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_custom_fields`
+-- AUTO_INCREMENT for table `te_custom_fields`
 --
-ALTER TABLE `geopos_custom_fields`
+ALTER TABLE `te_custom_fields`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_cust_group`
+-- AUTO_INCREMENT for table `te_cust_group`
 --
-ALTER TABLE `geopos_cust_group`
+ALTER TABLE `te_cust_group`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_documents`
+-- AUTO_INCREMENT for table `te_documents`
 --
-ALTER TABLE `geopos_documents`
+ALTER TABLE `te_documents`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_draft`
+-- AUTO_INCREMENT for table `te_draft`
 --
-ALTER TABLE `geopos_draft`
+ALTER TABLE `te_draft`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_draft_items`
+-- AUTO_INCREMENT for table `te_draft_items`
 --
-ALTER TABLE `geopos_draft_items`
+ALTER TABLE `te_draft_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_employees`
+-- AUTO_INCREMENT for table `te_employees`
 --
-ALTER TABLE `geopos_employees`
+ALTER TABLE `te_employees`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `geopos_events`
+-- AUTO_INCREMENT for table `te_events`
 --
-ALTER TABLE `geopos_events`
+ALTER TABLE `te_events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_gateways`
+-- AUTO_INCREMENT for table `te_gateways`
 --
-ALTER TABLE `geopos_gateways`
+ALTER TABLE `te_gateways`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `geopos_hrm`
+-- AUTO_INCREMENT for table `te_hrm`
 --
-ALTER TABLE `geopos_hrm`
+ALTER TABLE `te_hrm`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_invoices`
+-- AUTO_INCREMENT for table `te_invoices`
 --
-ALTER TABLE `geopos_invoices`
+ALTER TABLE `te_invoices`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_invoice_items`
+-- AUTO_INCREMENT for table `te_invoice_items`
 --
-ALTER TABLE `geopos_invoice_items`
+ALTER TABLE `te_invoice_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_locations`
+-- AUTO_INCREMENT for table `te_locations`
 --
-ALTER TABLE `geopos_locations`
+ALTER TABLE `te_locations`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_log`
+-- AUTO_INCREMENT for table `te_log`
 --
-ALTER TABLE `geopos_log`
+ALTER TABLE `te_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `geopos_login_attempts`
+-- AUTO_INCREMENT for table `te_login_attempts`
 --
-ALTER TABLE `geopos_login_attempts`
+ALTER TABLE `te_login_attempts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `geopos_metadata`
+-- AUTO_INCREMENT for table `te_metadata`
 --
-ALTER TABLE `geopos_metadata`
+ALTER TABLE `te_metadata`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_milestones`
+-- AUTO_INCREMENT for table `te_milestones`
 --
-ALTER TABLE `geopos_milestones`
+ALTER TABLE `te_milestones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_movers`
+-- AUTO_INCREMENT for table `te_movers`
 --
-ALTER TABLE `geopos_movers`
+ALTER TABLE `te_movers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_notes`
+-- AUTO_INCREMENT for table `te_notes`
 --
-ALTER TABLE `geopos_notes`
+ALTER TABLE `te_notes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_pms`
+-- AUTO_INCREMENT for table `te_pms`
 --
-ALTER TABLE `geopos_pms`
+ALTER TABLE `te_pms`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_premissions`
+-- AUTO_INCREMENT for table `te_premissions`
 --
-ALTER TABLE `geopos_premissions`
+ALTER TABLE `te_premissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `geopos_products`
+-- AUTO_INCREMENT for table `te_products`
 --
-ALTER TABLE `geopos_products`
+ALTER TABLE `te_products`
   MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_product_cat`
+-- AUTO_INCREMENT for table `te_product_cat`
 --
-ALTER TABLE `geopos_product_cat`
+ALTER TABLE `te_product_cat`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_product_serials`
+-- AUTO_INCREMENT for table `te_product_serials`
 --
-ALTER TABLE `geopos_product_serials`
+ALTER TABLE `te_product_serials`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_projects`
+-- AUTO_INCREMENT for table `te_projects`
 --
-ALTER TABLE `geopos_projects`
+ALTER TABLE `te_projects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_project_meta`
+-- AUTO_INCREMENT for table `te_project_meta`
 --
-ALTER TABLE `geopos_project_meta`
+ALTER TABLE `te_project_meta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_promo`
+-- AUTO_INCREMENT for table `te_promo`
 --
-ALTER TABLE `geopos_promo`
+ALTER TABLE `te_promo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_purchase`
+-- AUTO_INCREMENT for table `te_purchase`
 --
-ALTER TABLE `geopos_purchase`
+ALTER TABLE `te_purchase`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_purchase_items`
+-- AUTO_INCREMENT for table `te_purchase_items`
 --
-ALTER TABLE `geopos_purchase_items`
+ALTER TABLE `te_purchase_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_quotes`
+-- AUTO_INCREMENT for table `te_quotes`
 --
-ALTER TABLE `geopos_quotes`
+ALTER TABLE `te_quotes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_quotes_items`
+-- AUTO_INCREMENT for table `te_quotes_items`
 --
-ALTER TABLE `geopos_quotes_items`
+ALTER TABLE `te_quotes_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_register`
+-- AUTO_INCREMENT for table `te_register`
 --
-ALTER TABLE `geopos_register`
+ALTER TABLE `te_register`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_reports`
+-- AUTO_INCREMENT for table `te_reports`
 --
-ALTER TABLE `geopos_reports`
+ALTER TABLE `te_reports`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_restkeys`
+-- AUTO_INCREMENT for table `te_restkeys`
 --
-ALTER TABLE `geopos_restkeys`
+ALTER TABLE `te_restkeys`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_stock_r`
+-- AUTO_INCREMENT for table `te_stock_r`
 --
-ALTER TABLE `geopos_stock_r`
+ALTER TABLE `te_stock_r`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_stock_r_items`
+-- AUTO_INCREMENT for table `te_stock_r_items`
 --
-ALTER TABLE `geopos_stock_r_items`
+ALTER TABLE `te_stock_r_items`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_supplier`
+-- AUTO_INCREMENT for table `te_supplier`
 --
-ALTER TABLE `geopos_supplier`
+ALTER TABLE `te_supplier`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_terms`
+-- AUTO_INCREMENT for table `te_terms`
 --
-ALTER TABLE `geopos_terms`
+ALTER TABLE `te_terms`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `geopos_tickets`
+-- AUTO_INCREMENT for table `te_tickets`
 --
-ALTER TABLE `geopos_tickets`
+ALTER TABLE `te_tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_tickets_th`
+-- AUTO_INCREMENT for table `te_tickets_th`
 --
-ALTER TABLE `geopos_tickets_th`
+ALTER TABLE `te_tickets_th`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_todolist`
+-- AUTO_INCREMENT for table `te_todolist`
 --
-ALTER TABLE `geopos_todolist`
+ALTER TABLE `te_todolist`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_transactions`
+-- AUTO_INCREMENT for table `te_transactions`
 --
-ALTER TABLE `geopos_transactions`
+ALTER TABLE `te_transactions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_trans_cat`
+-- AUTO_INCREMENT for table `te_trans_cat`
 --
-ALTER TABLE `geopos_trans_cat`
+ALTER TABLE `te_trans_cat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `geopos_units`
+-- AUTO_INCREMENT for table `te_units`
 --
-ALTER TABLE `geopos_units`
+ALTER TABLE `te_units`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `geopos_users`
+-- AUTO_INCREMENT for table `te_users`
 --
-ALTER TABLE `geopos_users`
+ALTER TABLE `te_users`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `geopos_warehouse`
+-- AUTO_INCREMENT for table `te_warehouse`
 --
-ALTER TABLE `geopos_warehouse`
+ALTER TABLE `te_warehouse`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --

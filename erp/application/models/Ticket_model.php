@@ -30,11 +30,11 @@ class Ticket_model extends CI_Model
 
     public function thread_list($id)
     {
-        $this->db->select('geopos_tickets_th.*,geopos_customers.name AS custo,geopos_employees.name AS emp');
-        $this->db->from('geopos_tickets_th');
-        $this->db->join('geopos_customers', 'geopos_tickets_th.cid=geopos_customers.id', 'left');
-        $this->db->join('geopos_employees', 'geopos_tickets_th.eid=geopos_employees.id', 'left');
-        $this->db->where('geopos_tickets_th.tid', $id);
+        $this->db->select('te_tickets_th.*,te_customers.name AS custo,te_employees.name AS emp');
+        $this->db->from('te_tickets_th');
+        $this->db->join('te_customers', 'te_tickets_th.cid=te_customers.id', 'left');
+        $this->db->join('te_employees', 'te_tickets_th.eid=te_employees.id', 'left');
+        $this->db->where('te_tickets_th.tid', $id);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -43,7 +43,7 @@ class Ticket_model extends CI_Model
     {
         $this->load->library('ultimatemailer');
         $this->db->select('host,port,auth,auth_type,username,password,sender');
-        $this->db->from('geopos_smtp');
+        $this->db->from('te_smtp');
         $query = $this->db->get();
         $smtpresult = $query->row_array();
         $host = $smtpresult['host'];
@@ -61,10 +61,10 @@ class Ticket_model extends CI_Model
 
     public function thread_info($id)
     {
-        $this->db->select('geopos_tickets.*, geopos_customers.name,geopos_customers.email');
-        $this->db->from('geopos_tickets');
-        $this->db->join('geopos_customers', 'geopos_tickets.cid=geopos_customers.id', 'left');
-        $this->db->where('geopos_tickets.id', $id);
+        $this->db->select('te_tickets.*, te_customers.name,te_customers.email');
+        $this->db->from('te_tickets');
+        $this->db->join('te_customers', 'te_tickets.cid=te_customers.id', 'left');
+        $this->db->where('te_tickets.id', $id);
         $query = $this->db->get();
         return $query->row_array();
     }
@@ -88,16 +88,16 @@ class Ticket_model extends CI_Model
             $this->send_email($customer['email'], $customer['name'], '[Customer Ticket] #' . $thread_id, $message . $this->ticket()->other, $attachmenttrue = false, $attachment = '');
 
         }
-        return $this->db->insert('geopos_tickets_th', $data);
+        return $this->db->insert('te_tickets_th', $data);
 
     }
 
     function deleteticket($id)
     {
-        $this->db->delete('geopos_tickets', array('id' => $id));
+        $this->db->delete('te_tickets', array('id' => $id));
 
         $this->db->select('attach');
-        $this->db->from('geopos_tickets_th');
+        $this->db->from('te_tickets_th');
         $this->db->where('tid', $id);
         $query = $this->db->get();
         $result = $query->result_array();
@@ -108,7 +108,7 @@ class Ticket_model extends CI_Model
 
             }
         }
-        $this->db->delete('geopos_tickets_th', array('tid' => $id));
+        $this->db->delete('te_tickets_th', array('tid' => $id));
         return true;
     }
 
@@ -119,7 +119,7 @@ class Ticket_model extends CI_Model
 				COUNT(IF( status = 'Waiting', id, NULL)) AS Waiting,
 				COUNT(IF( status = 'Processing', id, NULL)) AS Processing,
 				COUNT(IF( status = 'Solved', id, NULL)) AS Solved
-				FROM geopos_tickets ");
+				FROM te_tickets ");
         echo json_encode($query->result_array());
 
     }
@@ -137,7 +137,7 @@ class Ticket_model extends CI_Model
     private function ticket_datatables_query($filt)
     {
 
-        $this->db->from('geopos_tickets');
+        $this->db->from('te_tickets');
         if ($filt == 'unsolved') {
             $this->db->where('status!=', 'Solved');
         }

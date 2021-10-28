@@ -26,7 +26,7 @@ class Events_model extends CI_Model
     public function getEvents($start, $end)
     {
         $e2=date('Y-m-d', strtotime($end. ' - 60 days'));
-        $sql = "SELECT * FROM geopos_events WHERE (geopos_events.start BETWEEN ? AND ?) OR (geopos_events.end > ? ) ORDER BY geopos_events.start ASC";
+        $sql = "SELECT * FROM te_events WHERE (te_events.start BETWEEN ? AND ?) OR (te_events.end > ? ) ORDER BY te_events.start ASC";
         return $this->db->query($sql, array($start, $end,$e2))->result();
 
     }
@@ -45,7 +45,7 @@ class Events_model extends CI_Model
             'color' => $color
         );
 
-        if ($this->db->insert('geopos_events', $data)) {
+        if ($this->db->insert('te_events', $data)) {
             return true;
         } else {
             return false;
@@ -57,7 +57,7 @@ class Events_model extends CI_Model
     public function updateEvent($id, $title, $description, $color)
     {
 
-        $sql = "UPDATE geopos_events SET title = ?, description = ?, color = ? WHERE id = ?";
+        $sql = "UPDATE te_events SET title = ?, description = ?, color = ? WHERE id = ?";
         $this->db->query($sql, array($title, $description, $color, $id));
         return ($this->db->affected_rows() != 1) ? false : true;
     }
@@ -68,7 +68,7 @@ class Events_model extends CI_Model
     public function deleteEvent()
     {
 
-        $sql = "DELETE FROM geopos_events WHERE id = ?";
+        $sql = "DELETE FROM te_events WHERE id = ?";
         $this->db->query($sql, array($_GET['id']));
         return ($this->db->affected_rows() != 1) ? false : true;
     }
@@ -78,7 +78,7 @@ class Events_model extends CI_Model
     public function dragUpdateEvent()
     {
 
-        $sql = "UPDATE geopos_events SET  geopos_events.start = ? ,geopos_events.end = ?  WHERE id = ?";
+        $sql = "UPDATE te_events SET  te_events.start = ? ,te_events.end = ?  WHERE id = ?";
         $this->db->query($sql, array($_POST['start'], $_POST['end'], $_POST['id']));
         return ($this->db->affected_rows() != 1) ? false : true;
 

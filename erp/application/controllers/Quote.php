@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -148,7 +132,7 @@ class Quote extends CI_Controller
         $bill_date = datefordatabase($invoicedate);
         $bill_due_date = datefordatabase($invocieduedate);
         $data = array('tid' => $invocieno, 'invoicedate' => $bill_date, 'invoiceduedate' => $bill_due_date, 'subtotal' => $subtotal, 'shipping' => $shipping, 'ship_tax' => $shipping_tax, 'ship_tax_type' => $ship_taxtype, 'discount' => $total_discount, 'tax' => $total_tax, 'total' => $total, 'notes' => $notes, 'csd' => $customer_id, 'eid' => $emp, 'taxstatus' => $tax, 'discstatus' => $discstatus, 'format_discount' => $discountFormat, 'refer' => $refer, 'term' => $pterms, 'proposal' => $proposal, 'multi' => $currency, 'loc' => $this->aauth->get_user()->loc);
-        if ($this->db->insert('geopos_quotes', $data)) {
+        if ($this->db->insert('te_quotes', $data)) {
             $pid = $this->input->post('pid');
             $invocieno = $this->db->insert_id();
             $productlist = array();
@@ -194,10 +178,10 @@ class Quote extends CI_Controller
                 $itc += $amt;
             }
             if ($prodindex > 0) {
-                $this->db->insert_batch('geopos_quotes_items', $productlist);
+                $this->db->insert_batch('te_quotes_items', $productlist);
                 $this->db->set(array('discount' => rev_amountExchange_s(amountFormat_general($total_discount), $currency, $this->aauth->get_user()->loc), 'tax' => rev_amountExchange_s(amountFormat_general($total_tax), $currency, $this->aauth->get_user()->loc), 'items' => $itc));
                 $this->db->where('id', $invocieno);
-                $this->db->update('geopos_quotes');
+                $this->db->update('te_quotes');
             } else {
                 echo json_encode(array('status' => 'Error', 'message' =>
                     "Please choose product from product list. Go to Item manager section if you have not added the products."));
@@ -372,7 +356,7 @@ class Quote extends CI_Controller
 
         $prodindex = 0;
 
-        $this->db->delete('geopos_quotes_items', array('tid' => $invocieno));
+        $this->db->delete('te_quotes_items', array('tid' => $invocieno));
         $product_id = $this->input->post('pid');
         $product_name1 = $this->input->post('product_name', true);
         $product_qty = $this->input->post('product_qty');
@@ -425,8 +409,8 @@ class Quote extends CI_Controller
 
         if ($flag) {
 
-            if ($this->db->update('geopos_quotes', $data)) {
-                $this->db->insert_batch('geopos_quotes_items', $productlist);
+            if ($this->db->update('te_quotes', $data)) {
+                $this->db->insert_batch('te_quotes_items', $productlist);
                 echo json_encode(array('status' => 'Success', 'message' =>
                     $this->lang->line('Quote has  been updated') . " <a href='view?id=$invocieno' class='btn btn-info btn-lg'><span class='icon-file-text2' aria-hidden='true'></span> View </a> "));
             } else {
@@ -459,7 +443,7 @@ class Quote extends CI_Controller
 
         $this->db->set('status', $status);
         $this->db->where('id', $tid);
-        $this->db->update('geopos_quotes');
+        $this->db->update('te_quotes');
 
         echo json_encode(array('status' => 'Success', 'message' =>
             $this->lang->line('Quote Status updated') . '', 'pstatus' => $status));

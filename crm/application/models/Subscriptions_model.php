@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Subscriptions_model extends CI_Model
 {
-    var $table = 'geopos_invoices';
+    var $table = 'te_invoices';
     var $column_order = array(null, 'tid', 'name', 'invoicedate', 'total', 'status', null);
     var $column_search = array('tid', 'name', 'invoicedate', 'total');
     var $order = array('tid' => 'desc');
@@ -34,12 +34,12 @@ class Subscriptions_model extends CI_Model
     public function invoice_details($id)
     {
 
-        $this->db->select('geopos_invoices.*,geopos_invoices.id AS iid,geopos_customers.*,geopos_customers.id AS cid,geopos_terms.id AS termid,geopos_terms.title AS termtit,geopos_terms.terms AS terms');
+        $this->db->select('te_invoices.*,te_invoices.id AS iid,te_customers.*,te_customers.id AS cid,te_terms.id AS termid,te_terms.title AS termtit,te_terms.terms AS terms');
         $this->db->from($this->table);
-        $this->db->where('geopos_invoices.id', $id);
-        $this->db->where('geopos_invoices.csd', $this->session->userdata('user_details')[0]->cid);
-        $this->db->join('geopos_customers', 'geopos_invoices.csd = geopos_customers.id', 'left');
-        $this->db->join('geopos_terms', 'geopos_terms.id = geopos_invoices.term', 'left');
+        $this->db->where('te_invoices.id', $id);
+        $this->db->where('te_invoices.csd', $this->session->userdata('user_details')[0]->cid);
+        $this->db->join('te_customers', 'te_invoices.csd = te_customers.id', 'left');
+        $this->db->join('te_terms', 'te_terms.id = te_invoices.term', 'left');
         $query = $this->db->get();
         return $query->row_array();
 
@@ -49,7 +49,7 @@ class Subscriptions_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_invoice_items');
+        $this->db->from('te_invoice_items');
         $this->db->where('tid', $id);
         $query = $this->db->get();
         return $query->result_array();
@@ -60,7 +60,7 @@ class Subscriptions_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_transactions');
+        $this->db->from('te_transactions');
         $this->db->where('tid', $id);
         $this->db->where('ext', 0);
         $query = $this->db->get();
@@ -71,11 +71,11 @@ class Subscriptions_model extends CI_Model
 
     private function _get_datatables_query()
     {
-       $this->db->select('geopos_invoices.*,geopos_customers.name');
+       $this->db->select('te_invoices.*,te_customers.name');
         $this->db->from($this->table);
-        $this->db->where('geopos_invoices.csd', $this->session->userdata('user_details')[0]->cid);
-           $this->db->where('geopos_invoices.i_class>', 1);
-        $this->db->join('geopos_customers', 'geopos_invoices.csd=geopos_customers.id', 'left');
+        $this->db->where('te_invoices.csd', $this->session->userdata('user_details')[0]->cid);
+           $this->db->where('te_invoices.i_class>', 1);
+        $this->db->join('te_customers', 'te_invoices.csd=te_customers.id', 'left');
 
         $i = 0;
 
@@ -111,8 +111,8 @@ class Subscriptions_model extends CI_Model
     {
 
         $this->_get_datatables_query();
-        $this->db->where('geopos_invoices.csd', $this->session->userdata('user_details')[0]->cid);
-           $this->db->where('geopos_invoices.i_class>', 1);
+        $this->db->where('te_invoices.csd', $this->session->userdata('user_details')[0]->cid);
+           $this->db->where('te_invoices.i_class>', 1);
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -122,8 +122,8 @@ class Subscriptions_model extends CI_Model
     function count_filtered()
     {
         $this->_get_datatables_query();
-        $this->db->where('geopos_invoices.csd', $this->session->userdata('user_details')[0]->cid);
-           $this->db->where('geopos_invoices.i_class>', 1);
+        $this->db->where('te_invoices.csd', $this->session->userdata('user_details')[0]->cid);
+           $this->db->where('te_invoices.i_class>', 1);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -131,8 +131,8 @@ class Subscriptions_model extends CI_Model
     public function count_all()
     {
         $this->db->from($this->table);
-        $this->db->where('geopos_invoices.csd', $this->session->userdata('user_details')[0]->cid);
-           $this->db->where('geopos_invoices.i_class>', 1);
+        $this->db->where('te_invoices.csd', $this->session->userdata('user_details')[0]->cid);
+           $this->db->where('te_invoices.i_class>', 1);
         return $this->db->count_all_results();
     }
 
@@ -140,17 +140,17 @@ class Subscriptions_model extends CI_Model
     public function billingterms()
     {
         $this->db->select('id,title');
-        $this->db->from('geopos_terms');
+        $this->db->from('te_terms');
         $query = $this->db->get();
         return $query->result_array();
     }
 
     public function employee($id)
     {
-        $this->db->select('geopos_employees.name,geopos_employees.sign,geopos_users.roleid');
-        $this->db->from('geopos_employees');
-        $this->db->where('geopos_employees.id', $id);
-        $this->db->join('geopos_users', 'geopos_employees.id =geopos_users.id', 'left');
+        $this->db->select('te_employees.name,te_employees.sign,te_users.roleid');
+        $this->db->from('te_employees');
+        $this->db->where('te_employees.id', $id);
+        $this->db->join('te_users', 'te_employees.id =te_users.id', 'left');
         $query = $this->db->get();
         return $query->row_array();
     }

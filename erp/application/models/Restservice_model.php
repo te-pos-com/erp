@@ -25,7 +25,7 @@ class Restservice_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_customers');
+        $this->db->from('te_customers');
         if ($id != '') {
 
             $this->db->where('id', $id);
@@ -36,14 +36,14 @@ class Restservice_model extends CI_Model
 
     public function delete_customer($id)
     {
-        return $this->db->delete('geopos_customers', array('id' => $id));
+        return $this->db->delete('te_customers', array('id' => $id));
     }
 
     public function products($id = '')
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_products');
+        $this->db->from('te_products');
         if ($id != '') {
 
             $this->db->where('id', $id);
@@ -54,17 +54,17 @@ class Restservice_model extends CI_Model
 
     public function invoice($id)
     {
-        $this->db->select('geopos_invoices.*,geopos_customers.*,geopos_invoices.id AS iid,geopos_customers.id AS cid,geopos_terms.id AS termid,geopos_terms.title AS termtit,geopos_terms.terms AS terms');
-        $this->db->from('geopos_invoices');
-        $this->db->where('geopos_invoices.id', $id);
-        $this->db->join('geopos_customers', 'geopos_invoices.csd = geopos_customers.id', 'left');
-        $this->db->join('geopos_terms', 'geopos_terms.id = geopos_invoices.term', 'left');
+        $this->db->select('te_invoices.*,te_customers.*,te_invoices.id AS iid,te_customers.id AS cid,te_terms.id AS termid,te_terms.title AS termtit,te_terms.terms AS terms');
+        $this->db->from('te_invoices');
+        $this->db->where('te_invoices.id', $id);
+        $this->db->join('te_customers', 'te_invoices.csd = te_customers.id', 'left');
+        $this->db->join('te_terms', 'te_terms.id = te_invoices.term', 'left');
         $query = $this->db->get();
         $invoice = $query->row_array();
         $loc = location($invoice['loc']);
-        $this->db->select('geopos_invoice_items.*');
-        $this->db->from('geopos_invoice_items');
-        $this->db->where('geopos_invoice_items.tid', $id);
+        $this->db->select('te_invoice_items.*');
+        $this->db->from('te_invoice_items');
+        $this->db->where('te_invoice_items.tid', $id);
         $query = $this->db->get();
         $items = $query->result_array();
         return array(array('invoice' => $invoice, 'company' => $loc, 'items' => $items, 'currency' => currency($invoice['loc'])));

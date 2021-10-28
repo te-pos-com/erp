@@ -49,7 +49,7 @@
             <div class="container">
                         <div class="row align-items-center justify-content-center" style="background-color:#fff">
                             <div class="col-md-7">
-                                <h3 class="text-center">Register to<a href="https://te-pos.com"><img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></a></h3>
+                                <h3 class="text-center">Register to<a href="<?= $setting['link_website']?>"><img src="<?= base_url()?>assets/images/logo.png" width="150px" height="50px"></a></h3>
                                 <div id="hasil"></div>
                                 <form action="#" id="frmlogin" name="frmlogin" method="post">
                                     <div class="form-group first">
@@ -65,8 +65,12 @@
                                     <input type="email" class="form-control"  style="border:1px solid #cd955c" placeholder="youremail@mail.com" name="email" id="email">
                                     </div>
                                     <div class="form-group last mb-2">
+                                    <label for="phone">Phone *</label>
+                                    <input type="text" class="form-control"  style="border:1px solid #cd955c" placeholder="08XXXXXXXXX" name="phone" id="phone">
+                                    </div>
+                                    <div class="form-group last mb-2">
                                     <label for="perusahaan">Perusahaan *</label>
-                                    <input type="perusahaan" class="form-control" style="border:1px solid #cd955c" placeholder=" Nama Perusahaan" name="perusahaan" id="perusahaan">
+                                    <input type="text" class="form-control" style="border:1px solid #cd955c" placeholder=" Nama Perusahaan" name="perusahaan" id="perusahaan">
                                     </div>
                                     <div class="form-group last mb-2">
                                     <label for="password">Alamat</label>
@@ -109,6 +113,7 @@
 			password: $("#password").val(),
             email: $("#email").val(),
             alamat: $("#alamat").val(),
+            phone: $("#phone").val(),
             perusahaan: $("#perusahaan").val(),
 		};
 

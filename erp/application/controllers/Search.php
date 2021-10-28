@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -58,14 +42,14 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($tid) {
-            $query = $this->db->query("SELECT tid FROM geopos_invoices WHERE $whr (UPPER(tid)  LIKE '" . $tid . "%')  LIMIT 4");
+            $query = $this->db->query("SELECT tid FROM te_invoices WHERE $whr (UPPER(tid)  LIKE '" . $tid . "%')  LIMIT 4");
 
             $result = $query->result_array();
 
@@ -91,14 +75,14 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_customers WHERE $whr (UPPER(name)  LIKE '%" . strtoupper($name) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name) . "%') LIMIT 6");
 
             $result = $query->result_array();
 
@@ -135,13 +119,13 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
 
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
         if ($name != NULL) {
-            $query = $this->db->query("SELECT id,username FROM geopos_users WHERE $whr username  LIKE '%" . $name . "%' LIMIT 6");
+            $query = $this->db->query("SELECT id,username FROM te_users WHERE $whr username  LIKE '%" . $name . "%' LIMIT 6");
 
             $result = $query->result_array();
 
@@ -168,14 +152,14 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_customers WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_customers WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
 
             $result = $query->result_array();
 
@@ -194,14 +178,14 @@ class Search extends CI_Controller
         $whr = '';
         if ($this->aauth->get_user()->loc) {
             $whr = ' (loc=' . $this->aauth->get_user()->loc . ' ) AND ';
-            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ' OR loc=0) AND ';
+            if (BDATA) $whr = ' (loc=' . $this->aauth->get_user()->loc . ') AND ';
             $this->db->group_end();
         } elseif (!BDATA) {
-            $whr = ' ( loc=0) AND ';
+            $whr = ' AND ';
         }
 
         if ($name) {
-            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM geopos_supplier WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
+            $query = $this->db->query("SELECT id,name,address,city,phone,email FROM te_supplier WHERE $whr (UPPER(name)  LIKE '" . strtoupper($name['term']) . "%' OR UPPER(phone)  LIKE '" . strtoupper($name['term']) . "%') LIMIT 6");
 
             $result = $query->result_array();
 

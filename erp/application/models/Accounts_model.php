@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Accounts_model extends CI_Model
 {
-    var $table = 'geopos_accounts';
+    var $table = 'te_accounts';
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ class Accounts_model extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->from('geopos_accounts');
+        $this->db->from('te_accounts');
         $this->db->where('id', $acid);
         if ($this->aauth->get_user()->loc) {
             $this->db->group_start();
@@ -75,7 +75,7 @@ class Accounts_model extends CI_Model
             'account_type'=>$account_type
         );
 
-        if ($this->db->insert('geopos_accounts', $data)) {
+        if ($this->db->insert('te_accounts', $data)) {
             $this->aauth->applog("[Account Created] $accno - $intbal ID " . $this->db->insert_id(), $this->aauth->get_user()->username);
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('ADDED'). "  <a href='".base_url('accounts')."' class='btn btn-blue btn-lg'><span class='fa fa-list-alt' aria-hidden='true'></span>  </a> <a href='add' class='btn btn-info btn-lg'><span class='fa fa-plus-circle' aria-hidden='true'></span>  </a>"));
@@ -112,7 +112,7 @@ class Accounts_model extends CI_Model
            $this->db->where('loc', $this->aauth->get_user()->loc);
          }
 
-        if ($this->db->update('geopos_accounts')) {
+        if ($this->db->update('te_accounts')) {
             $this->aauth->applog("[Account Edited] $accno - ID " . $acid, $this->aauth->get_user()->username);
             echo json_encode(array('status' => 'Success', 'message' =>
                 $this->lang->line('UPDATED')));
@@ -128,10 +128,10 @@ class Accounts_model extends CI_Model
         $whr = ' ';
         if ($this->aauth->get_user()->loc) {
             $whr = ' WHERE loc=' . $this->aauth->get_user()->loc;
-             if(BDATA) $whr .= 'OR loc=0 ';
+             if(BDATA) $whr .= '';
         }
 
-        $query = $this->db->query("SELECT SUM(lastbal) AS balance,COUNT(id) AS count_a FROM geopos_accounts $whr");
+        $query = $this->db->query("SELECT SUM(lastbal) AS balance,COUNT(id) AS count_a FROM te_accounts $whr");
 
         $result = $query->row_array();
         echo json_encode(array(0 => array('balance' => amountExchange($result['balance'], 0, $this->aauth->get_user()->loc), 'count_a' => $result['count_a'])));

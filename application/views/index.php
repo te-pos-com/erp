@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Selamat Datang</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>Selamat Datang | <?= $setting['nama_website']?></title>
+  <meta content="Program ERP,Accounting,CRM,HRM yang lengkap, murah dan mudah digunakan" name="description">
+  <meta content="Program Kasir, Program ERP, cloud program, penjualan program, POS program" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= base_url() ?>assets/img/favicon.png" rel="icon">
+  <link href="<?= base_url() ?>assets/img/<?= $setting['favicon']?>" rel="icon">
   <link href="<?= base_url() ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -34,7 +34,9 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="index.html"><img src="<?= base_url()?>assets/img/logo.png"> te-pos.com</a></h1>
+      <h1 class="logo">
+        <a href="<?= base_url()?>"><img src="<?= base_url()?>assets/img/<?= $setting['logo']?>"> <?= $setting['nama_website']?></a>
+      </h1>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -42,8 +44,10 @@
           <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Fitur</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="#pricing">Harga</a></li>
+          <li><a class="nav-link scrollto" href="<?= base_url()?>patner">Patner</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
-          <li><a class="getstarted scrollto" href="<?= base_url()?>erp/user/register">Coba Gratis 30 Hari</a></li>
+          <li><a class="getstarted scrollto" href="<?= $setting['link_cloud']?>/user/register">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -67,8 +71,8 @@
             <li><i class="ri-check-line"></i> Laporan Yang Lengkap</li>
           </ul>
           <div class="mt-3">
-            <a href="<?= base_url()?>erp/" class="btn-get-started scrollto">Mulai</a>
-            <a href="<?= base_url()?>erp/user/register" class="btn-get-quote">Coba Gratis 30 Hari</a>
+            <a href="<?= $setting['link_cloud']?>" class="btn-get-started scrollto">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>/user/register" class="btn-get-quote">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -87,12 +91,12 @@
 
         <div class="row content">
           <div class="col-lg-6">
-            <h2>Hi !, Perkenalkan Tentang Kami</h2>
-            <h3>Kami adalah Tim yang berfokus untuk terus mengembangkan program yang lengkap untuk membantu mempermudah menjalankan proses bisnis  </h3>
+            <h2>Hi !, Perkenalkan Tentang <?= $setting['nama_website']?></h2>
+            <h3><?= $setting['nama_website']?> adalah Aplikasi yang digunakan untuk penjualan, dengan program yang lengkap untuk membantu mempermudah menjalankan proses bisnis  </h3>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <p>
-              Kami menawarkan pengalaman menarik untuk anda, <br/>
+            <?= $setting['nama_website']?> menawarkan pengalaman menarik untuk anda, <br/>
               dengan harga yang terjangkau dan fitur program yang lengkap anda akan merasakan pengalaman yang luar biasa,
               Service yang kami tawarkan dan layanan yang tersedia di dalamnya diantaranya :
             </p>
@@ -102,7 +106,7 @@
               <li><i class="ri-check-double-line"></i> Tanpa ada batasan input produk</li>
             </ul>
             <p class="fst-italic">
-              Berkembang bersama bersama adalah tujuan yang ingin Tim kami capai bersama anda, segera bergabung bersama kami dan rasakan pengalaman yang luar biasa !
+              Berkembang bersama bersama adalah tujuan yang ingin <?= $setting['nama_website']?> capai bersama anda, segera bergabung bersama <?= $setting['nama_website']?> dan rasakan pengalaman yang luar biasa !
             </p>
           </div>
         </div>
@@ -119,8 +123,8 @@
           <div class="col-lg-4">
             <div class="box">
               <span>01</span>
-              <h4>Daftar Gratis 30 hari</h4>
-              <p>Segera gabung dan langsung mendapatkan gratis 30 hari akses program</p>
+              <h4>Daftar Gratis <?= $setting['gratis_langganan']?> hari</h4>
+              <p>Segera gabung dan langsung mendapatkan gratis <?= $setting['gratis_langganan']?> hari akses program</p>
             </div>
           </div>
 
@@ -154,7 +158,7 @@
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
-              <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($pelanggan)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Total Pelanggan</p>
             </div>
           </div>
@@ -162,7 +166,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="bi bi-journal-richtext"></i>
-              <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($pelanggan_baru)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Pelanggan Baru Bulan Ini</p>
             </div>
           </div>
@@ -170,7 +174,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="bi bi-headset"></i>
-              <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($suport)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Support yang membantu</p>
             </div>
           </div>
@@ -178,7 +182,7 @@
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="bi bi-people"></i>
-              <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="<?= count($patner)?>" data-purecounter-duration="1" class="purecounter"></span>
               <p>Patner</p>
             </div>
           </div>
@@ -558,7 +562,7 @@
 
           <div class="col-lg-4 box">
             <h3>Free</h3>
-            <h4>Rp. 0,00<span>Selama 30 Hari</span></h4>
+            <h4>Rp. 0<span>Selama <?= $setting['gratis_langganan']?> Hari</span></h4>
             <ul>
               <li><i class="bx bx-check"></i> Penjualan</li>
               <li><i class="bx bx-check"></i> Pembelian</li>
@@ -570,12 +574,12 @@
               <li><i class="bx bx-check"></i> Manajement Project</li>
               <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="<?= $setting['link_cloud']?>/user/register" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box featured">
             <h3>Personal</h3>
-            <h4>Rp 50.000,00<span>per bulan</span></h4>
+            <h4>Rp 250.000<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -587,12 +591,12 @@
                 <li class="na"><i class="bx bx-x"></i> <span> Manajement Project</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span> Accounting</span></li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box">
             <h3>Business</h3>
-            <h4>Rp 150.000,00<span>per bulan</span></h4>
+            <h4>Rp 350.000<span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -604,84 +608,14 @@
                 <li><i class="bx bx-check"></i> Manajement Project</li>
                 <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="#" class="btn-buy">Get Started</a>
+            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Get Started</a>
           </div>
 
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
-
-    
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <!--
-    <section id="faq" class="faq">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>FAQ</h2>
-        </div>
-
-        <ul class="faq-list">
-
-          <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq2" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq3" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq4" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq5" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq6" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-              </p>
-            </div>
-          </li>
-
-        </ul>
-
-      </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section>
+    <!-- End Pricing Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact section-bg">
@@ -701,21 +635,21 @@
                 <div class="info-box">
                   <i class="bx bx-map"></i>
                   <h3>Alamat</h3>
-                  <p>Jl Kalimati No 32, Yogyakarta, 535022</p>
+                  <p><?= $setting['alamat']?></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@te-pos.com<br>contact@te-pos.com</p>
+                  <p><?= $setting['email']?></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-box mt-4">
                   <i class="bx bx-phone-call"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                  <p><?= $setting['no_telp']?></p>
                 </div>
               </div>
             </div>
@@ -762,13 +696,11 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>te-pos.com</h3>
+            <h3>Te-Pos</h3>
             <p>
-              Jl Kalimati No. 32<br>
-              Sleman, 535022<br>
-              Indonesia <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              <?= $setting['alamat']?><br>
+              <strong>Phone:</strong> <?= $setting['no_telp']?><br>
+              <strong>Email:</strong> <?= $setting['email']?><br>
             </p>
           </div>
 
@@ -794,21 +726,16 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>te-pos.com</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span><?= $setting['nama_website']?></span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/resi-free-bootstrap-html-template/ -->
-          Designed by <a href="https://te-pos.com/">te-pos</a>
+          Designed by <a href="<?= $setting['link_website']?>"><?= $setting['domain_website']?></a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>
