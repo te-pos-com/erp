@@ -24,7 +24,16 @@ class Langganan extends CI_Controller
 		$this->midtrans->config($params);
     }
 
-    public function index()
+	public function index()
+    {
+        $head['usernm'] = $this->aauth->get_user()->username;
+        $data['langganan'] = $this->langganan_model->langganan_list();
+        $head['title'] = 'Langganan';
+        $this->load->view('fixed/header', $head);
+        $this->load->view('langganan/list_langganan', $data);
+        $this->load->view('fixed/footer');
+    }
+    public function addlangganan()
     {
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['langganan'] = $this->langganan_model->langganan_list();
@@ -47,47 +56,26 @@ class Langganan extends CI_Controller
 
     public function token()
     {
+
 		$transaction_details = array(
 		  'order_id' => rand(),
-		  'gross_amount' => 1000, // no decimal allowed for creditcard
+		  'gross_amount' => $this->input->post('nominal'), // no decimal allowed for creditcard
 		);
 
 		$item1_details = array(
 		  'id' => 'a1',
-		  'price' => 1000,//$this->input->post('nominal'),
+		  'price' => $this->input->post('nominal'),
 		  'quantity' => 1,
-		  'name' => "priyo subarkah"//$this->input->post('paket')
+		  'name' => $this->input->post('paket')
 		);
 
 		$item_details = array ($item1_details);
 
-		$billing_address = array(
-		  'first_name'    => "Andri",
-		  'last_name'     => "Litani",
-		  'address'       => "Mangga 20",
-		  'city'          => "Jakarta",
-		  'postal_code'   => "16602",
-		  'phone'         => "081122334455",
-		  'country_code'  => 'IDN'
-		);
-
-		$shipping_address = array(
-		  'first_name'    => "Obet",
-		  'last_name'     => "Supriadi",
-		  'address'       => "Manggis 90",
-		  'city'          => "Jakarta",
-		  'postal_code'   => "16601",
-		  'phone'         => "08113366345",
-		  'country_code'  => 'IDN'
-		);
-
 		$customer_details = array(
-		  'first_name'    => "Andri",
-		  'last_name'     => "Litani",
-		  'email'         => "andri@litani.com",
-		  'phone'         => "081122334455",
-		  'billing_address'  => $billing_address,
-		  'shipping_address' => $shipping_address
+		  'first_name'    => $this->input->post('nama'),
+		  'last_name'     => "",
+		  'email'         => $this->input->post('email'),
+		  'phone'         => $this->input->post('phone'),
 		);
 
 		$transaction = array(
@@ -98,6 +86,30 @@ class Langganan extends CI_Controller
 
 		$snapToken = $this->midtrans->getSnapToken($transaction);
 		error_log($snapToken);
+
+		$masatrial = 30*$this->input->post('durasi_langganan');
+		$tglinstal = date('Y-m-d');
+		$today = strtotime($tglinstal);
+		$tglexpired = date("Y-m-d", strtotime("+".$masatrial." days", $today));
+		
+		$langganan = array(
+			'loc'=> $this->aauth->get_user()->loc,
+			'id_langganan'=>$this->input->post('id_langganan'),
+			'id_user'=> $this->aauth->get_user()->id,
+			'nominal_langganan'=>$this->input->post('nominal'),
+			'alamat'=>$this->input->post('alamat'),
+			'tokon_midtrans'=>$snapToken,
+			'tanggal'=>$tglexpired,
+			'durasi_langganan'=>$this->input->post('durasi_langganan'),
+			'email'=>$this->input->post('email'),
+			'phone'=>$this->input->post('phone'),
+			'username'=>$this->input->post('nama'),
+			'status'=>0
+		);
+		$this->db->insert('te_pembayaran', $langganan);
 		echo $snapToken;
-    }                                                   
+    }           
+	function berhasil(){
+
+	}                                        
 }

@@ -20,30 +20,35 @@
 
             <!--Card content-->
             <form class="card-body" action="<?=site_url()?>/snap/finish">
-
-              <!--Username-->
-              <div class="md-form input-group pl-0 mb-5">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">@</span>
-                </div>
-                <input type="text" class="form-control py-0" placeholder="Username" aria-describedby="basic-addon1">
+              <!--username-->
+              <div class="md-form mb-5">
+                <label for="email" class="">Username</label>
+                <input type="text" id="username" class="form-control" value="<?= $this->aauth->get_user()->username?>" placeholder="youremail@example.com" disabled>
               </div>
 
               <!--email-->
               <div class="md-form mb-5">
                 <label for="email" class="">Email</label>
-                <input type="text" id="email" class="form-control" placeholder="youremail@example.com">
+                <input type="text" id="email" class="form-control" placeholder="youremail@example.com" value="<?=$this->aauth->get_user()->email?>" disabled>
               </div>
 
-              <!--address-->
+              
+              <!--phone-->
               <div class="md-form mb-5">
-                <label for="address" class="">Alamat</label>  
-                <input type="text" id="address" class="form-control" placeholder="1234 Main St">
+                <label for="email" class="">Phone</label>
+                <input type="text" id="phone" class="form-control" placeholder="+62xxxx" value="<?=$this->aauth->get_user()->phone?>" disabled>
               </div>
-               
+
+              <!--alamat-->
+              <div class="md-form mb-5">
+                <label for="email" class="">Alamat</label>
+                <textarea id="alamat" class="form-control"></textarea>
+              </div>
+              <?php if ($langganan['id']!=4){
+              ?>
               <div class="md-form mb-5">
                   <label for="state">Periode Langganan</label>
-                  <select class="custom-select d-block w-100" id="state" required>
+                  <select class="custom-select d-block w-100" id="durasi_langganan" required>
                     <option value="">Pilih...</option>
                     <option value="6" selected >6 Bulan</option>
                     <option value="12">12 Bulan (1 Tahun)</option>
@@ -54,7 +59,8 @@
                     Please provide a valid state.
                   </div>
               </div>
-
+              <?php }?>
+              <input type="hidden" value=<?= $langganan['harga_langganan'] ?> id="value_bayar">
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" id="pay-button">Bayar</button>
 
@@ -71,16 +77,20 @@
           <!-- Cart -->
           <ul class="list-group mb-3 z-depth-1">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0"><?= $langganan['nama_langganan']?></h6>
-                <small class="text-muted">Paket <?= $langganan['nama_langganan']?> selama <span id="lama">6</span> Bulan</small>
-              </div>
-              <?php if ($langganan['id']!=4){
-              ?>
-                <span class="text-muted">Rp <?= number_format(6*$langganan['harga_langganan'])?></span>
+             <?php if ($langganan['id']!=4){
+             ?>  
+                <div>
+                  <h6 class="my-0"><?= $langganan['nama_langganan']?></h6>
+                  <small class="text-muted">Paket <?= $langganan['nama_langganan']?> selama <span id="lama">6</span> Bulan</small>
+                </div>
+                <span class="text-muted"> <?= number_format($langganan['harga_langganan'])?></span>
               <?php 
                 }
               else{?>
+                <div>
+                  <h6 class="my-0"><?= $langganan['nama_langganan']?></h6>
+                  <small class="text-muted">Paket <?= $langganan['nama_langganan']?></small>
+                </div>
                 <span class="text-muted"><?= number_format($langganan['harga_langganan'])?></span>
               <?php }?>
             </li>
@@ -89,28 +99,14 @@
               <span>Total </span>
               <?php if ($langganan['id']!=4){
               ?>
-                <strong>Rp <?= number_format(6*$langganan['harga_langganan'])?></strong>
+                <strong id="total_langganan"> 0</strong>
               <?php 
                 }
               else{?>
-                <span class="text-muted">Rp <?= number_format($langganan['harga_langganan'])?></span>
+                <span class="text-muted"> <?= number_format($langganan['harga_langganan'])?></span>
               <?php }?>  
             </li>
           </ul>
-          <!-- Cart -->
-
-          <!-- Promo code -->
-          <!--
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code" aria-label="Recipient's username" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Redeem</button>
-              </div>
-            </div>
-          </form>
-          -->
-          <!-- Promo code -->
 
         </div>
         <!--Grid column-->
@@ -123,39 +119,21 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            load();
-            totallangganan();
-            $('#langganan').change(function () {
-                load();
-            });
+            <?php if ($langganan['id']!=4){
+            ?>
+            totallangganan()
+            <?php }?>
             $('#durasi_langganan').change(function () {
                 totallangganan();
             });
 
-            function load() {
-                var pilihan = $("#langganan").children("option:selected").val();
-                if(pilihan=="MEDIUM"){
-                    $("#keterangan").html('1. Transaksi Pembelian & Penjualan<br/>2. Laporan Persediaan Barang<br/>3. Laporan Laba/Rugi<br/>4. Laporan Penjualan Harian Ke E-mail<br/>5. Notifikasi Minimal Stok Ke E-mail<br/><br/><h2><b>Rp 150.000 /Bulan</b></h2>');
-                }
-                else if(pilihan=="BUSINESS"){
-                    $('#keterangan').html('1. Transaksi Pembelian & Penjualan<br/>2. Laporan Persediaan Barang<br/>3. Laporan Laba/Rugi<br/>4. Laporan Penjualan Harian Ke E-mail<br/>5. Notifikasi Minimal Stok Ke E-mail<br/>6. Laporan GL<br/>7. Laporan Buku Besar<br/>8. Laporan Kas Harian<br/>9. Laporan Neraca<br/><br/><h2><b>Rp 300.000 /Bulan</b></h2>');
-                }
-                totallangganan();
-            }
-
+           
             function totallangganan() {
-                var pilihan = $("#langganan").children("option:selected").val();
                 var bulan  = $("#durasi_langganan").children("option:selected").val();
-                if(pilihan=="MEDIUM"){
-                    var total = 150000*bulan;
-                    $("#totallangganan").html('<h2><b>TOTAL : Rp '+ number_format(total) +' /Bulan</b></h2>');
-                }
-                else if(pilihan=="BUSINESS"){
-                    console.log(bulan);
-                    var total = 300000*bulan;
-                    $('#totallangganan').html('<h2><b>TOTAL : Rp '+ number_format(total) +' /Bulan</b></h2>');
-                }
-                console.log(pilihan);
+                var total_langganan = <?= $langganan['harga_langganan']?>*bulan;
+                $('#lama').html(bulan);
+                $('#total_langganan').html(number_format(total_langganan));
+                $('#value_bayar').val(total_langganan)
             }
 
             function number_format (number, decimals, dec_point, thousands_sep) {
@@ -189,32 +167,24 @@
                     
     $('#pay-button').click(function (event) {
       event.preventDefault();
-      //$(this).attr("disabled", "disabled");
-
-    var pilihan = $("#langganan").children("option:selected").val();
-    var bulan  = $("#durasi_langganan").children("option:selected").val();
-    if(pilihan=="MEDIUM"){
-        var total = 150000*bulan;
-    }
-    else if(pilihan=="BUSINESS"){
-        var total = 300000*bulan;
-    }
-
-    var datapaket = {
-        nominal: total,
-        paket: pilihan,
+      var datapaket = {
+          nominal: $('#value_bayar').val(),
+          paket:"<?=$langganan['nama_langganan']?> ",
+          nama:$('#username').val(),
+          email:$('#email').val(),
+          phone:$('#phone').val(),
+          alamat:$('#alamat').val(),
+          durasi_langganan:$("#durasi_langganan").children("option:selected").val(),
+          id_langganan:<?=$langganan['id']?>
     };
     
-    console.log(datapaket);
     $.ajax({
       type: "POST",
       url: '<?=site_url()?>/langganan/token',
       cache: false,
       data: datapaket,
       success: function(data) {
-        //location = data;
-        console.log('token = '+data);
-        
+        //location = data;    
         var resultType = document.getElementById('result-type');
         var resultData = document.getElementById('result-data');
 

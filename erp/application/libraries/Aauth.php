@@ -258,6 +258,7 @@ class Aauth
                 's_role' => 'r_'.$row->roleid,
                 'loc'=>$row->loc,
                 'id_perusahaan'=>$row->id_perusahaan,
+                'phone'=>$row->phone,
                 'loggedin' => TRUE
             );
 
