@@ -850,7 +850,9 @@ class Aauth
             'date_created' => date("Y-m-d H:i:s"),
             'ip_address'=>'::1',
             'id_perusahaan'=>$id_perusahaan,
-			'picture'=>'example.png'
+			'picture'=>'example.png',
+            'roleid'=>5,
+            'loc'=>$id_perusahaan,
         );
 
 
@@ -883,6 +885,9 @@ class Aauth
             );  
             $this->aauth_db->insert('geopos_register', $register);
             
+
+
+
             // if otp actived
             if ($this->config_vars['totp_active'] == TRUE AND $this->config_vars['totp_only_on_ip_change'] == TRUE) {
                 $this->update_user_totp_secret($user_id,$this->generate_unique_totp_secret());
