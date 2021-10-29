@@ -24,29 +24,15 @@
                     <tr>
                         <th>#</th>
                         <th>Username</th>
-                        <th><?php echo $this->lang->line('Qty') ?></th>
-                        <th><?php echo $this->lang->line('Code') ?></th>
-                        <th><?php echo $this->lang->line('Category') ?></th>
-                        <th><?php echo $this->lang->line('Warehouse') ?></th>
-                        <th><?php echo $this->lang->line('Price') ?></th>
-                        <th><?php echo $this->lang->line('Settings') ?></th>
+                        <th>Phone</th>
+                        <th>Pembayaran</th>
+                        <th>Durasi</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     </tbody>
-
-                    <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th><?php echo $this->lang->line('Name') ?></th>
-                        <th><?php echo $this->lang->line('Qty') ?></th>
-                        <th><?php echo $this->lang->line('Code') ?></th>
-                        <th><?php echo $this->lang->line('Category') ?></th>
-                        <th><?php echo $this->lang->line('Warehouse') ?></th>
-                        <th><?php echo $this->lang->line('Price') ?></th>
-                        <th><?php echo $this->lang->line('Settings') ?></th>
-                    </tr>
-                    </tfoot>
                 </table>
 
             </div>
@@ -69,7 +55,7 @@
 
                     // Load data for the table's content from an Ajax source
                     "ajax": {
-                        "url": "<?php echo site_url('products/product_list')?>",
+                        "url": "<?php echo site_url('langganan/langganan_list')?>",
                         "type": "POST",
                         'data': {'<?=$this->security->get_csrf_token_name()?>': crsf_hash,'group': '<?=$this->input->get('group')?>'}
                     },
