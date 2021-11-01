@@ -94,7 +94,7 @@
                                                         $loc = location($this->aauth->get_user()->loc);
                                                         echo ' <option value="' . $loc['id'] . '"> *' . $loc['cname'] . '*</option>';
                                 
-                                                        $loc = locations();
+                                                        $loc = location();
                                                         foreach ($loc as $row) {
                                                             echo ' <option value="' . $row['id'] . '"> ' . $row['cname'] . '</option>';
                                                         }
@@ -595,7 +595,7 @@
                          $loc = location($this->aauth->get_user()->loc);
                          echo ' <option value="' . $loc['id'] . '"> *' . $loc['cname'] . '*</option>';
  
-                         $loc = locations();
+                         $loc = location();
                          foreach ($loc as $row) {
                              echo ' <option value="' . $row['id'] . '"> ' . $row['cname'] . '</option>';
                          }

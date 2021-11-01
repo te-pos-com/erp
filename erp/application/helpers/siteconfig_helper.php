@@ -393,8 +393,8 @@ function location($number = 0)
         return $query2->row_array();
     }
     else{
-        $query2 = $ci->db->query("SELECT * FROM te_locations WHERE loc=". 0);
-        return $query2->row_array();
+        $query2 = $ci->db->query("SELECT * FROM te_locations WHERE loc=". $this->aauth->get_user()->loc);
+        return $query2->result_array();
     }
 }
 
