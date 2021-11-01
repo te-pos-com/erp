@@ -175,7 +175,8 @@
           phone:$('#phone').val(),
           alamat:$('#alamat').val(),
           durasi_langganan:$("#durasi_langganan").children("option:selected").val(),
-          id_langganan:<?=$langganan['id']?>
+          id_langganan:<?=$langganan['id']?>,
+          id_pembayaran:"<?= $idpembayaran ?>"
     };
     
     $.ajax({
