@@ -733,6 +733,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+    <div class="contactwa" onclick="openHelpWA();">
+            <div class="inner color-scheme-background" style="background:#000;border-color:#000">
+                Butuh Bantuan ?
+                <div class="iconwa color-scheme-background" style="background:#000;border-color:#fff;" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16" style="margin-top:4px">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="formWaBox" id="helpViaWa">
+        <div class="formWa" id="formHelpWA">
+            <div class="formWaBody" id="formHelpWABody">
+                <div class="heading clear">
+                    <i class="icon ion-logo-whatsapp" style="color: #61ddbb"></i>
+                    <h3><b>Form</b> Bantuan Whatsapp!</h3>
+                    <div class="close" onclick="closeHelpWA();">×</div>
+                </div>
+                <form class="form" method="post" enctype="multipart/form-data" onsubmit="helpWA(this); return false;">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="input">
+                                    <i class="icon ion-md-person"></i>
+                                    <input type="text" name="full_name" placeholder="Nama Lengkap" required oninvalid="this.setCustomValidity('Input Nama Lengkap Anda')" oninput="this.setCustomValidity('')">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="input">
+                                    <textarea name="message" placeholder="Pesan Anda"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <button class="color-scheme-background" type="submit">
+                                    <i class="icon ion-md-send"></i>
+                                    Kirim
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="hidden" name="destination" value="<?= $setting['no_telp']?>">
+                    <input type="hidden" name="gretings" value="Halo <?= $setting['nama_website'] ?> Saya Mau Tanya">
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container d-md-flex py-4">
 
       <div class="me-md-auto text-center text-md-start">
@@ -764,7 +820,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+     function openHelpWA(tujuan = false){
+            let form = document.getElementById('helpViaWa');
 
+            if( tujuan ){
+                form.querySelector('[name=destination]').value = tujuan;
+            }
+            form.classList.add('open');
+
+            let formwa = form.querySelector('#formHelpWA');
+            let formwabody = form.querySelector('#formHelpWABody');
+            let formbodyheight = formwa.offsetHeight - 60;
+
+            if( formwabody.offsetHeight < formbodyheight ){
+                formwa.style.height = 'auto';
+            }
+        }
+
+        function closeHelpWA(){
+            let form = document.getElementById('helpViaWa');
+            form.classList.remove('open');
+        }
+
+        function helpWA(ini){
+            let formData = ini.elements,
+            inputs = {},
+            wa = 'https://web.whatsapp.com/send',
+            ajax = new XMLHttpRequest();
+
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                wa = 'whatsapp://send';
+            }
+
+            for (let i = 0; i < formData.length; i++) {
+                let key = formData[i].name;
+                if( key !== '' ){
+                    inputs[key] = formData[i].value;
+                }
+            }
+
+            let message = inputs.message.replace(/\n/g, '%0A');
+
+            let url = wa + '?phone=' + inputs.destination + '&text=' + inputs.gretings + '.%0A' + 'Saya *' + inputs.full_name + '*%0A%0A ' + '💬 ' + message + '%0A%0A ' + 'Via ' + location.href;
+
+
+            let w = 960,h = 540,left = Number((screen.width / 2) - (w / 2)),top = Number((screen.height / 2) - (h / 2)),popupWindow = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            popupWindow.focus();
+            let form = document.getElementById('helpViaWa');
+            form.classList.remove('open');
+            return false;
+        }
+  </script>
 </body>
 
 </html>
