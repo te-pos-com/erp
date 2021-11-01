@@ -384,11 +384,15 @@ function locations()
     return $query2->result_array();
 }
 
-function location($number = 0)
+function location($number = 0,$loc=0)
 {
     $ci =& get_instance();
     $ci->load->database();
     if ($number>0){
+        if ($loc>0){
+            $query2 = $ci->db->query("SELECT * FROM te_locations WHERE loc=". $loc);
+            return $query2->result_array();            
+        }
         $query2 = $ci->db->query("SELECT * FROM te_locations WHERE id=$number");
         return $query2->row_array();
     }
