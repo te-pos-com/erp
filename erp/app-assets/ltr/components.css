@@ -3298,8 +3298,11 @@ input[type="month"].form-control {
     }
 } */
 .input-group-addon {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem; }
+  padding-top: 0.6rem;
+  padding-bottom: 0.4rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
 .floating-label-form-group-with-focus label,
 .floating-label-form-group-with-value label {

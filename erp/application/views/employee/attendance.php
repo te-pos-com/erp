@@ -7,18 +7,12 @@
             <div class="message"></div>
         </div>
         <div class="card card-block">
-
-
             <form method="post" id="data_form" class="card-body">
-
                 <h5><?php echo $this->lang->line('Add') . ' ' . $this->lang->line('Attendance') ?></h5>
                 <hr>
-
                 <div class="form-group row">
-
                     <label class="col-sm-3 col-form-label"
                            for="pay_cat"><?php echo $this->lang->line('Employees') ?></label>
-
                     <div class="col-sm-6">
                         <select name="employee[]" class="form-control required select-box" multiple="multiple">
                             <?php
@@ -29,15 +23,11 @@
                             }
                             ?>
                         </select>
-
-
                     </div>
                 </div>
                 <div class="form-group row">
-
                     <label class="col-sm-3 control-label"
                            for="from"><?php echo $this->lang->line('Date') ?></label>
-
                     <div class="col-sm-2">
                         <input type="text" class="form-control b_input required"
                                placeholder="Start Date" name="adate"

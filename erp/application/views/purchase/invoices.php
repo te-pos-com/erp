@@ -5,14 +5,6 @@
                         href="<?php echo base_url('purchase/create') ?>"
                         class="btn btn-primary btn-sm rounded">
                     <?php echo $this->lang->line('Add new') ?></a></h4>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                </ul>
-            </div>
         </div>
         <div class="card-content">
             <div id="notify" class="alert alert-success" style="display:none;">
@@ -22,7 +14,6 @@
             </div>
             <div class="card-body">
                 <div class="row">
-
                     <div class="col-md-2"><?php echo $this->lang->line('Date') ?></div>
                     <div class="col-md-2">
                         <input type="text" name="start_date" id="start_date"
@@ -56,15 +47,6 @@
                     </tbody>
 
                     <tfoot>
-                    <tr>
-                        <th><?php echo $this->lang->line('No') ?></th>
-                        <th>Order #</th>
-                        <th><?php echo $this->lang->line('Supplier') ?></th>
-                        <th><?php echo $this->lang->line('Date') ?></th>
-                        <th><?php echo $this->lang->line('Amount') ?></th>
-                        <th><?php echo $this->lang->line('Status') ?></th>
-                        <th class="no-sort"><?php echo $this->lang->line('Settings') ?></th>
-                    </tr>
                     </tfoot>
                 </table>
             </div>

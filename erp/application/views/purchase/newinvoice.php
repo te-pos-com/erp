@@ -7,8 +7,6 @@
             </div>
             <div class="card-body">
                 <form method="post" id="data_form">
-
-
                     <div class="row">
 
                         <div class="col-sm-4">

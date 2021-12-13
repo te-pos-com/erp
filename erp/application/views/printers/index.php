@@ -1,5 +1,5 @@
-<article class="content">
-    <div class="card card-block">
+<div class="content-body">
+    <div class="card">
         <div id="notify" class="alert alert-success" style="display:none;">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
 
@@ -23,8 +23,6 @@
                     <th><?php echo $this->lang->line('Business Locations') ?></th>
                     <th><?php echo $this->lang->line('Type') ?></th>
                     <th><?php echo $this->lang->line('Action') ?></th>
-
-
                 </tr>
                 </thead>
                 <tbody>
@@ -43,13 +41,6 @@
                 ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th><?php echo $this->lang->line('Name') ?></th>
-                    <th><?php echo $this->lang->line('Location') ?></th>
-                    <th><?php echo $this->lang->line('Type') ?></th>
-                    <th><?php echo $this->lang->line('Action') ?></th>
-                </tr>
                 </tfoot>
             </table>
         </div>

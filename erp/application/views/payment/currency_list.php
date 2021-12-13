@@ -51,13 +51,7 @@
             ?>
             </tbody>
             <tfoot>
-            <tr>
-                <th>#</th>
-                <th>ISO CODE</th>
-                <th>Symbol</th>
-                <th>Exchange Rate</th>
-                <th><?php echo $this->lang->line('Action') ?></th>
-            </tr>
+            
             </tfoot>
         </table>
     </div>

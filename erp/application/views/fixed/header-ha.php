@@ -758,7 +758,7 @@
                     </ul>
                 </li>
             <?php }
-            if ($this->aauth->premission(3)) {
+            if ($this->aauth->premission(0)) {
                 ?>
                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#"
                                                                       data-toggle="dropdown"><i

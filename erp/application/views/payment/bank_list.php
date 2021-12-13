@@ -48,13 +48,6 @@
             ?>
             </tbody>
             <tfoot>
-            <tr>
-                <th>#</th>
-                <th><?php echo $this->lang->line('Name') ?></th>
-                <th><?php echo $this->lang->line('Account No') ?></th>
-                <th><?php echo $this->lang->line('Enable') ?></th>
-                <th><?php echo $this->lang->line('Action') ?></th>
-            </tr>
             </tfoot>
         </table>
     </div>

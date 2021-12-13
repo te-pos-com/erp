@@ -2189,8 +2189,6 @@ ul.list-inline.list-inline-pipe > li + li:before {
 a:hover {
   cursor: pointer; }
 
-.round {
-  border-radius: 1.5rem; }
 
 .square {
   border-radius: 0; }
