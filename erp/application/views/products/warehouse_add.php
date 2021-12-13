@@ -1,13 +1,11 @@
-<article class="content">
+<div class="content-body">
     <div class="card card-block">
         <div id="notify" class="alert alert-success" style="display:none;">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
 
             <div class="message"></div>
         </div>
-        <div class="card card-block">
-
-
+        <div class="card">
             <form method="post" id="data_form" class="card-body">
 
                 <h5><?php echo $this->lang->line('Add New Product Warehouse') ?></h5>
@@ -68,5 +66,5 @@
             </form>
         </div>
     </div>
-</article>
+</div>
 

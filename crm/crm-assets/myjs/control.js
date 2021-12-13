@@ -577,10 +577,17 @@ function addObject(action,action_url) {
             dataType: 'json',
             success: function (data) {
                 if (data.status == "Success") {
-                    $("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
-                    $("#notify").removeClass("alert-danger").addClass("alert-success").fadeIn();
-                    $("html, body").scrollTop($("body").offset().top);
-                    $("#data_form").remove();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    //$("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
+                    //$("#notify").removeClass("alert-danger").addClass("alert-success").fadeIn();
+                    //$("html, body").scrollTop($("body").offset().top);
+                    //$("#data_form").remove();
 
                 } else {
                     $("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);

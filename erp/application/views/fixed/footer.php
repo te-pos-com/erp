@@ -16,6 +16,7 @@
 
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
 <script src="<?= assets_url() ?>app-assets/vendors/js/extensions/unslider-min.js"></script>
 <script src="<?= assets_url() ?>app-assets/vendors/js/timeline/horizontal-timeline.js"></script>
 <script src="<?= assets_url() ?>app-assets/js/core/app-menu.js"></script>

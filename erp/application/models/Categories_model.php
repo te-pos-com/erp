@@ -36,7 +36,7 @@ ORDER BY id DESC");
             if (BDATA) $whr = "WHERE  (te_warehouse.loc=" . $this->aauth->get_user()->loc . " ) ";
         }
 
-        $query = $this->db->query("SELECT c.*,p.pc,p.salessum,p.worthsum,p.qty FROM te_product_cat AS c LEFT JOIN ( SELECT te_products.pcat,COUNT(te_products.pid) AS pc,SUM(te_products.product_price*te_products.qty) AS salessum, SUM(te_products.fproduct_price*te_products.qty) AS worthsum,SUM(te_products.qty) AS qty FROM te_products LEFT JOIN te_warehouse ON te_products.warehouse=te_warehouse.id  $whr GROUP BY te_products.pcat ) AS p ON c.id=p.pcat WHERE c.c_type=0");
+        $query = $this->db->query("SELECT c.*,p.pc,p.salessum,p.worthsum,p.qty FROM te_product_cat AS c LEFT JOIN ( SELECT te_products.pcat,COUNT(te_products.pid) AS pc,SUM(te_products.product_price*te_products.qty) AS salessum, SUM(te_products.fproduct_price*te_products.qty) AS worthsum,SUM(te_products.qty) AS qty FROM te_products LEFT JOIN te_warehouse ON te_products.warehouse=te_warehouse.id  $whr GROUP BY te_products.pcat ) AS p ON c.id=p.pcat WHERE c.c_type=0 AND c.loc=". $this->aauth->get_user()->loc ."");
         return $query->result_array();
     }
 

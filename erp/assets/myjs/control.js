@@ -902,11 +902,11 @@ function removeObject(action, action_url) {
 //universal create
 $("#submit-data").on("click", function (e) {
     e.preventDefault();
-    $(this).hide();
+    //$(this).hide();
     var o_data = $("#data_form").serialize();
     var action_url = $('#action-url').val();
     addObject(o_data, action_url);
-    setTimeout(function(){  $("#submit-data").show(); }, 1000);
+    //setTimeout(function(){  $("#submit-data").show(); }, 1000);
 });
 $("#submit-data2").on("click", function (e) {
     e.preventDefault();
@@ -935,20 +935,39 @@ function addObject(action, action_url) {
             success: function (data) {
 
                 if (data.status == "Success") {
-                    $("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
-                    $("#notify").removeClass("alert-danger").addClass("alert-success").fadeIn();
-                    $("html, body").scrollTop($("body").offset().top);
-                    $("#data_form").remove();
+                    Swal.fire({
+                        icon: 'success',
+                        title: data.status,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    
+                    //$("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
+                    //$("#notify").removeClass("alert-danger").addClass("alert-success").fadeIn();
+                    //$("html, body").scrollTop($("body").offset().top);
+                    //$("#data_form").remove();
                 } else {
-                    $("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
-                    $("#notify").removeClass("alert-success").addClass("alert-danger").fadeIn();
-                    $("html, body").scrollTop($("body").offset().top);
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.status,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    //$("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
+                    //$("#notify").removeClass("alert-success").addClass("alert-danger").fadeIn();
+                    //$("html, body").scrollTop($("body").offset().top);
                 }
             },
             error: function (data) {
-                $("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
-                $("#notify").removeClass("alert-success").addClass("alert-warning").fadeIn();
-                $("html, body").scrollTop($("body").offset().top);
+                Swal.fire({
+                    icon: 'error',
+                    title: data.status,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                //$("#notify .message").html("<strong>" + data.status + "</strong>: " + data.message);
+                //$("#notify").removeClass("alert-success").addClass("alert-warning").fadeIn();
+                //$("html, body").scrollTop($("body").offset().top);
             }
         });
     }
