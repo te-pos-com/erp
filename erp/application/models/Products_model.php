@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -42,7 +26,7 @@ class Products_model extends CI_Model
             if ($this->input->post('group') != 'yes') $this->db->where('te_products.merge', 0);
             if ($this->aauth->get_user()->loc) {
                 $this->db->group_start();
-                $this->db->where('te_warehouse.loc', $this->aauth->get_user()->loc);
+                $this->db->where('te_products.loc', $this->aauth->get_user()->loc);
                 if (BDATA) $this->db->or_where('te_warehouse.loc', 0);
                 $this->db->group_end();
             } elseif (!BDATA) {
@@ -62,7 +46,7 @@ class Products_model extends CI_Model
                 }
                 if ($this->aauth->get_user()->loc) {
                     $this->db->group_start();
-                    $this->db->where('te_warehouse.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_products.loc', $this->aauth->get_user()->loc);
 
                     if (BDATA) $this->db->or_where('te_warehouse.loc', 0);
                     $this->db->group_end();
@@ -75,7 +59,7 @@ class Products_model extends CI_Model
                 if ($this->input->post('group') != 'yes') $this->db->where('te_products.merge', 0);
                 if ($this->aauth->get_user()->loc) {
                     $this->db->group_start();
-                    $this->db->where('te_warehouse.loc', $this->aauth->get_user()->loc);
+                    $this->db->where('te_products.loc', $this->aauth->get_user()->loc);
                     if (BDATA) $this->db->or_where('te_warehouse.loc', 0);
                     $this->db->group_end();
                 } elseif (!BDATA) {
@@ -87,7 +71,6 @@ class Products_model extends CI_Model
                 }
             }
         }
-        $this->db->where('te_products.loc', $this->aauth->get_user()->loc);
         $i = 0;
 
         foreach ($this->column_search as $item) // loop column 
@@ -156,6 +139,7 @@ class Products_model extends CI_Model
         } elseif (!BDATA) {
             $this->db->where('te_warehouse.loc', 0);
         }
+        $this->db->where('te_products.loc', $this->aauth->get_user()->loc);
         return $this->db->count_all_results();
     }
 
@@ -563,7 +547,7 @@ class Products_model extends CI_Model
 
         $whr = '';
         if ($this->aauth->get_user()->loc) {
-            $whr = ' LEFT JOIN  te_warehouse on te_warehouse.id = te_products.warehouse WHERE te_warehouse.loc=' . $this->aauth->get_user()->loc;
+            $whr = ' LEFT JOIN  te_warehouse on te_warehouse.id = te_products.warehouse WHERE te_products.loc=' . $this->aauth->get_user()->loc;
             if (BDATA) $whr = ' LEFT JOIN  te_warehouse on te_warehouse.id = te_products.warehouse WHERE  te_warehouse.loc=' . $this->aauth->get_user()->loc;
         } elseif (!BDATA) {
             $whr = ' LEFT JOIN  te_warehouse on te_warehouse.id = te_products.warehouse ';
@@ -614,7 +598,6 @@ FROM te_products $whr");
         $this->db->select('*');
         $this->db->from('te_product_serials');
         $this->db->where('product_id', $pid);
-
         $query = $this->db->get();
         return $query->result_array();
 
@@ -640,6 +623,7 @@ FROM te_products $whr");
             $this->db->select('*');
             $this->db->from('te_products');
             $this->db->where('pid', $row);
+            $this->db->where('loc', $this->aauth->get_user()->loc);
             $query = $this->db->get();
             $pr = $query->row_array();
             $pr2 = $pr;
@@ -654,6 +638,7 @@ FROM te_products $whr");
                     $this->db->select('pid,product_name');
                     $this->db->from('te_products');
                     $this->db->where('pid', $pr['sub']);
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->where('warehouse', $to_warehouse);
                     $query = $this->db->get();
                     $pr = $query->row_array();
@@ -663,6 +648,7 @@ FROM te_products $whr");
                     $this->db->from('te_products');
                     $this->db->where('merge', 2);
                     $this->db->where('sub', $row);
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->where('warehouse', $to_warehouse);
                     $query = $this->db->get();
                     $pr = $query->row_array();
@@ -676,6 +662,7 @@ FROM te_products $whr");
 
                     $this->db->set('qty', "qty+$qty", FALSE);
                     $this->db->where('pid', $c_pid);
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->update('te_products');
                     $this->aauth->applog("[Product Transfer] -$product_name  -Qty-$qty ID " . $c_pid, $this->aauth->get_user()->username);
                     $this->db->delete('te_products', array('pid' => $row));
@@ -717,6 +704,7 @@ FROM te_products $whr");
                 if ($pr['merge'] == 2) {
                     $this->db->select('pid,product_name');
                     $this->db->from('te_products');
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->where('pid', $pr['sub']);
                     $this->db->where('warehouse', $to_warehouse);
                     $query = $this->db->get();
@@ -726,6 +714,7 @@ FROM te_products $whr");
                     $this->db->from('te_products');
                     $this->db->where('merge', 2);
                     $this->db->where('sub', $row);
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->where('warehouse', $to_warehouse);
                     $query = $this->db->get();
                     $pr = $query->row_array();
@@ -739,6 +728,7 @@ FROM te_products $whr");
 
                     $this->db->set('qty', "qty+$qty", FALSE);
                     $this->db->where('pid', $c_pid);
+                    $this->db->where('loc', $this->aauth->get_user()->loc);
                     $this->db->update('te_products');
 
                     $this->movers(1, $c_pid, $qty, 0, 'Stock Transferred W ' . $to_warehouse_name);
@@ -755,6 +745,7 @@ FROM te_products $whr");
 
                 $this->db->set('qty', "qty-$qty", FALSE);
                 $this->db->where('pid', $row);
+                $this->db->where('loc', $this->aauth->get_user()->loc);
                 $this->db->update('te_products');
                 $this->movers(1, $row, -$qty, 0, 'Stock Transferred WID ' . $to_warehouse_name);
             }

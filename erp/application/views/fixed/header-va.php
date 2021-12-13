@@ -297,18 +297,7 @@
                                                 aria-labelledby="heading7" aria-expanded="true">
                                             <div class="card-content">
                                                 <ul>
-                                                    <li><a class="dropdown-item"
-                                                            href="<?php echo base_url(); ?>units"><i
-                                                                    class="ft-chevron-right"></i><?php echo $this->lang->line('Measurement Unit') ?>
-                                                        </a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="<?php echo base_url(); ?>units/variations"><i
-                                                                    class="ft-chevron-right"></i> <?php echo $this->lang->line('ProductsVariations') ?>
-                                                        </a></li>
-                                                    <li><a class="dropdown-item"
-                                                            href="<?php echo base_url(); ?>units/variables"><i
-                                                                    class="ft-chevron-right"></i> <?php echo $this->lang->line('VariationsVariables') ?>
-                                                        </a></li>
+                                                    
                                                 </ul>
                                             </div>
                                         </div>
@@ -613,10 +602,29 @@
                 } ?>"><a href="#"><i
                                 class="ft-layers"></i><span><?php echo $this->lang->line('Stock') ?></span></a>
                     <ul class="menu-content">
+                        <li class="menu-item"><a href="<?php echo base_url(); ?>productcategory"><i
+                                        class="ft-umbrella"></i><?php echo $this->lang->line('Product Categories'); ?>
+                            </a>
+                        </li>
+                        <li class="menu-item"><a href="<?php echo base_url(); ?>productcategory/warehouse"><i
+                                        class="ft-sliders"></i><?php echo $this->lang->line('Warehouses'); ?></a>
+                        </li>
                         <li class="menu-item"><a
                                     href="#"><i
                                         class="ft-list"></i> <?php echo $this->lang->line('Items Manager') ?></a>
                             <ul class="menu-content">
+                                <li><a class="menu-item"
+                                        href="<?php echo base_url(); ?>units"><?php echo $this->lang->line('Measurement Unit') ?>
+                                    </a>
+                                </li>
+                                <li><a class="menu-item"
+                                        href="<?php echo base_url(); ?>units/variations"><?php echo $this->lang->line('ProductsVariations') ?>
+                                    </a>
+                                </li>
+                                <li><a class="menu-item"
+                                        href="<?php echo base_url(); ?>units/variables"><?php echo $this->lang->line('VariationsVariables') ?>
+                                    </a>
+                                </li>
                                 <li class="menu-item"><a
                                             href="<?= base_url(); ?>products/add"> <?php echo $this->lang->line('New Product'); ?></a>
                                 </li>
@@ -625,13 +633,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="menu-item"><a href="<?php echo base_url(); ?>productcategory"><i
-                                        class="ft-umbrella"></i><?php echo $this->lang->line('Product Categories'); ?>
-                            </a>
-                        </li>
-                        <li class="menu-item"><a href="<?php echo base_url(); ?>productcategory/warehouse"><i
-                                        class="ft-sliders"></i><?php echo $this->lang->line('Warehouses'); ?></a>
-                        </li>
+                        
                         <li class="menu-item"><a class="dropdown-item"
                                                  href="<?php echo base_url(); ?>products/stock_transfer"><i
                                         class="ft-wind"></i><?php echo $this->lang->line('Stock Transfer'); ?></a>

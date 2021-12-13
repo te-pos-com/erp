@@ -59,14 +59,8 @@
                     ?>
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th><?php echo $this->lang->line('Name') ?></th>
-                        <th><?php echo $this->lang->line('Total Products') ?></th>
-                        <th><?php echo $this->lang->line('Stock Quantity') ?></th>
-                        <th><?php echo $this->lang->line('Worth (Sales/Stock)') ?></th>
-                        <th><?php echo $this->lang->line('Action') ?></th>
-                    </tr>
+                        <tr>
+                        </tr>
                     </tfoot>
                 </table>
             </div>

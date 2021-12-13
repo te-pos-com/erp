@@ -1,20 +1,4 @@
 <?php
-/**
- * Geo POS -  Accounting,  Invoicing  and CRM Application
- * Copyright (c) Rajesh Dukiya. All Rights Reserved
- * ***********************************************************************
- *
- *  Email: support@ultimatekode.com
- *  Website: https://www.ultimatekode.com
- *
- *  ************************************************************************
- *  * This software is furnished under a license and may be used and copied
- *  * only  in  accordance  with  the  terms  of such  license and with the
- *  * inclusion of the above copyright notice.
- *  * If you Purchased from Codecanyon, Please read the full License from
- *  * here- http://codecanyon.net/licenses/standard/
- * ***********************************************************************
- */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -24,28 +8,22 @@ class Categories_model extends CI_Model
     public function category_list($type = 0, $rel = 0)
     {
         $query = $this->db->query("SELECT id,title
-FROM te_product_cat WHERE c_type='$type' AND rel_id='$rel'
-
+FROM te_product_cat WHERE
+ c_type='$type' AND rel_id='$rel'
+ AND loc='". $this->aauth->get_user()->loc ."'
 ORDER BY id DESC");
         return $query->result_array();
     }
 
     public function warehouse_list()
     {
-        $where = '';
 
-
-        if (!BDATA) $where = "";
-        if ($this->aauth->get_user()->loc) {
-            $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . " ) ";
-            if (BDATA) $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . ") ";
-        }
-
+        $where = "WHERE  (loc=" . $this->aauth->get_user()->loc . " ) ";
 
         $query = $this->db->query("SELECT id,title
 FROM te_warehouse $where 
-
 ORDER BY id DESC");
+
         return $query->result_array();
     }
 
@@ -80,13 +58,8 @@ ORDER BY id DESC");
     public function warehouse()
     {
         $where = '';
-        if ($this->aauth->get_user()->loc) {
-            $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc;
 
-            if (BDATA) $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc . ' ';
-        } elseif (!BDATA) {
-            $where = '';
-        }
+        $where = ' WHERE c.loc=' . $this->aauth->get_user()->loc;
         $query = $this->db->query("SELECT c.*,p.pc,p.salessum,p.worthsum,p.qty FROM te_warehouse AS c LEFT JOIN ( SELECT warehouse,COUNT(pid) AS pc,SUM(product_price*qty) AS salessum, SUM(fproduct_price*qty) AS worthsum,SUM(qty) AS qty FROM  te_products GROUP BY warehouse ) AS p ON c.id=p.warehouse  $where");
         return $query->result_array();
     }
@@ -109,7 +82,8 @@ p.pid='$id' $qj ");
             'title' => $cat_name,
             'extra' => $cat_desc,
             'c_type' => $cat_type,
-            'rel_id' => $cat_rel
+            'rel_id' => $cat_rel,
+            'loc'=>$this->aauth->get_user()->loc
         );
 
         if ($cat_type) {
@@ -156,7 +130,8 @@ p.pid='$id' $qj ");
             'title' => $product_cat_name,
             'extra' => $product_cat_desc,
             'c_type' => $cat_type,
-            'rel_id' => $cat_rel
+            'rel_id' => $cat_rel,
+            'loc'=>$this->aauth->get_user()->loc
         );
         $this->db->set($data);
         $this->db->where('id', $catid);
@@ -205,6 +180,7 @@ p.pid='$id' $qj ");
         $this->db->select('*');
         $this->db->from('te_product_cat');
         $this->db->where('rel_id', $id);
+        $this->db->where('loc',$this->aauth->get_user()->loc);
         $this->db->where('c_type', 1);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -216,6 +192,7 @@ p.pid='$id' $qj ");
         $this->db->select('*');
         $this->db->from('te_product_cat');
         $this->db->where('id', $id);
+        $this->db->where('loc',$this->aauth->get_user()->loc);
         $this->db->where('c_type', 1);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -227,6 +204,7 @@ p.pid='$id' $qj ");
         $this->db->select('*');
         $this->db->from('te_product_cat');
         $this->db->where('rel_id', $id);
+        $this->db->where('loc',$this->aauth->get_user()->loc);
         $this->db->where('c_type', 1);
         $query = $this->db->get();
         return $query->result_array();

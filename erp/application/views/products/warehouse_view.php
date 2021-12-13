@@ -39,16 +39,8 @@
                     </tbody>
 
                     <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th><?php echo $this->lang->line('Name') ?></th>
-                        <th><?php echo $this->lang->line('Stock') ?></th>
-                        <th><?php echo $this->lang->line('Code') ?></th>
-                        <th><?php echo $this->lang->line('Category') ?></th>
-                        <th><?php echo $this->lang->line('Price') ?></th>
-                        <th><?php echo $this->lang->line('Settings') ?></th>
-
-                    </tr>
+                        <tr>
+                        </tr>
                     </tfoot>
                 </table>
             </div>

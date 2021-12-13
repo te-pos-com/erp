@@ -258,23 +258,19 @@ class Productcategory extends CI_Controller
     public function report_product()
     {
         $pid = intval($this->input->post('id'));
-
         $r_type = intval($this->input->post('r_type'));
         $s_date = datefordatabase($this->input->post('s_date'));
         $e_date = datefordatabase($this->input->post('e_date'));
         $sub_date = $this->input->post('sub');
         $filter = 'pcat';
         if ($sub_date) $filter = 'sub_id';
-
         if ($pid && $r_type) {
             $qj = '';
             $wr = '';
             if ($this->aauth->get_user()->loc) {
                 $qj = "LEFT JOIN te_warehouse ON te_products.warehouse=te_warehouse.id";
-
                 $wr = " AND te_warehouse.loc='" . $this->aauth->get_user()->loc . "'";
             }
-
 
             switch ($r_type) {
                 case 1 :
@@ -294,10 +290,10 @@ class Productcategory extends CI_Controller
             }
             $this->db->select('*');
             $this->db->from('te_product_cat');
+            $this->db->where('loc',$this->aauth->get_user()->loc);
             $this->db->where('id', $pid);
             $query = $this->db->get();
             $product = $query->row_array();
-
             $html = $this->load->view('products/cat_statementpdf-ltr', array('report' => $result, 'product' => $product, 'r_type' => $r_type), true);
             ini_set('memory_limit', '64M');
 
@@ -311,6 +307,7 @@ class Productcategory extends CI_Controller
             $sub = $this->input->get('sub');
             $this->db->select('*');
             $this->db->from('te_product_cat');
+            $this->db->where('loc',$this->aauth->get_user()->loc);
             $this->db->where('id', $pid);
             $query = $this->db->get();
             $product = $query->row_array();

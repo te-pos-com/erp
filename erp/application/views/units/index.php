@@ -44,12 +44,8 @@
             ?>
             </tbody>
             <tfoot>
-            <tr>
-                <th>#</th>
-                <th><?php echo $this->lang->line('Name') ?></th>
-                <th><?php echo $this->lang->line('Code') ?></th>
-                <th><?php echo $this->lang->line('Action') ?></th>
-            </tr>
+                <tr>
+                </tr>
             </tfoot>
         </table>
     </div>

@@ -7,7 +7,8 @@ class Myapp extends CI_Controller
     {
         $ci =& get_instance();
         $ci->load->database();
-        $query = $ci->db->query("SELECT * FROM te_system WHERE id=1 LIMIT 1");
+        $ci->load->library();
+        $query = $ci->db->query("SELECT * FROM te_system WHERE id=". $this->aauth->get_user()->id_perusahaan ." LIMIT 1");
         $row = $query->row_array();
         $this->config->set_item('ctitle', $row["cname"]);
         $this->config->set_item('address', $row["address"]);

@@ -152,12 +152,8 @@
                     <div class="col-sm-4">
                         <div class="input-group">
                             <input type="text" placeholder="<?php echo $this->lang->line('Stock Units') ?>*"
-                                class="form-control margin-bottom required" name="product_qty"
+                                value="0" class="form-control margin-bottom required" name="product_qty"
                                 onkeypress="return isNumber(event)">
-                            <span class="input-group-addon">
-                                <input type="checkbox" name="chk_nonstok">
-                                <label for="chk_nonstok" style="font-size:12px">Non Stok**</label>
-                            </span>
                         </div>
                     </div>
 

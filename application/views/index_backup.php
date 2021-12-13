@@ -11,9 +11,10 @@
 
   <!-- Favicons -->
   <link href="<?= base_url() ?>assets/img/<?= $setting['favicon']?>" rel="icon">
+  <link href="<?= base_url() ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <style type="text/css">
-        .formWaBox{font-size:14px;line-height:1.6;display:flex;position:fixed;z-index:99998;top:0;left:0;width:100%;height:100%;overflow-y:auto;padding:5px 0;visibility:hidden;opacity:0;background:rgba(0,0,0,.6)}.formWaBox.open{visibility:visible;opacity:1;transition:.2s}.formWa{display:block;margin:auto auto;width:calc(100% - 10px);box-shadow:0 20px 50px rgba(0,0,0,.2);max-width:500px;background:#fff;height:100%;border-radius:2px;padding-top:60px;position:relative}.formWa .formWaBody{width:100%;height:auto;max-height:100%;overflow:auto}.formWa .formWaBody .heading{position:absolute;top:0;left:0;width:100%;margin:0;height:60px;line-height:60px;border-bottom:1px solid rgba(0,0,0,.06);font-size:14px;background:#fff;font-weight:400;border-radius:2px 2px 0 0;padding:15px 20px}.formWa .formWaBody .heading svg{height:30px;width:30px;float:left}.formWa .formWaBody .heading i{font-size:35px;float:left;line-height:35px;margin-right:10px;margin-top:-2.5px}.formWa .formWaBody .heading h3{padding:0 5px;float:left;height:30px;line-height:30px;margin:0;color:#444;font-weight:400;font-size:18px;border:none}.formWa .formWaBody .heading .close{position:absolute;width:30px;height:30px;top:15px;right:20px;color:#aaa;text-align:center;padding:0;cursor:pointer;font-size:30px;line-height:20px;font-weight:300;transition:.2s}.formWa .formWaBody .items{position:relative;height:100%;height:auto;position:relative}.formWa .formWaBody .items .item{background:rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.08)}.formWa .formWaBody .items .item .thumb{width:65px;height:90px;text-align:center;float:left;border-right:1px solid rgba(0,0,0,.08);padding:15px 10px}.formWa .formWaBody .items .item .thumb img{height:100%;width:auto}.formWa .formWaBody .items .item .detailbox{width:calc(100% - 65px);float:left;height:90px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;flex-direction:row}.formWa .formWaBody .items .item .detailbox .detail{max-width:100%;min-width:100%;text-align:left;flex:1}.formWa .formWaBody .items .item .detailbox .detail h3{margin:0;font-size:14px;line-height:20px;padding:0 20px 0 10px;font-weight:700;height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.formWa .formWaBody .items .item .detailbox .varian{width:100%;padding:0 20px 0 10px;flex:1;margin-top:-25px}.formWa .formWaBody .items .item .detailbox .detail table tr{position:relative}.formWa .formWaBody .items .item .detailbox .detail table tr td{line-height:13px;position:relative;font-size:13px}.formWa .formWaBody .items .item .detailbox .optione{max-width:100%;min-width:100%;text-align:left;flex:1;margin-top:-15px;padding:0 20px 0 10px;position:relative;height:30px}.formWa .formWaBody .items .item .detailbox .optione-price{width:45%;float:left;height:100%;font-weight:700;color:#ff5050;line-height:25px}.formWa .formWaBody .items .item .detailbox .optione-qty{width:55%;float:right;height:100%;height:25px;position:relative}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer{width:87px;float:left}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer input{width:35px;text-align:center;border:1px solid rgba(0,0,0,.1);border-left:none;border-right:none;border-radius:0;margin:0;float:left;color:#000;height:25px;padding:0}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer button{background:rgba(0,0,0,.04);width:25px;height:25px;border:1px solid rgba(0,0,0,.1);cursor:pointer;margin:0;float:left;font-size:16px;line-height:20px;text-align:center;padding:0}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer button:hover{background:rgba(0,0,0,.09)}.formWa .formWaBody .items .item .detailbox .optione-qty i{line-height:25px;font-size:20px;float:right;cursor:pointer}.formWa .formWaBody .items .item .detailbox .order-note{margin-top:-15px;min-width:100%;max-width:100%;padding:0 20px 0 10px;height:30px}.formWa .formWaBody .items .item .detailbox .order-note textarea{border-top:none;border-left:none;border-right:none;width:100%;overflow:hidden;line-height:15px;font-size:14px;height:30px}.formWa .formWaBody .subtotal{background:rgba(0,0,0,.02);height:auto;position:relative}.formWa .formWaBody .subtotal table{width:100%;background:#fff;border-color:#fff}.formWa .formWaBody .subtotal table tr td.labelo{line-height:16px;width:100px}.formWa .formWaBody .subtotal table tr td.valueo{line-height:16px;width:calc(100% - 100px)}.formWa .formWaBody .subtotal .subtotalrp{height:40px;width:160px;position:absolute;top:3px;right:20px;text-align:right;font-size:16px;font-weight:700;line-height:16px}.formWa .formWaBody .form{position:relative;padding:10px 20px}.formWa .formWaBody .form table{width:100%;margin-bottom:5px}.formWa .formWaBody .form .input{position:relative}.formWa .formWaBody .form .input input{width:100%;height:40px;line-height:40px;padding-left:25px}.formWa .formWaBody .form .input input[type=search]{width:100%;height:35px;line-height:35px;padding-left:10px}.formWa .formWaBody .form .input .ss-main{width:100%;height:40px;line-height:40px}.formWa .formWaBody .form .input select{width:100%;height:40px;line-height:40px;padding-left:30px}.formWa .formWaBody .form .input textarea{width:100%;height:60px;line-height:30px}.formWa .formWaBody .form .input svg{position:absolute;top:13px;left:5px}.formWa .formWaBody .form .input i{position:absolute;top:5px;left:7px;width:20px;height:20px;font-size:20px;color:rgba(0,0,0,.2)}.formWa .formWaBody .form .dropdown:after{content:'\f3d0';font-family:IonIcons;display:inline-block;float:right;vertical-align:middle;color:#666;margin:0 5px;position:absolute;top:12px;right:7px;font-weight:700}.formWa .formWaBody .form button[type=submit]{width:100%;color:#fff;font-weight:700;text-transform:uppercase;font-family:inherit;font-size:16px;line-height:45px;height:45px;letter-spacing:1px}.formWa .formWaBody .form button[type=submit] i{vertical-align:middle;font-size:25px}.formWa .formWaBody .form .loader{position:absolute;width:calc(100% - 40px);height:143px;bottom:18px;left:20px;background:rgba(0,0,0,.5);text-align:center;vertical-align:middle;line-height:143px;color:#fff;font-size:20px;border-radius:3px;z-index:1}.formWa .formWaBody .cart-empty{height:200px;display:none;align-items:center;justify-content:center;flex-wrap:wrap;flex-direction:row;padding-bottom:50px}.formWa .formWaBody .cart-empty .cart-empty-inner{flex:1;max-width:100%;min-width:100%;text-align:center}.formWa .formWaBody .cart-empty .cart-empty-inner p{font-size:16px}.formWa .formWaBody .cart-empty .cart-empty-inner p a{color:#fff;font-weight:700;padding:10px 20px;border-radius:5px}.formWa .formWaBody .cart-empty .cart-empty-inner p a:hover{text-decoration:none}.formWa .formWaBody .cart-add{height:auto;display:block;padding:10px 0}.formWa .formWaBody .cart-add .cart-add-inner{width:100%;text-align:center}.formWa .formWaBody .cart-add .cart-add-inner p{font-size:16px}.formWa .formWaBody .cart-add .cart-add-inner p a{color:#fff;font-weight:700;padding:10px 20px;border-radius:5px;display:inline-block;width:calc(50% - 10px);cursor:pointer}.formWa .formWaBody .cart-add .cart-add-inner p a.order-again-background{background:#fa591d radial-gradient(circle,transparent 1%,#fa591d 1%) center/15000%}.formWa .formWaBody .cart-add .cart-add-inner p a:hover{text-decoration:none}.footer{height:auto}.footer .copyright{height:50px;line-height:50px;font-size:14px;font-weight:700;color:#fff}.contactwa{position:fixed;height:35px;border-radius:25px;width:200px;bottom:10px;right:10px;cursor:pointer;z-index:99990}.contactwa .inner{position:relative;width:100%;height:100%;color:#fff;line-height:35px;font-weight:700;font-size:16px;padding-left:20px;border-radius:25px}.contactwa .inner .iconwa{position:absolute;top:0;right:0;width:40px;height:35px;border-radius:0 25px 25px 0;text-align:center;padding-top:5px}.contactwa .inner .iconwa i{color:#fff;font-size:25px;line-height:23px}::selection{background:#04a4cc;color:#fff;text-shadow:none}::-webkit-selection{background:#04a4cc;color:#fff;text-shadow:none}::-moz-selection{background:#04a4cc;color:#fff;text-shadow:none}
+    .formWaBox{font-size:14px;line-height:1.6;display:flex;position:fixed;z-index:99998;top:0;left:0;width:100%;height:100%;overflow-y:auto;padding:5px 0;visibility:hidden;opacity:0;background:rgba(0,0,0,.6)}.formWaBox.open{visibility:visible;opacity:1;transition:.2s}.formWa{display:block;margin:auto auto;width:calc(100% - 10px);box-shadow:0 20px 50px rgba(0,0,0,.2);max-width:500px;background:#fff;height:100%;border-radius:2px;padding-top:60px;position:relative}.formWa .formWaBody{width:100%;height:auto;max-height:100%;overflow:auto}.formWa .formWaBody .heading{position:absolute;top:0;left:0;width:100%;margin:0;height:60px;line-height:60px;border-bottom:1px solid rgba(0,0,0,.06);font-size:14px;background:#fff;font-weight:400;border-radius:2px 2px 0 0;padding:15px 20px}.formWa .formWaBody .heading svg{height:30px;width:30px;float:left}.formWa .formWaBody .heading i{font-size:35px;float:left;line-height:35px;margin-right:10px;margin-top:-2.5px}.formWa .formWaBody .heading h3{padding:0 5px;float:left;height:30px;line-height:30px;margin:0;color:#444;font-weight:400;font-size:18px;border:none}.formWa .formWaBody .heading .close{position:absolute;width:30px;height:30px;top:15px;right:20px;color:#aaa;text-align:center;padding:0;cursor:pointer;font-size:30px;line-height:20px;font-weight:300;transition:.2s}.formWa .formWaBody .items{position:relative;height:100%;height:auto;position:relative}.formWa .formWaBody .items .item{background:rgba(0,0,0,.02);border-bottom:1px solid rgba(0,0,0,.08)}.formWa .formWaBody .items .item .thumb{width:65px;height:90px;text-align:center;float:left;border-right:1px solid rgba(0,0,0,.08);padding:15px 10px}.formWa .formWaBody .items .item .thumb img{height:100%;width:auto}.formWa .formWaBody .items .item .detailbox{width:calc(100% - 65px);float:left;height:90px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;flex-direction:row}.formWa .formWaBody .items .item .detailbox .detail{max-width:100%;min-width:100%;text-align:left;flex:1}.formWa .formWaBody .items .item .detailbox .detail h3{margin:0;font-size:14px;line-height:20px;padding:0 20px 0 10px;font-weight:700;height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.formWa .formWaBody .items .item .detailbox .varian{width:100%;padding:0 20px 0 10px;flex:1;margin-top:-25px}.formWa .formWaBody .items .item .detailbox .detail table tr{position:relative}.formWa .formWaBody .items .item .detailbox .detail table tr td{line-height:13px;position:relative;font-size:13px}.formWa .formWaBody .items .item .detailbox .optione{max-width:100%;min-width:100%;text-align:left;flex:1;margin-top:-15px;padding:0 20px 0 10px;position:relative;height:30px}.formWa .formWaBody .items .item .detailbox .optione-price{width:45%;float:left;height:100%;font-weight:700;color:#ff5050;line-height:25px}.formWa .formWaBody .items .item .detailbox .optione-qty{width:55%;float:right;height:100%;height:25px;position:relative}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer{width:87px;float:left}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer input{width:35px;text-align:center;border:1px solid rgba(0,0,0,.1);border-left:none;border-right:none;border-radius:0;margin:0;float:left;color:#000;height:25px;padding:0}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer button{background:rgba(0,0,0,.04);width:25px;height:25px;border:1px solid rgba(0,0,0,.1);cursor:pointer;margin:0;float:left;font-size:16px;line-height:20px;text-align:center;padding:0}.formWa .formWaBody .items .item .detailbox .optione-qty .optione-qty-changer button:hover{background:rgba(0,0,0,.09)}.formWa .formWaBody .items .item .detailbox .optione-qty i{line-height:25px;font-size:20px;float:right;cursor:pointer}.formWa .formWaBody .items .item .detailbox .order-note{margin-top:-15px;min-width:100%;max-width:100%;padding:0 20px 0 10px;height:30px}.formWa .formWaBody .items .item .detailbox .order-note textarea{border-top:none;border-left:none;border-right:none;width:100%;overflow:hidden;line-height:15px;font-size:14px;height:30px}.formWa .formWaBody .subtotal{background:rgba(0,0,0,.02);height:auto;position:relative}.formWa .formWaBody .subtotal table{width:100%;background:#fff;border-color:#fff}.formWa .formWaBody .subtotal table tr td.labelo{line-height:16px;width:100px}.formWa .formWaBody .subtotal table tr td.valueo{line-height:16px;width:calc(100% - 100px)}.formWa .formWaBody .subtotal .subtotalrp{height:40px;width:160px;position:absolute;top:3px;right:20px;text-align:right;font-size:16px;font-weight:700;line-height:16px}.formWa .formWaBody .form{position:relative;padding:10px 20px}.formWa .formWaBody .form table{width:100%;margin-bottom:5px}.formWa .formWaBody .form .input{position:relative}.formWa .formWaBody .form .input input{width:100%;height:40px;line-height:40px;padding-left:25px}.formWa .formWaBody .form .input input[type=search]{width:100%;height:35px;line-height:35px;padding-left:10px}.formWa .formWaBody .form .input .ss-main{width:100%;height:40px;line-height:40px}.formWa .formWaBody .form .input select{width:100%;height:40px;line-height:40px;padding-left:30px}.formWa .formWaBody .form .input textarea{width:100%;height:60px;line-height:30px}.formWa .formWaBody .form .input svg{position:absolute;top:13px;left:5px}.formWa .formWaBody .form .input i{position:absolute;top:5px;left:7px;width:20px;height:20px;font-size:20px;color:rgba(0,0,0,.2)}.formWa .formWaBody .form .dropdown:after{content:'\f3d0';font-family:IonIcons;display:inline-block;float:right;vertical-align:middle;color:#666;margin:0 5px;position:absolute;top:12px;right:7px;font-weight:700}.formWa .formWaBody .form button[type=submit]{width:100%;color:#fff;font-weight:700;text-transform:uppercase;font-family:inherit;font-size:16px;line-height:45px;height:45px;letter-spacing:1px}.formWa .formWaBody .form button[type=submit] i{vertical-align:middle;font-size:25px}.formWa .formWaBody .form .loader{position:absolute;width:calc(100% - 40px);height:143px;bottom:18px;left:20px;background:rgba(0,0,0,.5);text-align:center;vertical-align:middle;line-height:143px;color:#fff;font-size:20px;border-radius:3px;z-index:1}.formWa .formWaBody .cart-empty{height:200px;display:none;align-items:center;justify-content:center;flex-wrap:wrap;flex-direction:row;padding-bottom:50px}.formWa .formWaBody .cart-empty .cart-empty-inner{flex:1;max-width:100%;min-width:100%;text-align:center}.formWa .formWaBody .cart-empty .cart-empty-inner p{font-size:16px}.formWa .formWaBody .cart-empty .cart-empty-inner p a{color:#fff;font-weight:700;padding:10px 20px;border-radius:5px}.formWa .formWaBody .cart-empty .cart-empty-inner p a:hover{text-decoration:none}.formWa .formWaBody .cart-add{height:auto;display:block;padding:10px 0}.formWa .formWaBody .cart-add .cart-add-inner{width:100%;text-align:center}.formWa .formWaBody .cart-add .cart-add-inner p{font-size:16px}.formWa .formWaBody .cart-add .cart-add-inner p a{color:#fff;font-weight:700;padding:10px 20px;border-radius:5px;display:inline-block;width:calc(50% - 10px);cursor:pointer}.formWa .formWaBody .cart-add .cart-add-inner p a.order-again-background{background:#fa591d radial-gradient(circle,transparent 1%,#fa591d 1%) center/15000%}.formWa .formWaBody .cart-add .cart-add-inner p a:hover{text-decoration:none}.footer{height:auto}.footer .copyright{height:50px;line-height:50px;font-size:14px;font-weight:700;color:#fff}.contactwa{position:fixed;height:35px;border-radius:25px;width:200px;bottom:10px;right:10px;cursor:pointer;z-index:99990}.contactwa .inner{position:relative;width:100%;height:100%;color:#fff;line-height:35px;font-weight:700;font-size:16px;padding-left:20px;border-radius:25px}.contactwa .inner .iconwa{position:absolute;top:0;right:0;width:40px;height:35px;border-radius:0 25px 25px 0;text-align:center;padding-top:5px}.contactwa .inner .iconwa i{color:#fff;font-size:25px;line-height:23px}::selection{background:#04a4cc;color:#fff;text-shadow:none}::-webkit-selection{background:#04a4cc;color:#fff;text-shadow:none}::-moz-selection{background:#04a4cc;color:#fff;text-shadow:none}.alignnone{margin:5px 20px 20px 0}.aligncenter,div.aligncenter{display:block;margin:5px auto 5px auto}.alignright{float:right;margin:5px 0 20px 20px}.alignleft{float:left;margin:5px 20px 20px 0}a img.alignright{float:right;margin:5px 0 20px 20px}a img.alignnone{margin:5px 20px 20px 0}a img.alignleft{float:left;margin:5px 20px 20px 0}a img.aligncenter{display:block;margin-left:auto;margin-right:auto}.wp-caption{background:#fff;border:1px solid #f0f0f0;max-width:96%;padding:5px 3px 10px;text-align:center}.wp-caption.alignnone{margin:5px 20px 20px 0}.wp-caption.alignleft{margin:5px 20px 20px 0}.wp-caption.alignright{margin:5px 0 20px 20px}.wp-caption img{border:0 none;height:auto;margin:0;max-width:98.5%;padding:0;width:auto}.ss-main .ss-content .ss-search input{display:inline-flex;font-size:inherit;line-height:inherit;flex:1 1 auto;width:100%;min-width:0;height:30px;padding:6px 8px;margin:0;border:1px solid #dcdee2;border-radius:4px;background-color:#fff;outline:0;text-align:left;box-sizing:border-box;-webkit-box-sizing:border-box;-webkit-appearance:textfield}.ss-main .ss-content .ss-search input::placeholder{color:#8a8a8a;vertical-align:middle}.ss-main .ss-content .ss-search input:focus{box-shadow:0 0 5px #5897fb}.ss-main .ss-content .ss-search .ss-addable{display:inline-flex;justify-content:center;align-items:center;cursor:pointer;font-size:22px;font-weight:700;flex:0 0 30px;height:30px;margin:0 0 0 8px;border:1px solid #dcdee2;border-radius:4px;box-sizing:border-box}.ss-main .ss-content .ss-addable{padding-top:0}.ss-main .ss-content .ss-list{max-height:200px;overflow-x:hidden;overflow-y:auto;text-align:left}.ss-main .ss-content .ss-list .ss-optgroup .ss-optgroup-label{padding:6px 10px;font-weight:700}.ss-main .ss-content .ss-list .ss-optgroup .ss-option{padding:6px 6px 6px 25px}.ss-main .ss-content .ss-list .ss-optgroup-label-selectable{cursor:pointer}.ss-main .ss-content .ss-list .ss-optgroup-label-selectable:hover{color:#fff;background-color:#5897fb}.ss-main .ss-content .ss-list .ss-option{padding:6px 10px;cursor:pointer;user-select:none}.ss-main .ss-content .ss-list .ss-option *{display:inline-block}.ss-main .ss-content .ss-list .ss-option.ss-highlighted,.ss-main .ss-content .ss-list .ss-option:hover{color:#fff;background-color:#5897fb}.ss-main .ss-content .ss-list .ss-option.ss-disabled{cursor:not-allowed;color:#dedede;background-color:#fff}.ss-main .ss-content .ss-list .ss-option:not(.ss-disabled).ss-option-selected{color:#666;background-color:rgba(88,151,251,.1)}.ss-main .ss-content .ss-list .ss-option.ss-hide{display:none}.ss-main .ss-content .ss-list .ss-option .ss-search-highlight{background-color:#fffb8c}
   </style>
 
   <!-- Google Fonts -->
@@ -55,8 +56,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Tentang Kami</a></li>
+          <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
+          <li><a class="nav-link scrollto " href="#portfolio">Fitur</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Harga</a></li>
           <li><a class="nav-link scrollto" href="<?= base_url()?>patner">Patner</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
           <li><a class="getstarted scrollto" href="<?= $setting['link_cloud']?>/user/register">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -71,7 +76,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>Program Kasir Untuk Bisnis Kamu</h1>
+          <h1>Program Penjualan Untuk Bisnis Kamu</h1>
           <ul>
             <li><i class="ri-check-line"></i> Mudah digunakan</li>
             <li><i class="ri-check-line"></i> Mengelola Penjualan Pembelian kamu menjadi lebih mudah</li>
@@ -508,6 +513,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section><!-- End Portfolio Section -->
 
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Team</h2>
+        </div>
+
+        <div class="row" style="margin-left:33%">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-1.jpeg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Priyo Subarkah</h4>
+                <span>Founder</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Fredi S.Kom.</h4>
+                <span>Co-Founder</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Team Section -->
+
     <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
       <div class="container">
@@ -533,7 +589,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <li><i class="bx bx-check"></i> Manajement Project</li>
               <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="<?= $setting['link_cloud']?>/user/register" class="btn-buy">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>/user/register" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box featured">
@@ -550,7 +606,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li class="na"><i class="bx bx-x"></i> <span> Manajement Project</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span> Accounting</span></li>
             </ul>
-            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Get Started</a>
           </div>
 
           <div class="col-lg-4 box">
@@ -567,7 +623,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><i class="bx bx-check"></i> Manajement Project</li>
                 <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
-            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Get Started</a>
           </div>
 
         </div>
@@ -682,10 +738,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="contactwa" onclick="openHelpWA();">
-            <div class="inner color-scheme-background" style="background:#ff9800;border-color:#ff9800;margin-top:-60px;">
+            <div class="inner color-scheme-background" style="background:#000;border-color:#000">
                 Butuh Bantuan ?
-                <div class="iconwa color-scheme-background" style="background:#ff9800;border-color:#ff9800;" >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16" style="margin-top:-15px">
+                <div class="iconwa color-scheme-background" style="background:#000;border-color:#fff;" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16" style="margin-top:4px">
                     <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
                     </svg>
                 </div>
@@ -698,13 +754,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="heading clear">
                     <i class="icon ion-logo-whatsapp" style="color: #61ddbb"></i>
                     <h3><b>Form</b> Bantuan Whatsapp!</h3>
-                    <div class="close" onclick="closeHelpWA();">Ã—</div>
+                    <div class="close" onclick="closeHelpWA();">×</div>
                 </div>
                 <form class="form" method="post" enctype="multipart/form-data" onsubmit="helpWA(this); return false;">
                     <table>
                         <tr>
                             <td>
                                 <div class="input">
+                                    <i class="icon ion-md-person"></i>
                                     <input type="text" name="full_name" placeholder="Nama Lengkap" required oninvalid="this.setCustomValidity('Input Nama Lengkap Anda')" oninput="this.setCustomValidity('')">
                                 </div>
                             </td>
@@ -722,7 +779,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <table>
                         <tr>
                             <td>
-                                <button class="btn btn-primary" type="submit">
+                                <button class="color-scheme-background" type="submit">
+                                    <i class="icon ion-md-send"></i>
                                     Kirim
                                 </button>
                             </td>
@@ -808,7 +866,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             let message = inputs.message.replace(/\n/g, '%0A');
 
-            let url = wa + '?phone=' + inputs.destination + '&text=' + inputs.gretings + '.%0A' + 'Saya *' + inputs.full_name + '*%0A%0A ' + 'ðŸ’¬ ' + message + '%0A%0A ' + 'Via ' + location.href;
+            let url = wa + '?phone=' + inputs.destination + '&text=' + inputs.gretings + '.%0A' + 'Saya *' + inputs.full_name + '*%0A%0A ' + '💬 ' + message + '%0A%0A ' + 'Via ' + location.href;
 
 
             let w = 960,h = 540,left = Number((screen.width / 2) - (w / 2)),top = Number((screen.height / 2) - (h / 2)),popupWindow = window.open(url, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);

@@ -6,15 +6,10 @@
             <div class="message"></div>
         </div>
         <div class="card-body">
-
-
             <form method="post" id="data_form" class="form-horizontal">
-
                 <h5><?php echo $this->lang->line('Add New Product Category') ?></h5>
                 <hr>
-
                 <div class="form-group row">
-
                     <label class="col-sm-2 col-form-label"
                            for="product_catname"><?php echo $this->lang->line('Category Name') ?></label>
 
@@ -44,8 +39,6 @@
                         <input type="hidden" value="productcategory/addcat" id="action-url">
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>

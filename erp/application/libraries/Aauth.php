@@ -112,7 +112,6 @@ class Aauth
      */
     public function login($identifier, $pass, $remember = FALSE, $captcha, $totp_code = NULL)
     {
-
         // Remove cookies first
         $cookie = array(
             'name' => 'user',
@@ -809,7 +808,16 @@ class Aauth
             'cname'=>$perusahaan,
             'address'=>$alamat,
             'email'=>$email,
-            'id_referal' => $referal
+            'id_referal' => $referal,
+            'phone'=>$phone,
+            'zone'=>'Asia/Jakarta',
+            'prefix'=>'SNG',
+            'country'=>'ID',
+            'region'=>'FL',
+            'city'=>'',
+            'tax'=>'-1',
+            'lang'=>'indonesian',
+            'logo'=>'logo.png'
         );
         if ($this->aauth_db->insert('te_system', $data_perusahaan)) {
             
