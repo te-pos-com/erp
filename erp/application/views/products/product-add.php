@@ -3,39 +3,22 @@
         <div class="card-header pb-0">
             <h5><?php echo $this->lang->line('Add New Product') ?></h5>
             <hr>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                </ul>
-            </div>
         </div>
 
         <div id="notify" class="alert alert-success" style="display:none;">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-
             <div class="message"></div>
         </div>
         <div class="card-body">
             <form method="post" id="data_form">
-
-
                 <input type="hidden" name="act" value="add_product">
-
-
                 <div class="form-group row">
-
-
-                    <div class="col-sm-6"><label class="col-form-label"
+                    <div class="col-sm-6"><label class="col-form-lael"
                                                  for="product_name"><?php echo $this->lang->line('Product Name') ?>
                             *</label>
                         <input type="text" placeholder="Product Name"
                                class="form-control margin-bottom required" name="product_name">
                     </div>
-
-
                     <div class="col-sm-6"><label class="col-form-label"
                                                  for="product_code"><?php echo $this->lang->line('Product Code') ?></label>
                         <input type="text" placeholder="Product Code"
@@ -43,7 +26,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-
                     <div class="col-sm-6"><label class="col-form-label"
                                                  for="product_cat"><?php echo $this->lang->line('Product Category') ?>
                             *</label>
@@ -184,14 +166,10 @@
                             }
                             ?>
                         </select>
-
-
                     </div>
                 </div>
 
-
                 <div class="form-group row">
-
                     <label class="col-sm-2 col-form-label"><?php echo $this->lang->line('BarCode') ?></label>
                     <div class="col-sm-2">
                         <select class="form-control" name="code_type">
@@ -228,7 +206,7 @@
                         )</label>
 
                     <div class="col-sm-2">
-                        <input type="text" class="form-control required"
+                        <input type="text" class="form-control"
                                placeholder="Expiry Date" name="wdate"
                                data-toggle="datepicker" autocomplete="false">
                     </div>

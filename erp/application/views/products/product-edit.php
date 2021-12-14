@@ -3,14 +3,6 @@
         <div class="card-header">
             <h5><?php echo $this->lang->line('Edit Product') ?></h5>
             <hr>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                </ul>
-            </div>
         </div>
         <div class="card-content">
             <div id="notify" class="alert alert-success" style="display:none;">
@@ -56,11 +48,9 @@
 
 
                         <div class="col-sm-6"><label class="col-form-label"
-                                                     for="sub_cat"><?php echo $this->lang->line('Sub') ?><?php echo $this->lang->line('Category') ?></label>
+                                                     for="sub_cat"><?php echo $this->lang->line('Sub') ?> <?php echo $this->lang->line('Category') ?></label>
                             <select id="sub_cat" name="sub_cat" class="form-control select-box">
                                 <?= '<option value="' . $cat_sub['id'] . '" selected>' . $cat_sub['title'] . ' (S)</option>';
-
-
                                 foreach ($cat_sub_list as $row) {
                                     $cid = $row['id'];
                                     $title = $row['title'];
@@ -68,16 +58,12 @@
                                 }
                                 ?>
                             </select>
-
-
                         </div>
                     </div>
 
                     <div class="form-group row">
-
                         <label class="col-sm-2 col-form-label"
                                for="product_cat"><?php echo $this->lang->line('Warehouse') ?>*</label>
-
                         <div class="col-sm-6">
                             <select name="product_warehouse" class="form-control">
                                 <?php
@@ -89,12 +75,9 @@
                                 }
                                 ?>
                             </select>
-
-
                         </div>
                     </div>
                     <div class="form-group row">
-
                         <label class="col-sm-2 col-form-label"
                                for="product_code"><?php echo $this->lang->line('Product Code') ?></label>
 
@@ -112,7 +95,7 @@
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><?php echo $this->config->item('currency');
-                                    echo $product['product_price'] ?></span>
+                                    ?></span>
                                 <input type="text" name="product_price" class="form-control required"
                                        placeholder="0.00" aria-describedby="sizing-addon"
                                        onkeypress="return isNumber(event)"
@@ -121,9 +104,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-
                         <label class="col-sm-2 col-form-label"><?php echo $this->lang->line('Product Wholesale Price') ?></label>
-
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><?php echo $this->config->item('currency') ?></span>
@@ -257,7 +238,7 @@
                             )</label>
 
                         <div class="col-sm-2">
-                            <input type="text" class="form-control required"
+                            <input type="text" class="form-control"
                                    placeholder="Expiry Date" name="wdate"
                                    data-toggle="datepicker" autocomplete="false">
                         </div>
