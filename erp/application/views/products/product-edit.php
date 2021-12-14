@@ -285,7 +285,7 @@
                                 </tr>
                             </table>
                             <br>
-                            <span class="btn btn-success fileinput-button">
+                            <span>
         <i class="glyphicon glyphicon-plus"></i>
         <span>Select files...</span>
                                 <!-- The file input field used as target for the file upload widget -->

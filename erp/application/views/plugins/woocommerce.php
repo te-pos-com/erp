@@ -11,7 +11,7 @@
                 <h5>Woocommerce Integration Using REST</h5>
                 <hr>
                 <p>WooCommerce (WC) 2.6+ is fully integrated with the WordPress REST API. <br><span
-                            class="text-primary">You can link your WooCommerce Store to Geo POS. To create or manage keys for a specific WordPress user, go to WooCommerce > Settings >Advanced > REST API.</span>
+                            class="text-primary">You can link your WooCommerce Store to Te-POS. To create or manage keys for a specific WordPress user, go to WooCommerce > Settings >Advanced > REST API.</span>
                 </p>
 
                 <div class="form-group row">

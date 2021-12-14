@@ -9,7 +9,7 @@
                    data-target="#Pos_addCustomer">
                     <i class="fa fa-plus-circle"></i> <?php echo $this->lang->line('Add') ?>
                 </a>
-                <input type="text" class="form-control round mousetrap" name="cst"
+                <input type="text" class="form-control round mousetrap mx-1" name="cst"
                        id="pos-customer-box"
                        placeholder="<?php echo $this->lang->line('Enter Customer Name'); ?> "
                        autocomplete="off"/>
@@ -18,7 +18,7 @@
             <div class="row ml-3">
                 <div id="customer-box-result" class="col-md-12"></div>
                 <div id="customer" class="col-md-12 ml-3">
-                    <div class="clientinfo">
+                    <div class="clientinfo" style="margin-left:-15px;">
                         <input type="hidden" name="customer_id" id="customer_id" value="1">
                         <div id="customer_name"><?php echo $this->lang->line('Default'); ?>: <strong>Walk
                                 In </strong></div>
@@ -140,7 +140,7 @@
                     </div>
                 <?php } ?>
                 <div class="row mt-1">
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12 text-right">
                         <a href="#" class="possubmit btn btn-lg btn-cyan sub-btn" data-type="6"
                         ><i class="fa fa-save"></i> <?php echo $this->lang->line('Draft') ?></a>
                         <a href="#" class="possubmit3 btn btn-lg btn-success sub-btn" data-type="6"
@@ -148,15 +148,6 @@
                            data-target="#basicPay"><i
                                     class="fa fa-money"></i> <?php echo $this->lang->line('Payment') ?>
                         </a>
-                        <?php if ($enable_card['url']) { ?>
-                            <a href="#"
-                               class="possubmit2 btn btn-lg btn-blue-grey sub-btn"
-                               data-type="4" data-toggle="modal"
-                               data-target="#cardPay"><i
-                                        class="fa fa-credit-card"></i> <?php echo $this->lang->line('Card') ?>
-                            </a>
-                        <?php } ?>
-
                     </div>
                 </div>
 
@@ -267,7 +258,6 @@
 
                             <div class="col-sm-3"><label for="invociedate"
                                                          class="caption"><?php echo $this->lang->line('Invoice Date'); ?></label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon"><span class="icon-calendar4"
                                                                          aria-hidden="true"></span>
@@ -275,7 +265,7 @@
                                     <input type="text" class="form-control required"
                                            placeholder="Billing Date" name="invoicedate"
                                            data-toggle="datepicker"
-                                           autocomplete="false">
+                                           autocomplete="false" value="<?= date('Y-m-d') ?>">
                                 </div>
                             </div>
                             <div class="col-sm-3"><label for="invocieduedate"
@@ -288,7 +278,7 @@
                                     <input type="text" class="form-control required" id="tsn_due"
                                            name="invocieduedate"
                                            placeholder="Due Date" data-toggle="datepicker"
-                                           autocomplete="false">
+                                           autocomplete="false" value="<?= date('Y-m-d') ?>">
                                 </div>
                             </div>
                         </div>
@@ -323,23 +313,14 @@
                                 <textarea class="form-control" name="notes" rows="2"></textarea>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-
             </div>
-
         </div>
 
 
         <div class="col-md-6 card  order-sm-first  order-md-2 border-amber bg-lighten-1 bg-faded round pt-1">
-
-
             <div class="row border-bottom-grey-blue  border-bottom-lighten-4">
-
-
                 <div class="col-md-9 pb-1">
                     <input type="text" class="form-control text-center round mousetrap"
                            name="product_barcode"
@@ -363,7 +344,7 @@
 
 
             <div class="row">
-                <div class="col-md-12 pt-0" id="pos_item">
+                <div class="col-md-12 pt-1" id="pos_item">
                     <!-- pos items -->
                 </div>
             </div>

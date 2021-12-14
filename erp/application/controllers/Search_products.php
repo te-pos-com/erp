@@ -282,7 +282,7 @@ class Search_products extends CI_Controller
         echo '<div class="row match-height">';
         foreach ($result as $row) {
 
-            $out .= '    <div class="col-3 border mb-1 "><div class="rounded">
+            $out .= '    <div class="col-3 border mb-1 mx-1 "><div class="rounded">
                                  <a   id="posp' . $i . '"  class="select_pos_item btn btn-outline-light-blue round"   data-name="' . $row['product_name'] . '"  data-price="' . amountExchange_s($row['product_price'], 0, $this->aauth->get_user()->loc) . '"  data-tax="' . amountFormat_general($row['taxrate']) . '"  data-discount="' . amountFormat_general($row['disrate']) . '"   data-pcode="' . $row['product_code'] . '"   data-pid="' . $row['pid'] . '"  data-stock="' . amountFormat_general($row['qty']) . '" data-unit="' . $row['unit'] . '" data-serial="' . @$row['serial'] . '">
                                         <img class="round"
                                              src="' . base_url('userfiles/product/' . $row['image']) . '"  style="max-height: 100%;max-width: 100%">

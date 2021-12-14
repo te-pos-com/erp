@@ -71,7 +71,6 @@
                                     </form>
                                 </div>
                                 <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                                    <span>Donasi Kopi Via Ovo 081226508038</span></p>
                                 <div class="card-body">
                                     <a href="<?php echo base_url('crm'); ?>" class="btn btn-outline-danger btn-block"><i
                                                 class="ft-user"></i> <?php echo $this->lang->line('customer_login') ?>

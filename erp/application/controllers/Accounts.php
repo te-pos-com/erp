@@ -129,8 +129,6 @@ class Accounts extends CI_Controller
 
     public function balancesheet()
     {
-
-
         $head['title'] = "Balance Summary";
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['accounts'] = $this->accounts->accountslist();

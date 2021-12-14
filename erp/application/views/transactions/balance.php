@@ -2,14 +2,6 @@
     <div class="card">
         <div class="card-header">
             <h5><?php echo $this->lang->line('BalanceSheet') ?></h5>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                </ul>
-            </div>
         </div>
         <div class="card-content">
             <div id="notify" class="alert alert-success" style="display:none;">
@@ -20,7 +12,7 @@
             <div class="card-body">
 
                 <h5 class="title bg-gradient-x-info p-1 white">
-                    <?php echo $this->lang->line('Basic') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Basic') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table">
@@ -70,7 +62,7 @@
                     </tfoot>
                 </table>
                 <h5 class="title bg-gradient-x-purple p-1 white">
-                    <?php echo $this->lang->line('Assets') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Assets') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table">
@@ -121,7 +113,7 @@
                 </table>
 
                 <h5 class="title bg-gradient-x-danger p-1 white">
-                    <?php echo $this->lang->line('Expenses') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Expenses') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table">
@@ -172,7 +164,7 @@
                 </table>
 
                 <h5 class="title bg-gradient-x-success p-1 white">
-                    <?php echo $this->lang->line('Income') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Income') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table">
@@ -223,7 +215,7 @@
                 </table>
 
                 <h5 class="title bg-gradient-x-warning p-1 white">
-                    <?php echo $this->lang->line('Liabilities') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Liabilities') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table">
@@ -274,7 +266,7 @@
                 </table>
 
                 <h5 class="title bg-gradient-x-grey-blue p-1 white">
-                    <?php echo $this->lang->line('Equity') ?><?php echo $this->lang->line('Accounts') ?>
+                    <?php echo $this->lang->line('Equity') ?> <?php echo $this->lang->line('Accounts') ?>
                 </h5>
                 <p>&nbsp;</p>
                 <table class="table table-striped">

@@ -4,14 +4,6 @@
             <h4><?php echo $product['title'] . ' ';
                 echo $this->lang->line('Statements') ?></h4>
             <hr>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                    <li><a data-action="close"><i class="ft-x"></i></a></li>
-                </ul>
-            </div>
         </div>
         <div class="card-content">
             <div id="notify" class="alert alert-success" style="display:none;">

@@ -133,7 +133,7 @@ class Settings extends CI_Controller
 
             $this->load->library('ultimatemailer');
 
-            $test = $this->ultimatemailer->bin_send($host, $port, $auth, $auth_type, $username, $password, $sender, 'Geo POS Test', $sender, 'Geo POS Test', 'Geo POS SMTP Test', 'Hi, This is a Geo POS SMTP Test! Working Perfectly', false, '');
+            $test = $this->ultimatemailer->bin_send($host, $port, $auth, $auth_type, $username, $password, $sender, 'Te-POS Test', $sender, 'Te-POS Test', 'Te-POS SMTP Test', 'Hi, This is a Te-POS SMTP Test! Working Perfectly', false, '');
 
             if ($test) {
                 $this->settings->update_smtp($host, $port, $auth, $auth_type, $username, $password, $sender);

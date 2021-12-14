@@ -574,9 +574,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-
                         <?php if ($surcharge_t) echo '<br>' . $this->lang->line('Note: Payment Processing'); ?>
-
                     </div>
                     <div class="row" style="display:none;">
                         <div class="col-xs-12">
@@ -642,7 +640,6 @@
                                     <option value='Cash'><?php echo $this->lang->line('Cash') ?></option>
                                     <option value='Card Swipe'><?php echo $this->lang->line('Card Swipe') ?></option>
                                     <option value='Bank'><?php echo $this->lang->line('Bank') ?></option>
-
                                 </select></div>
                         </div>
 

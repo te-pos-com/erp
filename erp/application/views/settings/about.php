@@ -13,11 +13,11 @@
 
 
                 <div class="col-sm-12 text-center">
-                    <h3>Geo POS</h3><h5><?php $url = file_get_contents(FCPATH . '/version.json');
+                    <h3>Te-POS</h3><h5><?php $url = file_get_contents(FCPATH . '/version.json');
                         $version = json_decode($url, true);
                         echo 'V ' . $version['version'] . ' (b' . $version['build'] . ')'; ?></h5> <h6>
                         Copyright <?= date('Y') ?> <a
-                                href="https://codecanyon.net/user/ultimatekode">UltimateKode</a>
+                                href="https://te-pos.com">te-pos.com</a>
                     </h6>
 
                 </div>

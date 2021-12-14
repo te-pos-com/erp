@@ -51,8 +51,7 @@ class Pos_invoices extends CI_Controller
         $this->load->model('categories_model');
         $this->load->model('plugins_model', 'plugins');
         $this->load->library("Common");
-          $data['custom_fields_c'] = $this->custom->add_fields(1);
-
+        $data['custom_fields_c'] = $this->custom->add_fields(1);
         $data['taxlist'] = $this->common->taxlist($this->config->item('tax'));
         $data['gateway'] = $this->invocies->gateway_list('Yes');
         $data['exchange'] = $this->plugins->universal_api(5);
@@ -68,14 +67,11 @@ class Pos_invoices extends CI_Controller
         $data['cat'] = $this->categories_model->category_list();
         $data['taxdetails'] = $this->common->taxdetail();
         $data['acc_list'] = $this->invocies->accountslist();
-
         $data['emp'] = $this->plugins->universal_api(69);
         if ($data['emp']['key1']) {
             $this->load->model('employee_model', 'employee');
             $data['employee'] = $this->employee->list_employee();
         }
-
-
         if ($this->input->get('v2') or POSV == 2) {
             $head['s_mode'] = false;
             $this->load->view('fixed/header-pos', $head);

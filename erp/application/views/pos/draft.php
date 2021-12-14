@@ -8,7 +8,7 @@
                    data-target="#addCustomer">
                     <i class="fa fa-plus-circle"></i> <?php echo $this->lang->line('Add') ?>
                 </a>
-                <input type="text" class="form-control round mousetrap" name="cst"
+                <input type="text" class="form-control round mousetrap mx-1" name="cst"
                        id="pos-customer-box"
                        placeholder="<?php echo $this->lang->line('Enter Customer Name'); ?> "
                        autocomplete="off"/>
@@ -16,7 +16,7 @@
             <div class="row ml-3">
                 <div id="customer-box-result" class="col-md-12"></div>
                 <div id="customer" class="col-md-12 ml-3">
-                    <div class="clientinfo">
+                    <div class="clientinfo" style="margin-left:-15px;">
                         <input type="hidden" name="customer_id" id="customer_id"
                                value="<?= $invoice['csd'] ?>">
                         <div id="customer_name"><strong><?= $invoice['name'] ?></strong></div>
@@ -132,15 +132,10 @@
             </div>
             <hr>
             <div class="row mt-2">
-                <div class="col text-center">
+                <div class="col-md-12 text-right">
                     <button type="button" class="btn btn-success possubmit3" data-type="6" data-toggle="modal"
                             data-target="#basicPay"><i
                                 class="fa fa-money"></i> <?php echo $this->lang->line('Payment') ?></button>
-
-
-                    <button type="button" class="btn btn-primary possubmit2" data-type="4" data-toggle="modal"
-                            data-target="#cardPay"><i
-                                class="fa fa-credit-card"></i> <?php echo $this->lang->line('Card') ?></button>
                 </div>
             </div>
             <hr>
@@ -369,13 +364,15 @@
     <input type="hidden" value="<?php
     $tt = 0;
     if ($invoice['ship_tax_type'] == 'incl') $tt = @number_format(($invoice['shipping'] - $invoice['ship_tax']) / $invoice['shipping'], 2, '.', '');
-    echo amountFormat_general(number_format((($invoice['ship_tax'] / $invoice['shipping']) * 100) + $tt, 3, '.', '')); ?>"
+        if ($invoice['ship_tax']>0){
+            echo amountFormat_general(number_format((($invoice['ship_tax'] / $invoice['shipping']) * 100) + $tt, 3, '.', ''));
+        }
+        else echo amountFormat_general(number_format(0, 3, '.', ''));
+     ?>"
            name="shipRate" id="ship_rate">
     <input type="hidden" value="<?= $invoice['ship_tax_type']; ?>" name="ship_taxtype"
            id="ship_taxtype">
     <input type="hidden" value="<?= amountFormat_general($invoice['ship_tax']); ?>" name="ship_tax" id="ship_tax">
-
-
 </form>
 
 
