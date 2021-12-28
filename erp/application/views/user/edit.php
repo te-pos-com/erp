@@ -10,6 +10,7 @@
             <div class="card card-block card-body">
                 <h5><?php echo $this->lang->line('Update Profile Picture') ?></h5>
                 <hr>
+                <?php print_r($user)?>
                 <div class="ibox-content no-padding border-left-right">
                     <img alt="profile picture" id="dpic" class="img-responsive col"
                          src="<?php echo base_url('userfiles/employee/') . $user['picture'] ?>">
@@ -138,7 +139,7 @@
                             <div class="col-sm-10">
                                 <input type="text" placeholder="email"
                                        class="form-control margin-bottom  required" name="email"
-                                       value="<?php echo $user['email'] ?>" disabled>
+                                       value="<?php echo $user['email'] ?>">
                             </div>
                         </div>
 

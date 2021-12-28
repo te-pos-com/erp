@@ -40,13 +40,6 @@
             ?>
             </tbody>
             <tfoot>
-            <tr>
-                <th>#</th>
-
-                <th><?php echo $this->lang->line('Date') ?></th>
-                <th><?php echo $this->lang->line('Amount') ?></th>
-                <th><?php echo $this->lang->line('Note') ?></th>
-            </tr>
             </tfoot>
         </table>
     </div>
