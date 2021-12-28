@@ -456,9 +456,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <li><i class="bx bx-check"></i> Transfer Gudang</li>
               <li><i class="bx bx-check"></i> Retur Pembelian</li>
               <li><i class="bx bx-check"></i> POS</li>
-              <li><i class="bx bx-check"></i> CRM</li>
               <li><i class="bx bx-check"></i> HRM</li>
-              <li><i class="bx bx-check"></i> Manajement Project</li>
               <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
             <a href="<?= $setting['link_cloud']?>/user/register" class="btn-buy">Mulai</a>
@@ -474,8 +472,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><i class="bx bx-check"></i> Retur Pembelian</li>
                 <li><i class="bx bx-check"></i> POS</li>
                 <li><i class="bx bx-check"></i> HRM</li>
-                <li class="na"><i class="bx bx-x"></i> <span> CRM</span></li>
-                <li class="na"><i class="bx bx-x"></i> <span> Manajement Project</span></li>
                 <li class="na"><i class="bx bx-x"></i> <span> Accounting</span></li>
             </ul>
             <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Mulai</a>
@@ -491,8 +487,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><i class="bx bx-check"></i> Retur Pembelian</li>
                 <li><i class="bx bx-check"></i> POS</li>
                 <li><i class="bx bx-check"></i> HRM</li>
-                <li><i class="bx bx-check"></i> CRM</li>
-                <li><i class="bx bx-check"></i> Manajement Project</li>
                 <li><i class="bx bx-check"></i> Accounting</li>
             </ul>
             <a href="<?= $setting['link_cloud']?>/langganan" class="btn-buy">Mulai</a>
