@@ -872,7 +872,24 @@ class Aauth
             );  
             $this->aauth_db->insert('te_register', $register);
             
+            
+            $employes = array(
+                'id' =>  $user_id,
+                'username' => (!$username) ? '' : $username,
+                'name' => 'Admin',
+                'address' => "",
+                'city' => '',
+                'region' => '',
+                'country' => '',
+                'postbox' => '',
+                'phone' => '',
+                'dept' => 1,
+                'salary' => 0,
+                'c_rate' => 0,
+                'picture'=>'example.png'
+            );
 
+            $this->aauth_db->insert('te_employees', $employes);
 
 
             // if otp actived

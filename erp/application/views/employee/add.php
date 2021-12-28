@@ -77,8 +77,11 @@
                 <div class="col-sm-5">
                     <select name="location" class="form-control margin-bottom">
                         <option value="0"><?php echo $this->lang->line('Default') ?></option>
-                        <?php $loc = locations();
-
+                        <?php
+                        $loc = location($this->aauth->get_user()->loc);
+                        echo ' <option value="' . $loc['id'] . '"> ' . $loc['cname'] . '</option>';
+                                
+                        $loc = location($this->aauth->get_user()->loc,$this->aauth->get_user()->loc);
                         foreach ($loc as $row) {
                             echo ' <option value="' . $row['id'] . '"> ' . $row['cname'] . '</option>';
                         }

@@ -244,8 +244,6 @@ class User extends CI_Controller
         } else {
             $head['usernm'] = $this->aauth->get_user()->username;
             $head['title'] = $head['usernm'] . ' Profile';
-
-
             $data['user'] = $this->employee->employee_details($id);
             $data['eid'] = intval($id);
             $this->load->view('fixed/header', $head);
