@@ -9,6 +9,7 @@ class Main extends CI_Controller {
         $this->load->model('pelanggan_model');
 		$this->load->model('user_model');
 		$this->load->model('setting_model');
+		$this->load->model('langganan_model');
     }
 
 
@@ -19,6 +20,7 @@ class Main extends CI_Controller {
 		$data['patner'] = $this->pelanggan_model->patner_list();
 		$data['suport'] = $this->user_model->suport_list();
 		$data['setting'] = $this->setting_model->setting_list();
+		$data['langgananadmin'] = $this->langganan_model->langganan_list();
 		$this->load->view('index.php',$data);
 	}
 }

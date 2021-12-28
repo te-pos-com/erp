@@ -369,8 +369,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">All</li>
               <li data-filter=".filter-app">Transaksi</li>
-              <li data-filter=".filter-card">HRM</li>
-              <li data-filter=".filter-web">CRM</li>
             </ul>
           </div>
         </div>
@@ -413,76 +411,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Transaksi Pembelian</p>
                 <div class="portfolio-links">
                   <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Transaksi Pembelian"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Master Karyawan</h4>
-                <p>Master Karyawan</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Master Karyawan"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Master Dukungan</h4>
-                <p>Master Dukungan</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Master Dukungan"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Transaksi Penjualan</h4>
-                <p>Transaksi Penjualan</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Transaksi Penjualan"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Master Departemen</h4>
-                <p>Master Departemen</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Master Departemen"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Master Gaji</h4>
-                <p>Master Gaji</p>
-                <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Master Gaji"><i class="bx bx-plus"></i></a>
                   <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
@@ -537,8 +465,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="col-lg-4 box featured">
-            <h3>Personal</h3>
-            <h4>Rp 250.000<span>per bulan</span></h4>
+            <h3><?= $langgananadmin[1]['nama_langganan'] ?></h3>
+            <h4>Rp <?= number_format($langgananadmin[1]['harga_langganan']) ?><span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>
@@ -554,8 +482,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="col-lg-4 box">
-            <h3>Business</h3>
-            <h4>Rp 350.000<span>per bulan</span></h4>
+            <h3><?= $langgananadmin[2]['nama_langganan'] ?></h3>
+            <h4><?= number_format($langgananadmin[2]['harga_langganan']) ?><span>per bulan</span></h4>
             <ul>
                 <li><i class="bx bx-check"></i> Penjualan</li>
                 <li><i class="bx bx-check"></i> Pembelian</li>

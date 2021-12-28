@@ -38,8 +38,6 @@
 
       <div class="logo">
         <h1><img src="<?= base_url()?>assets/img/<?= $setting['logo']?>"><a href="<?= base_url()?>"> <?= $setting['nama_website']?> | Patner</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
