@@ -81,7 +81,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><i class="ri-check-line"></i> Laporan Yang Lengkap</li>
           </ul>
           <div class="mt-3">
-            <a href="<?= $setting['link_cloud']?>" class="btn-get-started scrollto">Mulai</a>
+            <a href="<?= $setting['link_cloud']?>" class="btn-get-started scrollto">Login</a>
             <a href="<?= $setting['link_cloud']?>/user/register" class="btn-get-quote">Coba Gratis <?= $setting['gratis_langganan']?> Hari</a>
           </div>
         </div>
